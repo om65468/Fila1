@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.19326036866359442" layoutX="33.0" layoutY="74.0" prefHeight="494.0" prefWidth="696.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="444.0" />
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="521.0" />
-        </items>
-      </SplitPane>
+      <AnchorPane maxWidth="149.0" prefHeight="494.0" prefWidth="149.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="-0.39999999999997726" AnchorPane.leftAnchor="-2.842170943040401E-14" AnchorPane.rightAnchor="545.6" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button layoutY="111.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Informacion       " AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Nuevo               " AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Button layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Abrir                  " AnchorPane.bottomAnchor="303.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="165.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane_nuevo" layoutX="150.4" prefHeight="494.0" prefWidth="0.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="149.60000000000002" AnchorPane.rightAnchor="546.0" AnchorPane.topAnchor="0.0" />
+      <Label layoutX="191.0" layoutY="30.0" text="Nuevo">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button contentDisplay="CENTER" layoutX="191.0" layoutY="92.0" mnemonicParsing="false" text="Nueva empresa" />
    </children>
 </AnchorPane>
