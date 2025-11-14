@@ -13,11 +13,11 @@ public class Factura {
     private String estado;
     private String observaciones;
 
-    public Factura(int id, char tipo, int numFactura, String fechaEmision, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
+    public Factura(int id, char tipo, int numFactura, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
         this.id = id;
         this.tipo = tipo;
         this.numFactura = numFactura;
-        this.fechaEmision = fechaEmision;
+        //La fecha de emisión será el día de hoy.
         this.idSecundario = idSecundario;
         this.concepto = concepto;
         this.base = base;
