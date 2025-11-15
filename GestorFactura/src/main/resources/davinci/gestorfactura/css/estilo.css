@@ -1,0 +1,10 @@
+.button {
+    -fx-background-color:   #DB1818; /* color normal */
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
+}
