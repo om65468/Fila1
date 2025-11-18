@@ -3,80 +3,110 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="davinci.gestorfactura.SecondaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.SecondaryController">
    <children>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="726.0" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <GridPane layoutX="24.8" layoutY="27.2" prefHeight="416.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.9999755859375" minWidth="10.0" prefWidth="118.19998779296876" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="283.20001220703125" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.60001220703123" minWidth="10.0" prefWidth="145.59998779296882" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.00002441406252" minWidth="10.0" prefWidth="215.20003662109377" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="67.79999389648438" minHeight="3.000007057189947" prefHeight="35.599999999999994" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="142.99999294281005" minHeight="0.0" prefHeight="30.799999999999997" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="202.79999999999995" minHeight="0.0" prefHeight="31.799993896484366" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="245.80001220703127" minHeight="0.0" prefHeight="31.800006103515628" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="285.20002441406245" minHeight="10.0" prefHeight="35.00002441406251" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="264.0000061035156" minHeight="10.0" prefHeight="198.19997558593747" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Label fx:id="labelID" text="ID" />
-                  <Label fx:id="labelCP" text="CP" GridPane.rowIndex="2" />
-                  <Label fx:id="labelNIF" text="NIF" GridPane.rowIndex="1" />
-                  <Label fx:id="labelDir" text="Calle" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="labelNombre" text="Nombre" GridPane.columnIndex="2">
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="labelTlf" text="Telefono" GridPane.rowIndex="3" />
-                  <Label fx:id="labelCiud" text="Ciudad" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="labelEmail" text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <padding>
-                        <Insets left="80.0" />
-                     </padding>
-                  </Label>
-                  <TextField fx:id="txtID" prefHeight="26.0" prefWidth="2.0" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtNIF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtCP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtTel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtNom" GridPane.columnIndex="3" />
-                  <TextField fx:id="txtDir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtCiud" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <TextField fx:id="txtEmail" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtCon" prefHeight="26.0" prefWidth="145.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToPrimary" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                     <GridPane.margin>
-                        <Insets left="100.0" />
-                     </GridPane.margin></Button>
-                  <Button fx:id="ButtonCancelar" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                     <GridPane.margin>
-                        <Insets left="100.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Label fx:id="labelTlf1" text="Tipo" GridPane.rowIndex="4" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </GridPane>
+         <children>davinci.gestorfactura.SecondaryController
+            <TabPane layoutX="88.0" layoutY="14.0" prefHeight="465.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab fx:id="Empresa" text="Empresa">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane prefHeight="416.0" prefWidth="726.0" AnchorPane.bottomAnchor="0.8000000000000114" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="0.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.9999755859375" minWidth="10.0" prefWidth="118.19998779296876" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="283.20001220703125" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.60001220703123" minWidth="10.0" prefWidth="145.59998779296882" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="232.00002441406252" minWidth="10.0" prefWidth="215.20003662109377" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="67.79999389648438" minHeight="3.000007057189947" prefHeight="35.599999999999994" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="142.99999294281005" minHeight="0.0" prefHeight="30.799999999999997" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.79999999999995" minHeight="0.0" prefHeight="31.799993896484366" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="245.80001220703127" minHeight="0.0" prefHeight="31.800006103515628" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="285.20002441406245" minHeight="10.0" prefHeight="35.00002441406251" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="264.0000061035156" minHeight="10.0" prefHeight="198.19997558593747" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label fx:id="labelID" text="ID" />
+                                    <Label fx:id="labelCP" text="CP" GridPane.rowIndex="2" />
+                                    <Label fx:id="labelNIF" text="NIF" GridPane.rowIndex="1" />
+                                    <Label fx:id="labelDir" text="Calle" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <padding>
+                                          <Insets left="80.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelNombre" text="Nombre" GridPane.columnIndex="2">
+                                       <padding>
+                                          <Insets left="80.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelTlf" text="Telefono" GridPane.rowIndex="3" />
+                                    <Label fx:id="labelCiud" text="Ciudad" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <padding>
+                                          <Insets left="80.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="labelEmail" text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                       <padding>
+                                          <Insets left="80.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="txtID" prefHeight="26.0" prefWidth="2.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txtNIF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtCP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtTel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtNom" GridPane.columnIndex="3" />
+                                    <TextField fx:id="txtDir" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtCiud" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtEmail" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtCon" prefHeight="26.0" prefWidth="145.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToPrimary" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="80.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <Button fx:id="ButtonCancelar" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="100.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                    <Label fx:id="labelTlf1" text="Tipo" GridPane.rowIndex="4" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="Cliente" text="Cliente">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                  <Tab text="Producto">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </AnchorPane>
    </children>
