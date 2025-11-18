@@ -8,3 +8,18 @@
 .button:hover {
     -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
 }
+
+.boton_menu {
+    -fx-background-color:   #DB1818; /* color normal */
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: white;
+}
+
+.boton_menu:hover {
+    -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
+}
+
+.caja_menu {
+    -fx-background-color:   #DB1818; /* color normal */
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fx:id="hbox_menu" prefHeight="30.0" prefWidth="600.0" styleClass="caja_menu" stylesheets="@css/estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="btn_archivo" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Archivo" />
+            <Button fx:id="btn_comercial" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Comercial" />
+            <Button fx:id="btn_almacen" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Almacen" />
+            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Administracion" />
+            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Empresa" />
+            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Impresion" />
+            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Utilidades" />
+            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="58.0" styleClass="botonmenu" text="Clientes" />
+         </children>
+      </HBox>
+      <AnchorPane layoutY="30.0" prefHeight="78.0" prefWidth="752.0" AnchorPane.bottomAnchor="373.20000000000005" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <Button contentDisplay="TOP" layoutX="22.0" layoutY="2.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Nuevo">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
