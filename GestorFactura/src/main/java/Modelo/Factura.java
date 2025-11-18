@@ -114,6 +114,4 @@ public class Factura {
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
     }
-    
-    
 }
