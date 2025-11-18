@@ -2,16 +2,26 @@ package Modelo;
 
 public class LineaFactura {
    
+    private int idLinea;
     private int idFactura;
     private int idProducto;
     private int cantidad;
 
-    public LineaFactura(int idFactura, int idProducto, int cantidad) {
+    public LineaFactura(int id, int idFactura, int idProducto, int cantidad) {
+        this.idLinea = id;
         this.idFactura = idFactura;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
     }
 
+    public int getIdLinea() {
+        return idLinea;
+    }
+
+    public void setIdLinea(int idLinea) {
+        this.idLinea = idLinea;
+    }
+    
     public int getIdFactura() {
         return idFactura;
     }

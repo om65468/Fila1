@@ -3,6 +3,7 @@ module davinci.gestorfactura {
     requires javafx.fxml;
     requires java.sql;
     
-    opens davinci.gestorfactura to javafx.fxml;
-    exports davinci.gestorfactura;
+    opens Controlador to javafx.fxml;
+    exports Controlador;
+    exports Vista to javafx.graphics;
 }

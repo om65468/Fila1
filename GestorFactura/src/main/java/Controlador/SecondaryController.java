@@ -1,5 +1,6 @@
-package davinci.gestorfactura;
+package Controlador;
 
+import Vista.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 

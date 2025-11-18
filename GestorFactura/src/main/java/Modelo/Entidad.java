@@ -8,19 +8,17 @@ public class Entidad {
     private String calle;
     private String codPost;
     private String ciudad;
-    private String telfono;
     private String email;
     private String telefono;
 
 
-    public Entidad(int id, String nombre, String nif, String calle, String codPost, String ciudad, String telfono, String email, String telefono) {
+    public Entidad(int id, String nombre, String nif, String calle, String codPost, String ciudad, String email, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.nif = nif;
         this.calle = calle;
         this.codPost = codPost;
         this.ciudad = ciudad;
-        this.telfono = telfono;
         this.email = email;
         this.telefono = telefono;
     }
@@ -71,14 +69,6 @@ public class Entidad {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
-    }
-
-    public String getTelfono() {
-        return telfono;
-    }
-
-    public void setTelfono(String telfono) {
-        this.telfono = telfono;
     }
 
     public String getEmail() {
