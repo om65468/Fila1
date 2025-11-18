@@ -11,9 +11,9 @@ public class Entidad {
     private String telfono;
     private String email;
     private String telefono;
-    private int tipo;
 
-    public Entidad(int id, String nombre, String nif, String calle, String codPost, String ciudad, String telfono, String email, String telefono, int tipo) {
+
+    public Entidad(int id, String nombre, String nif, String calle, String codPost, String ciudad, String telfono, String email, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.nif = nif;
@@ -23,7 +23,6 @@ public class Entidad {
         this.telfono = telfono;
         this.email = email;
         this.telefono = telefono;
-        this.tipo = tipo;
     }
 
     public int getId() {
@@ -98,13 +97,5 @@ public class Entidad {
         this.telefono = telefono;
     }
 
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-    
         
 }
