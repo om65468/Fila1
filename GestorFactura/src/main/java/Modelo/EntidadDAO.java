@@ -114,8 +114,7 @@ public class EntidadDAO {
         List<Entidad> lista = new ArrayList<>();
         String sql = "SELECT * FROM entidades";
 
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
 
@@ -146,5 +145,52 @@ public class EntidadDAO {
 
         return lista;
     }
-}
 
+    // Obtener todos los tipos de una entidad
+    public List<TipoEntidad> getTiposDeEntidad(int idEntidad) {
+        List<TipoEntidad> tipos = new ArrayList<>();
+        String sql = "SELECT t.id_tipo, t.tipo FROM tipo_entidad t JOIN tipo_entidad et ON t.id_tipo = et.id_tipo "
+                + "WHERE et.id_entidad = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEntidad);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //tipos.add(new TipoEntidad(rs.getInt("id_tipo"), rs.getString("tipo")));
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return tipos;
+    }
+
+// Asignar un tipo a una entidad
+    public boolean asignarTipo(int idEntidad, int idTipo) {
+        String sql = "INSERT INTO tipo_entidad (id_entidad, id_tipo) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEntidad);
+            stmt.setInt(2, idTipo);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+// Quitar un tipo de una entidad
+    public boolean quitarTipo(int idEntidad, int idTipo) {
+        String sql = "DELETE FROM tipo_entidad WHERE id_entidad = ? AND id_tipo = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEntidad);
+            stmt.setInt(2, idTipo);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+}

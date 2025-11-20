@@ -12,7 +12,9 @@ public class Factura {
     private double total;
     private String estado;
     private String observaciones;
-
+    
+    public Factura(){}
+    
     public Factura(int id, char tipo, int numFactura, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
         this.id = id;
         this.tipo = tipo;
