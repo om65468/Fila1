@@ -15,9 +15,9 @@
    <children>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="726.0" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TabPane layoutX="88.0" layoutY="14.0" prefHeight="465.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="tabPaneSecondary" layoutX="88.0" layoutY="14.0" prefHeight="465.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
-                <Tab fx:id="Empresa" text="Empresa">
+                <Tab fx:id="tabEmpresa" text="Empresa">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -90,17 +90,25 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab fx:id="Cliente" text="Cliente">
+                <Tab fx:id="tabCliente" text="Cliente">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <AnchorPane prefHeight="89.0" prefWidth="825.0" />
+                           </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Producto">
+                  <Tab fx:id="tabProducto" text="Producto">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                   </Tab>
-                  <Tab text="Untitled Tab">
+                  <Tab fx:id="tabProveedor" text="Proveedor">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="tabFactura" text="Factura">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
