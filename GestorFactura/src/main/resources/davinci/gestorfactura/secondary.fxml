@@ -14,7 +14,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.SecondaryController">
    <children>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="726.0" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>davinci.gestorfactura.SecondaryController
+         <children>
             <TabPane layoutX="88.0" layoutY="14.0" prefHeight="465.0" prefWidth="825.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <tabs>
                 <Tab fx:id="Empresa" text="Empresa">

@@ -6,94 +6,84 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="hbox_menu" prefHeight="30.0" prefWidth="600.0" styleClass="caja_menu" stylesheets="@css/estilo.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button fx:id="btn_archivo" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Archivo" />
-            <Button fx:id="btn_comercial" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Comercial" />
-            <Button fx:id="btn_almacen" mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Almacen" />
-            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Administracion" />
-            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Empresa" />
-            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Impresion" />
-            <Button mnemonicParsing="false" prefHeight="29.0" styleClass="botonmenu" text="Utilidades" />
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="58.0" styleClass="botonmenu" text="Clientes" />
-         </children>
-      </HBox>
-      <AnchorPane fx:id="pane_cliente" layoutY="30.0" prefHeight="78.0" prefWidth="752.0" AnchorPane.bottomAnchor="373.20000000000005" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-         <children>
-            <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="22.0" layoutY="2.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Nuevo">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/iconnuevo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btn_nuevo1" contentDisplay="TOP" layoutX="86.0" layoutY="2.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Nuevo">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/iconnuevo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btn_nuevo11" contentDisplay="TOP" layoutX="150.0" layoutY="2.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Nuevo">
-               <graphic>
-                  <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/iconnuevo.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-      <TabPane layoutY="131.0" prefHeight="200.0" prefWidth="752.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="29.0" prefHeight="124.0" prefWidth="752.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab text="Archivo">
+          <Tab styleClass="Tab" text="Archivo">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="760.0" />
             </content>
           </Tab>
-          <Tab text="Comercial">
+          <Tab styleClass="Tab" text="Comercial">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab text="Almacen">
+            <Tab styleClass="Tab" text="Almacen">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Administracion">
+            <Tab styleClass="Tab" text="Administracion">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Empresa">
+            <Tab styleClass="Tab" text="Empresa">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="114.0" prefWidth="752.0">
+                     <children>
+                        <AnchorPane fx:id="pane_cliente" layoutX="-86.0" layoutY="26.0" prefHeight="78.0" prefWidth="752.0" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="-86.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="26.0" />
+                        <Button fx:id="btn_nuevo11" contentDisplay="TOP" layoutX="145.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Agentes">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconagent.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_nuevo1" contentDisplay="TOP" layoutX="79.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Proveedores">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconsupplier.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Cliente">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab styleClass="Tab" text="Impresion">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab text="Impresion">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-            <Tab text="Utilidades">
+            <Tab styleClass="Tab" text="Utilidades">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0" />
-               </content>
-            </Tab>
-            <Tab text="Clientes">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
             </Tab>
         </tabs>
