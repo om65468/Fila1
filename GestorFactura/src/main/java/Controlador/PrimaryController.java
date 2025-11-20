@@ -6,9 +6,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable{
 
@@ -33,10 +37,24 @@ public class PrimaryController implements Initializable{
     
     @FXML
     private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Secondary.fxml"));
+            Parent root = loader.load();
 
+            SecondaryController secController = loader.getController();
+
+            secController.irATab(secController.tabEmpresa);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
+
     public void cursorHand(){
         button_abrir.setCursor(Cursor.HAND);
         button_empre.setCursor(Cursor.HAND);
