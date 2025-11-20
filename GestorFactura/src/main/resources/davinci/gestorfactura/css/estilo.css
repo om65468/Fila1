@@ -24,13 +24,59 @@
     -fx-background-color:   #DB1818; /* color normal */
 }
 
-.Tab {
-    -fx-background-color:   #DB1818; /* color normal */
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
+/* Fondo completo detrás de las pestañas */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #ff0000; /* tu color rojo */
+    -fx-background-insets: 0;      /* obligatorio */
+    -fx-padding: 0;
+}
+
+/* Cada tab */
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: #ff0000;
+    -fx-background-insets: 0;
+}
+
+/* Tab seleccionado */
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #cc0000;
+}
+
+/* Texto */
+.tab-pane .tab-header-area .tab-label {
     -fx-text-fill: white;
 }
 
-.Tab:hover {
-    -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
+/* Altura fija de la barra del TabPane */
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+/* Altura de cada tab */
+.tab-pane .tab-header-area .tab {
+    -fx-padding: 2 15;   /* Aumenta o reduce altura */
+    -fx-background-insets: 0;
+}
+
+/* También puedes fijar altura exacta si lo prefieres */
+.tab-pane .tab-header-area .tab {
+    -fx-min-height: 35px;   /* Igualar altura */
+    -fx-max-height: 35px;   /* Igualar altura */
+}
+
+/* Tab seleccionado */
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #cc0000;
+}
+
+.tab-pane .tab-content-area {
+    -fx-background-color: white; /* O el color que quieras */
+}
+
+.btn_cliente {
+    -fx-background-color: white;
+}
+
+.btn_cliente:hover {
+    -fx-background-color: #DDDAD9;
 }

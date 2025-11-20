@@ -36,8 +36,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="114.0" prefWidth="752.0">
                      <children>
-                        <AnchorPane fx:id="pane_cliente" layoutX="-86.0" layoutY="26.0" prefHeight="78.0" prefWidth="752.0" AnchorPane.bottomAnchor="378.0" AnchorPane.leftAnchor="-86.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="26.0" />
-                        <Button fx:id="btn_nuevo11" contentDisplay="TOP" layoutX="145.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Agentes">
+                        <Button fx:id="btn_agentes" contentDisplay="TOP" layoutX="146.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Agentes" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -49,7 +48,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_nuevo1" contentDisplay="TOP" layoutX="79.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Proveedores">
+                        <Button fx:id="btn_proveedor" contentDisplay="TOP" layoutX="80.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Proveedores" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -61,7 +60,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_nuevo" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Cliente">
+                        <Button fx:id="btn_cliente" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Cliente" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
