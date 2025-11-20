@@ -38,8 +38,9 @@ public class PrimaryController implements Initializable{
     @FXML
     private void switchToSecondary() throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Secondary.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/secondary.fxml"));
             Parent root = loader.load();
+
 
             SecondaryController secController = loader.getController();
 
