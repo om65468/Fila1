@@ -38,11 +38,11 @@
          </children></AnchorPane>
       <AnchorPane maxWidth="149.0" prefHeight="494.0" prefWidth="149.0" style="-fx-background-color: #DB1818;" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="-0.39999999999997726" AnchorPane.leftAnchor="-2.842170943040401E-14" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="button_nuevo" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Nuevo               " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="button_nuevo" layoutY="138.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Nuevo               " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
-            <Button fx:id="button_abrir" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Abrir                  " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="button_abrir" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Abrir                  " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
-            <Button fx:id="button_informacion" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Informacion       " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="button_informacion" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Informacion       " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
          </children>
       </AnchorPane>

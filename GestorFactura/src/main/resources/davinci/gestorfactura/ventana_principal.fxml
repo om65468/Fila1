@@ -12,31 +12,31 @@
    <children>
       <TabPane layoutY="29.0" prefHeight="124.0" prefWidth="752.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
-          <Tab styleClass="Tab" text="Archivo">
+          <Tab text="Archivo">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="760.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="760.0" styleClass="tab-content-area" />
             </content>
           </Tab>
-          <Tab styleClass="Tab" text="Comercial">
+          <Tab text="Comercial">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
-            <Tab styleClass="Tab" text="Almacen">
+            <Tab text="Almacen">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab styleClass="Tab" text="Administracion">
+            <Tab text="Administracion">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab styleClass="Tab" text="Empresa">
+            <Tab text="Empresa">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="114.0" prefWidth="752.0">
                      <children>
-                        <Button fx:id="btn_agentes" contentDisplay="TOP" layoutX="146.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Agentes" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="btn_agentes" contentDisplay="TOP" layoutX="146.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Agentes" AnchorPane.leftAnchor="146.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -48,7 +48,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_proveedor" contentDisplay="TOP" layoutX="80.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Proveedores" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="btn_proveedor" contentDisplay="TOP" layoutX="80.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Proveedores" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -60,7 +60,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btn_cliente" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" text="Cliente" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="btn_cliente" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Cliente" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="13.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -75,12 +75,12 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab styleClass="Tab" text="Impresion">
+            <Tab text="Impresion">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
-            <Tab styleClass="Tab" text="Utilidades">
+            <Tab text="Utilidades">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0" />
                </content>
