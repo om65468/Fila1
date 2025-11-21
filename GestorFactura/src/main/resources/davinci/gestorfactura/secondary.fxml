@@ -70,12 +70,12 @@
                                     <TextField fx:id="txtCiud" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                                     <TextField fx:id="txtEmail" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                                     <TextField fx:id="txtCon" prefHeight="26.0" prefWidth="145.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToPrimary" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                    <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
                                        <GridPane.margin>
                                           <Insets left="80.0" />
                                        </GridPane.margin>
                                     </Button>
-                                    <Button fx:id="ButtonCancelar" mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <Button fx:id="ButtonCancelar" mnemonicParsing="false" onAction="#switchToPrimary" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                        <GridPane.margin>
                                           <Insets left="100.0" />
                                        </GridPane.margin>

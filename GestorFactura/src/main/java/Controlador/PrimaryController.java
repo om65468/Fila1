@@ -44,7 +44,7 @@ public class PrimaryController implements Initializable{
 
             SecondaryController secController = loader.getController();
 
-            secController.irATab(secController.tabEmpresa);
+            secController.irATab(secController.getTabEmpresa());
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

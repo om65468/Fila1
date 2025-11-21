@@ -12,7 +12,7 @@ public class SecondaryController {
     private TabPane tabPaneSecondary;
 
     @FXML
-     static Tab tabEmpresa;
+    private Tab tabEmpresa;
 
     @FXML
     private Tab tabCliente;
@@ -31,6 +31,12 @@ public class SecondaryController {
         App.setRoot("primary");
     }
     
+    
+    @FXML
+    private void switchToVentanaPrincipal() throws IOException {
+        App.setRoot("ventana_principal");
+    }
+    
     public void mostrarSoloCliente() {
         tabPaneSecondary.getSelectionModel().select(tabCliente); // Selecciona la pestaña Cliente
     }
@@ -47,5 +53,11 @@ public class SecondaryController {
         System.out.println("Empresa = " + tabEmpresa);
         System.out.println("Cliente = " + tabCliente);
     }
+    
+    
+    public Tab getTabEmpresa() {
+        return tabEmpresa;
+    }
+
 
 }
