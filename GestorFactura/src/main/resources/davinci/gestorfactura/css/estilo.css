@@ -26,15 +26,23 @@
 
 /* Fondo completo detrás de las pestañas */
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #ff0000; /* tu color rojo */
-    -fx-background-insets: 0;      /* obligatorio */
+    -fx-background-color: #ff0000;
+    -fx-background-insets: 0;
     -fx-padding: 0;
 }
 
-/* Cada tab */
+/* Altura de la barra superior */
+.tab-pane .tab-header-area {
+    -fx-padding: 0;
+}
+
+/* Cada tab (color + altura) */
 .tab-pane .tab-header-area .tab {
     -fx-background-color: #ff0000;
     -fx-background-insets: 0;
+    -fx-padding: 2 15;
+    -fx-min-height: 35px;
+    -fx-max-height: 35px;
 }
 
 /* Tab seleccionado */
@@ -47,31 +55,23 @@
     -fx-text-fill: white;
 }
 
-/* Altura fija de la barra del TabPane */
-.tab-pane .tab-header-area {
-    -fx-padding: 0;
-}
-
-/* Altura de cada tab */
-.tab-pane .tab-header-area .tab {
-    -fx-padding: 2 15;   /* Aumenta o reduce altura */
-    -fx-background-insets: 0;
-}
-
-/* También puedes fijar altura exacta si lo prefieres */
-.tab-pane .tab-header-area .tab {
-    -fx-min-height: 35px;   /* Igualar altura */
-    -fx-max-height: 35px;   /* Igualar altura */
-}
-
-/* Tab seleccionado */
-.tab-pane .tab-header-area .tab:selected {
-    -fx-background-color: #cc0000;
-}
-
+/* Fondo del contenido del tab */
 .tab-pane .tab-content-area {
-    -fx-background-color: white; /* O el color que quieras */
+    -fx-background-color: white;
 }
+
+/* Quitar borde de enfoque del TabPane */
+.tab-pane:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Quitar borde de enfoque de cada Tab */
+.tab:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+} 
+
 
 .btn_cliente {
     -fx-background-color: white;
