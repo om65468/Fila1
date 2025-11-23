@@ -149,8 +149,7 @@ public class EntidadDAO {
     // Obtener todos los tipos de una entidad
     public List<TipoEntidad> getTiposDeEntidad(int idEntidad) {
         List<TipoEntidad> tipos = new ArrayList<>();
-        String sql = "SELECT t.id_tipo, t.tipo FROM tipo_entidad t JOIN tipo_entidad et ON t.id_tipo = et.id_tipo "
-                + "WHERE et.id_entidad = ?";
+        String sql = "SELECT t.id_tipo, t.tipo FROM tipo_entidad t JOIN entidad_tipo_relacion etr ON t.id_tipo = etr.id_tipo WHERE etr.id_entidad = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idEntidad);
@@ -169,7 +168,7 @@ public class EntidadDAO {
 
 // Asignar un tipo a una entidad
     public boolean asignarTipo(int idEntidad, int idTipo) {
-        String sql = "INSERT INTO tipo_entidad (id_entidad, id_tipo) VALUES (?, ?)";
+        String sql = "INSERT INTO entidad_tipo_relacion (id_entidad, id_tipo) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idEntidad);
             stmt.setInt(2, idTipo);
@@ -182,7 +181,7 @@ public class EntidadDAO {
 
 // Quitar un tipo de una entidad
     public boolean quitarTipo(int idEntidad, int idTipo) {
-        String sql = "DELETE FROM tipo_entidad WHERE id_entidad = ? AND id_tipo = ?";
+        String sql = "DELETE FROM entidad_tipo_relacion  WHERE id_entidad = ? AND id_tipo = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, idEntidad);
             stmt.setInt(2, idTipo);
