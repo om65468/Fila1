@@ -8,8 +8,15 @@ public class TipoEntidadDAO {
 
     private Connection conn;
 
-    public TipoEntidadDAO(Connection conn) {
-        this.conn = conn;
+    public TipoEntidadDAO() {
+        
+        try {
+            conn = ConexionBBDD.get();
+        } catch (Exception e) {
+            System.out.println("No funciona la conexioin de TipoEntidadDAO a la BBDD, mira el constructor");
+            e.printStackTrace();
+        }
+
     }
 
     // Insertar relación (asignar un tipo a una entidad)

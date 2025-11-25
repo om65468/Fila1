@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class SecondaryController {
 
     private EntidadDAO entidadDAO;
-    private Connection conn;
+    ///private Connection conn;
     
     @FXML
     private TabPane tabPaneSecondary;
@@ -64,10 +64,11 @@ public class SecondaryController {
 
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
-        crearEmpresa();
-        App.setRoot("ventana_principal");
-        Stage stage = (Stage) ButtonCrear.getScene().getWindow();
-        stage.close();
+        if(crearEmpresa()){
+            App.setRoot("ventana_principal");
+            Stage stage = (Stage) ButtonCrear.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void mostrarSoloCliente() {
@@ -83,16 +84,16 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-        System.out.println("Empresa = " + tabEmpresa);
+        /* System.out.println("Empresa = " + tabEmpresa);
         System.out.println("Cliente = " + tabCliente);
         try {
-            conn = ConexionBBDD.get();
-            entidadDAO = new EntidadDAO(conn);
+        conn = ConexionBBDD.get();
+        entidadDAO = new EntidadDAO(conn);
         } catch (SQLException e) {
-            e.printStackTrace();
+        e.printStackTrace();
         } catch(Exception e){
-            e.printStackTrace();
-        }
+        e.printStackTrace();
+        }*/
     }
 
     public Tab getTabEmpresa() {
@@ -104,8 +105,9 @@ public class SecondaryController {
     }
 
     @FXML
-    private void crearEmpresa() {
+    private boolean crearEmpresa() {
         try {
+            entidadDAO = new EntidadDAO();
             String nombre = txtNom.getText().trim();
             String nif = txtNIF.getText().trim();
             String calle = txtDir.getText().trim();
@@ -116,7 +118,7 @@ public class SecondaryController {
 
             if (nombre.isEmpty() || nif.isEmpty()) {
                 System.out.println("ERROR: Nombre y NIF son obligatorios.");
-                return;
+                return false;
             }
 
             Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
@@ -127,16 +129,17 @@ public class SecondaryController {
 
             if (entidadInsertada == null) {
                 System.out.println("ERROR: No se pudo recuperar la entidad recién creada.");
-                return;
+                return false;
             }
             
-            TipoEntidadDAO tipoDAO = new TipoEntidadDAO(conn);
+            TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
             tipoDAO.insertar(entidadInsertada.getId(), 1);
 
             System.out.println("Empresa creada correctamente.");
-
+            return true;
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

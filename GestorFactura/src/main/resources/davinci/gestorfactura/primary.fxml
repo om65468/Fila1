@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
+<AnchorPane fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="992.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
    <children>
       <AnchorPane fx:id="pane_nuevo" layoutX="150.4" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -36,7 +36,7 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane fx:id="pane_info" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="pane_info" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="181.0" layoutY="111.0" prefHeight="345.0" prefWidth="432.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="111.0">
                <children>
@@ -55,7 +55,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane_abrir" layoutX="248.0" layoutY="110.0" prefHeight="494.0" prefWidth="696.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="pane_abrir" layoutX="248.0" layoutY="110.0" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane layoutX="200.0" layoutY="115.0" prefHeight="332.0" prefWidth="442.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="115.0" />
             <Label fx:id="label_abrir" layoutX="200.0" layoutY="25.0" text="Abrir">

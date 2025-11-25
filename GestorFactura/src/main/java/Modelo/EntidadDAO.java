@@ -8,8 +8,14 @@ public class EntidadDAO {
 
     private Connection conn;
 
-    public EntidadDAO(Connection conn) {
-        this.conn = conn;
+    public EntidadDAO() {
+        try {
+            this.conn = ConexionBBDD.get();
+        } catch (Exception e) {
+            System.out.println("No funciona la conexioin de EntidadDao a la BBDD, mira el constructor");
+            e.printStackTrace();
+        }
+        
     }
 
     public boolean insertar(Entidad e) {
