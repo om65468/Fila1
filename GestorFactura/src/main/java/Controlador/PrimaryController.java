@@ -50,9 +50,9 @@ public class PrimaryController implements Initializable{
             Parent root = loader.load();
 
 
-            //SecondaryController secController = loader.getController();
+            SecondaryController secController = loader.getController();
 
-            //secController.irATab(secController.getTabEmpresa());
+            secController.irATab(secController.getTabEmpresa());
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
