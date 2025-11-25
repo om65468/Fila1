@@ -85,6 +85,62 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0" />
                </content>
             </Tab>
+            <Tab text="Cliente">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_cliente1" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconnuevo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cliente11" contentDisplay="TOP" layoutX="82.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Duplicar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cliente111" contentDisplay="TOP" layoutX="146.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cliente1111" contentDisplay="TOP" layoutX="209.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>
