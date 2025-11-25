@@ -71,6 +71,39 @@ public class EntidadDAO {
         }
     }
 
+    public Entidad buscarPorNif(String nif) {
+        String sql = "SELECT * FROM entidades WHERE nif = ?";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, nif);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String direccion = rs.getString("direccion");
+                String[] partes = direccion.split(" ");
+                String calle = partes.length > 0 ? partes[0] : "";
+                String codPost = partes.length > 1 ? partes[1] : "";
+                String ciudad = partes.length > 2 ? partes[2] : "";
+
+                return new Entidad(
+                        rs.getInt("id_entidad"),
+                        rs.getString("nombre"),
+                        rs.getString("nif"),
+                        calle,
+                        codPost,
+                        ciudad,
+                        rs.getString("email"),
+                        rs.getString("telefono")
+                );
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return null; // Si no encuentra nada
+    }
+
     // BUSCAR POR ID
     public Entidad buscarPorId(int id) {
         String sql = "SELECT * FROM entidades WHERE id_entidad=?";

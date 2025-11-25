@@ -14,11 +14,9 @@ public class ConexionBBDD {
     private static Connection conn = null;
     
     static {
-        // El nombre del archivo debe coincidir con el que creaste
         try (InputStream input = ConexionBBDD.class.getClassLoader().getResourceAsStream("db.properties")) {
             
             if (input == null) {
-                // Esto ayuda a diagnosticar si el archivo no se encuentra en el classpath
                 throw new RuntimeException("Error: Archivo 'db.properties' no encontrado en el classpath.");
             }
 
@@ -28,7 +26,7 @@ public class ConexionBBDD {
             // Asignar valores a las variables estáticas para facilitar el uso
             URL = PROPIEDADES.getProperty("db.url");
             USER = PROPIEDADES.getProperty("db.user");
-            PASS = PROPIEDADES.getProperty("db.password");
+            PASS = PROPIEDADES.getProperty("db.pass");
             System.out.println("url "+URL);
             System.out.println("USER "+USER);
             System.out.println("PASS "+PASS);
@@ -45,10 +43,7 @@ public class ConexionBBDD {
     
     public static Connection get() throws Exception {
         if (conn == null || conn.isClosed()) {
-            String url = "jdbc:mysql://localhost:3306/mibase"; // o tu URL de Oracle
-            String user = "usuario";
-            String pass = "contraseña";
-            conn = DriverManager.getConnection(url, user, pass);
+            conn = DriverManager.getConnection(URL, USER, PASS);
         }
         return conn;
     }
