@@ -9,25 +9,6 @@
 
 <AnchorPane fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
    <children>
-      <AnchorPane fx:id="pane_info" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;">
-         <children>
-            <AnchorPane layoutX="172.0" layoutY="26.4" prefHeight="449.0" prefWidth="432.0" AnchorPane.leftAnchor="172.0" AnchorPane.topAnchor="26.0">
-               <children>
-                  <ImageView fitHeight="213.0" fitWidth="374.0" layoutX="29.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/info.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="54.0" layoutY="392.0" text="Hecho por: Omar Amen, Mohamed Quinte, Stefano González" />
-                  <Label layoutX="14.0" text="Información" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="0.0">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="pane_nuevo" layoutX="150.4" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="188.0" layoutY="46.0" text="Nuevo" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="32.0">
@@ -37,7 +18,7 @@
             </Label>
             <AnchorPane layoutX="224.0" layoutY="107.0" prefHeight="82.0" prefWidth="368.0" AnchorPane.leftAnchor="224.0" AnchorPane.topAnchor="107.0">
                <children>
-                  <Button fx:id="button_empre" contentDisplay="TOP" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="82.0" prefWidth="105.0" text="Nueva empresa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="0.0">
+                  <Button fx:id="button_empre" contentDisplay="TOP" focusTraversable="false" graphicTextGap="0.0" mnemonicParsing="false" onAction="#onCrearEmpresa" prefHeight="82.0" prefWidth="105.0" text="Nueva empresa" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="252.0" AnchorPane.topAnchor="0.0">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -55,13 +36,42 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane maxWidth="149.0" prefHeight="494.0" prefWidth="149.0" style="-fx-background-color: #DB1818;" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="-0.39999999999997726" AnchorPane.leftAnchor="-2.842170943040401E-14" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="pane_info" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" visible="false">
          <children>
-            <Button fx:id="button_nuevo" layoutY="138.0" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Nuevo               " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <AnchorPane layoutX="181.0" layoutY="111.0" prefHeight="345.0" prefWidth="432.0" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="111.0">
+               <children>
+                  <ImageView fitHeight="213.0" fitWidth="374.0" layoutX="29.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="34.0">
+                     <image>
+                        <Image url="@images/info.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="55.0" layoutY="297.0" text="Hecho por: Omar Amen, Mohamed Quinte, Stefano González" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="297.0" />
+               </children>
+            </AnchorPane>
+            <Label fx:id="label_info" layoutX="181.0" layoutY="22.0" text="Información" AnchorPane.leftAnchor="181.0" AnchorPane.topAnchor="22.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane_abrir" layoutX="248.0" layoutY="110.0" prefHeight="494.0" prefWidth="696.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="200.0" layoutY="115.0" prefHeight="332.0" prefWidth="442.0" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="115.0" />
+            <Label fx:id="label_abrir" layoutX="200.0" layoutY="25.0" text="Abrir">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pane_menu" maxWidth="149.0" prefHeight="494.0" prefWidth="149.0" style="-fx-background-color: #DB1818;" stylesheets="@css/estilo.css" AnchorPane.bottomAnchor="-0.39999999999997726" AnchorPane.leftAnchor="-2.842170943040401E-14" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="button_nuevo" layoutY="138.0" mnemonicParsing="false" onAction="#onPaneNuevaEmpresa" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Nuevo               " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
-            <Button fx:id="button_abrir" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Abrir                  " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="button_abrir" layoutY="164.0" mnemonicParsing="false" onAction="#onPaneAbrirEmpresa" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Abrir                  " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
-            <Button fx:id="button_informacion" layoutY="112.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Informacion       " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <Button fx:id="button_informacion" layoutY="112.0" mnemonicParsing="false" onAction="#onPaneInformacion" prefHeight="26.0" prefWidth="150.0" styleClass="boton_menu" text="Informacion       " textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             </Button>
          </children>
       </AnchorPane>
