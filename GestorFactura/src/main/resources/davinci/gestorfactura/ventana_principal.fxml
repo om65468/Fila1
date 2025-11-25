@@ -8,13 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
    <children>
       <TabPane focusTraversable="false" layoutY="29.0" prefHeight="124.0" prefWidth="752.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Archivo">
             <content>
-              <AnchorPane focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="760.0" styleClass="tab-content-area" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="760.0" styleClass="tab-content-area">
+                     <children>
+                        <Button fx:id="ButtonCliente" layoutX="99.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchToSecondaryCli" text="Cliente" />
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab text="Comercial">

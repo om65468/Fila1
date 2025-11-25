@@ -3,8 +3,10 @@ package Controlador;
 import Vista.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
 
 public class SecondaryController {
 
@@ -25,16 +27,23 @@ public class SecondaryController {
     
     @FXML
     private Tab tabFactura;
+    
+    @FXML
+    private Button ButtonCrear;
 
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
+        Stage stage = (Stage) ButtonCrear.getScene().getWindow();
+        stage.close();
     }
     
     
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
         App.setRoot("ventana_principal");
+        Stage stage = (Stage) ButtonCrear.getScene().getWindow();
+        stage.close();
     }
     
     public void mostrarSoloCliente() {
@@ -59,5 +68,8 @@ public class SecondaryController {
         return tabEmpresa;
     }
 
-
+    public Tab getTabCliente() {
+        return tabCliente;
+    }
+    
 }
