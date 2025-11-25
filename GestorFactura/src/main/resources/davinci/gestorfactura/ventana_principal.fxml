@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
    <children>
-      <TabPane layoutY="29.0" prefHeight="124.0" prefWidth="752.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TabPane focusTraversable="false" layoutY="29.0" prefHeight="124.0" prefWidth="752.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="358.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
           <Tab text="Archivo">
             <content>
@@ -87,6 +87,118 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0" />
                </content>
+            </Tab>
+            <Tab fx:id="tab_cliente" text="Cliente">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_cNuevo" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconnuevo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cDuplicar" contentDisplay="TOP" layoutX="70.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Duplicar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/duplicate.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cModificar" contentDisplay="TOP" layoutX="126.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/modificarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cEliminar" contentDisplay="TOP" layoutX="182.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tab_proveedor" text="Proveedores">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_cNuevo1" contentDisplay="TOP" layoutX="21.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconnuevo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cDuplicar1" contentDisplay="TOP" layoutX="77.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Duplicar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/duplicate.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cModificar1" contentDisplay="TOP" layoutX="133.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/modificarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_cEliminar1" contentDisplay="TOP" layoutX="189.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
         </tabs>
       </TabPane>

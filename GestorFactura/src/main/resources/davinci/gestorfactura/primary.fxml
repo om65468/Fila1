@@ -7,8 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
+<AnchorPane fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
    <children>
+      <AnchorPane fx:id="pane_info" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;">
+         <children>
+            <AnchorPane layoutX="172.0" layoutY="26.4" prefHeight="449.0" prefWidth="432.0" AnchorPane.leftAnchor="172.0" AnchorPane.topAnchor="26.0">
+               <children>
+                  <ImageView fitHeight="213.0" fitWidth="374.0" layoutX="29.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/info.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="54.0" layoutY="392.0" text="Hecho por: Omar Amen, Mohamed Quinte, Stefano González" />
+                  <Label layoutX="14.0" text="Información" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="pane_nuevo" layoutX="150.4" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="188.0" layoutY="46.0" text="Nuevo" AnchorPane.leftAnchor="188.0" AnchorPane.topAnchor="32.0">
