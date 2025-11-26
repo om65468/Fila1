@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -54,6 +55,26 @@ public class SecondaryController {
     private TextField txtNom;
     @FXML
     private TextField txtTel;
+    
+    //cliente
+    
+    @FXML
+    private TextField txtNombre;
+    
+    @FXML
+    private TextField txtID2;
+    
+    @FXML
+    private TextField txtCod;
+    @FXML
+    private TextField txtNIF2;
+    
+    @FXML
+    private TextField txtEmail2;
+    
+    @FXML
+    private TextField txtTlf;
+    
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -117,7 +138,7 @@ public class SecondaryController {
             String email = txtEmail.getText().trim();
 
             if (nombre.isEmpty() || nif.isEmpty()) {
-                System.out.println("ERROR: Nombre y NIF son obligatorios.");
+                mostrarAlerta("Incompleto", "Nombre y NIF son obligatorios");
                 return false;
             }
 
@@ -128,7 +149,7 @@ public class SecondaryController {
             Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
             if (entidadInsertada == null) {
-                System.out.println("ERROR: No se pudo recuperar la entidad recién creada.");
+                mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
                 return false;
             }
             
@@ -141,6 +162,45 @@ public class SecondaryController {
             ex.printStackTrace();
             return false;
         }
+    }
+    
+    public void comprobarCli(){
+        if (txtNombre.getText().isEmpty()) {
+            mostrarAlerta("Incompleto", "Debe indicar el nombre de persona.");
+            return;
+        }
+        if(txtID2.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el número de personas.");
+            return;
+        }
+        
+        if(txtCod.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el codigo de personas.");
+            return;
+        }
+        
+        if(txtNIF2.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el NIF de personas.");
+            return;
+        }
+        
+        if(txtEmail2.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el email de personas.");
+            return;
+        }
+        
+        if(txtTlf.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el número de telefono.");
+            return;
+        }
+    }
+    
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 
 }
