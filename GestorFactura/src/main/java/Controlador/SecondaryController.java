@@ -137,12 +137,8 @@ public class SecondaryController {
             String telefono = txtTel.getText().trim();
             String email = txtEmail.getText().trim();
 
-            if (nombre.isEmpty() || nif.isEmpty()) {
-                mostrarAlerta("Incompleto", "Nombre y NIF son obligatorios");
-                return false;
-            }
-
-            Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
+            if(comprobarCli()==true)
+            {Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
 
             entidadDAO.insertar(entidad);
 
@@ -157,42 +153,43 @@ public class SecondaryController {
             tipoDAO.insertar(entidadInsertada.getId(), 1);
 
             System.out.println("Empresa creada correctamente.");
-            return true;
+            return true;}
+            else{
+                return false;
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
     
-    public void comprobarCli(){
+    public boolean comprobarCli(){
         if (txtNombre.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el nombre de persona.");
-            return;
+            return false;
         }
-        if(txtID2.getText().isEmpty()){
+        else if(txtID2.getText().isEmpty()){
             mostrarAlerta("Incompleto", "Debe indicar el número de personas.");
-            return;
+            return false;
         }
-        
-        if(txtCod.getText().isEmpty()){
+        else if(txtCod.getText().isEmpty()){
             mostrarAlerta("Incompleto", "Debe indicar el codigo de personas.");
-            return;
+            return false;
         }
-        
-        if(txtNIF2.getText().isEmpty()){
+        else if(txtNIF2.getText().isEmpty()){
             mostrarAlerta("Incompleto", "Debe indicar el NIF de personas.");
-            return;
-        }
-        
-        if(txtEmail2.getText().isEmpty()){
+            return false;
+        }else if(txtEmail2.getText().isEmpty()){
             mostrarAlerta("Incompleto", "Debe indicar el email de personas.");
-            return;
+            return false;
+        }
+        else if(txtTlf.getText().isEmpty()){
+            mostrarAlerta("Incompleto", "Debe indicar el número de telefono.");
+            return false;
+        }else{
+            return true;
         }
         
-        if(txtTlf.getText().isEmpty()){
-            mostrarAlerta("Incompleto", "Debe indicar el número de telefono.");
-            return;
-        }
     }
     
     private void mostrarAlerta(String titulo, String mensaje) {
