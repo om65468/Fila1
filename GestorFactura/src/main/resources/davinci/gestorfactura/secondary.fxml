@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -156,10 +158,30 @@
                                           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <Button fx:id="buttGuar" mnemonicParsing="false" text="Guardar" />
-                                          <Button fx:id="buttEim" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1" />
-                                          <Button fx:id="buttGen" mnemonicParsing="false" text="General" GridPane.columnIndex="2" />
-                                          <Button fx:id="buttCom" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3" />
+                                          <Button fx:id="buttGuar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="86.0" prefWidth="48.0" text="Guardar">
+                                             <graphic>
+                                                <ImageView fitHeight="69.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/iconSave.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button fx:id="buttEim" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
+                                             <graphic>
+                                                <ImageView fitHeight="66.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@images/iconEliminarCliente.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic></Button>
+                                          <Button fx:id="buttGen" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
+                                             <graphic>
+                                                <ImageView fitHeight="70.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
+                                          <Button fx:id="buttCom" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
+                                             <graphic>
+                                                <ImageView fitHeight="72.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true" />
+                                             </graphic></Button>
                                        </children>
                                     </GridPane>
                                  </children>
