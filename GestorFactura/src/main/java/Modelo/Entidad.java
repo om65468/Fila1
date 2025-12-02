@@ -23,6 +23,8 @@ public class Entidad {
         this.telefono = telefono;
     }
 
+    public Entidad(){}
+    
     public int getId() {
         return id;
     }
