@@ -195,10 +195,10 @@
                            <children>
                               <AnchorPane prefHeight="101.0" prefWidth="826.0">
                                  <children>
-                                    <Button layoutX="46.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="195.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="339.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="542.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="46.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="260.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="476.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="669.0" layoutY="38.0" mnemonicParsing="false" text="Button" />
                                  </children></AnchorPane>
                               <Label fx:id="labCod" layoutX="60.0" layoutY="189.0" text="Codigo" />
                               <Label fx:id="labDsc" layoutX="57.0" layoutY="238.0" text="Descripción" />

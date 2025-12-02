@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author GON
+ * @author GON 
  */
 public class VentanaPrincipalController {
     
