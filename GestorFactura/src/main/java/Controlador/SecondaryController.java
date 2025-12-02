@@ -108,7 +108,7 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-        entidadDAO = new EntidadDAO();
+        
     }
 
     public Tab getTabEmpresa() {
@@ -122,7 +122,7 @@ public class SecondaryController {
     @FXML
     private boolean crearEmpresa() {
         try {
-            
+            entidadDAO = new EntidadDAO();
             String nombre = txtNom.getText().trim();
             String nif = txtNIF.getText().trim();
             String calle = txtDir.getText().trim();
