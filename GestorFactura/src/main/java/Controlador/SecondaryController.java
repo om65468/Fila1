@@ -105,16 +105,7 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-        /* System.out.println("Empresa = " + tabEmpresa);
-        System.out.println("Cliente = " + tabCliente);
-        try {
-        conn = ConexionBBDD.get();
-        entidadDAO = new EntidadDAO(conn);
-        } catch (SQLException e) {
-        e.printStackTrace();
-        } catch(Exception e){
-        e.printStackTrace();
-        }*/
+        entidadDAO = new EntidadDAO();
     }
 
     public Tab getTabEmpresa() {
@@ -128,7 +119,7 @@ public class SecondaryController {
     @FXML
     private boolean crearEmpresa() {
         try {
-            entidadDAO = new EntidadDAO();
+            
             String nombre = txtNom.getText().trim();
             String nif = txtNIF.getText().trim();
             String calle = txtDir.getText().trim();
@@ -137,23 +128,23 @@ public class SecondaryController {
             String telefono = txtTel.getText().trim();
             String email = txtEmail.getText().trim();
 
-            if(comprobarCli()==true)
-            {Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
+            if(comprobarCli()==true){
+                Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
+                entidadDAO.insertar(entidad);
 
-            entidadDAO.insertar(entidad);
+                Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
-            Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
+                if (entidadInsertada == null) {
+                    mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
+                    return false;
+                }
 
-            if (entidadInsertada == null) {
-                mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
-                return false;
+                TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
+                tipoDAO.insertar(entidadInsertada.getId(), 1);
+
+                System.out.println("Empresa creada correctamente.");
+                return true;
             }
-            
-            TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
-            tipoDAO.insertar(entidadInsertada.getId(), 1);
-
-            System.out.println("Empresa creada correctamente.");
-            return true;}
             else{
                 return false;
             }
