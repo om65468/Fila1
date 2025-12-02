@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Entidad;
 import Vista.App;
 import java.io.IOException;
 import java.net.URL;
@@ -12,6 +13,9 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -38,31 +42,33 @@ public class PrimaryController implements Initializable{
     @FXML
     private AnchorPane pane_nuevo;
     
+        @FXML
+    private TableColumn<Entidad, String> TColumn_Direccion;
+
+    @FXML
+    private TableColumn<Entidad, String> TColumn_NIF;
+
+    @FXML
+    private TableColumn<Entidad, String> TColumn_Nombre;
+
+    @FXML
+    private TableColumn<Entidad, String> TColumn_Telefono;
+
+    @FXML
+    private TableColumn<Entidad, String> TColumn_email;
+
+    @FXML
+    private TableView<Entidad> TView_Empresa;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cursorHand();
+        datosTablas();
     }
     
     @FXML
     private void onCrearEmpresa(ActionEvent event) throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/secondary.fxml"));
-            Parent root = loader.load();
-
-
-            SecondaryController secController = loader.getController();
-
-            secController.irATab(secController.getTabEmpresa());
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-            stage.requestFocus();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        App.setRoot("secondary");
     }
     
     
@@ -94,5 +100,13 @@ public class PrimaryController implements Initializable{
         button_informacion.setCursor(Cursor.HAND);
         button_nuevo.setCursor(Cursor.HAND);
                 
+    }
+    
+    public void datosTablas() {
+    TColumn_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    TColumn_NIF.setCellValueFactory(new PropertyValueFactory<>("nif"));
+    TColumn_Direccion.setCellValueFactory(new PropertyValueFactory<>("calle"));
+    TColumn_Telefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+    TColumn_email.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 }
