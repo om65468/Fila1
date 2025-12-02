@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
@@ -75,7 +76,9 @@ public class SecondaryController {
     @FXML
     private TextField txtTlf;
     
-
+    @FXML
+    private ComboBox combTipo;
+    
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -105,7 +108,7 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-        entidadDAO = new EntidadDAO();
+        
     }
 
     public Tab getTabEmpresa() {
@@ -119,7 +122,7 @@ public class SecondaryController {
     @FXML
     private boolean crearEmpresa() {
         try {
-            
+            entidadDAO = new EntidadDAO();
             String nombre = txtNom.getText().trim();
             String nif = txtNIF.getText().trim();
             String calle = txtDir.getText().trim();
