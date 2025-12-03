@@ -199,8 +199,8 @@
             </Tab>
         </tabs>
       </TabPane>
-      <AnchorPane fx:id="paneProveedor" layoutY="127.0" prefHeight="649.0" prefWidth="1050.0" />
-      <AnchorPane fx:id="paneEmpresa" layoutX="-5.0" layoutY="123.0" prefHeight="586.0" prefWidth="1002.0" />
-      <AnchorPane fx:id="paneCliente" layoutY="124.0" prefHeight="630.0" prefWidth="1134.0" />
+      <AnchorPane fx:id="paneProveedor" layoutY="97.0" prefHeight="616.0" prefWidth="992.0" />
+      <AnchorPane fx:id="paneEmpresa" layoutX="-5.0" layoutY="99.0" prefHeight="610.0" prefWidth="1002.0" />
+      <AnchorPane fx:id="paneCliente" layoutY="94.0" prefHeight="616.0" prefWidth="992.0" />
    </children>
 </AnchorPane>
