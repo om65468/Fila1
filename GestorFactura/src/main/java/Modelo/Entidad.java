@@ -92,5 +92,9 @@ public class Entidad {
     public String getDireccionCompleta() {
         return calle + " " + codPost + " " + ciudad;
     }
-        
+
+    @Override
+    public String toString() {
+        return "Entidad{" + "id=" + id + ", nombre=" + nombre + ", nif=" + nif + ", calle=" + calle + ", codPost=" + codPost + ", ciudad=" + ciudad + ", email=" + email + ", telefono=" + telefono + '}';
+    }
 }

@@ -23,11 +23,7 @@ public class EntidadDAO {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, e.getNombre());
             stmt.setString(2, e.getNif());
-
-            // Unimos los campos porque tu SQL usa una sola columna
-            String direccion = e.getCalle() + " " + e.getCodPost() + " " + e.getCiudad();
-            stmt.setString(3, direccion);
-
+            stmt.setString(3, e.getDireccionCompleta());
             stmt.setString(4, e.getTelefono());
             stmt.setString(5, e.getEmail());
 
@@ -46,10 +42,7 @@ public class EntidadDAO {
 
             stmt.setString(1, e.getNombre());
             stmt.setString(2, e.getNif());
-
-            String direccion = e.getCalle() + " " + e.getCodPost() + " " + e.getCiudad();
-            stmt.setString(3, direccion);
-
+            stmt.setString(3, e.getDireccionCompleta());
             stmt.setString(4, e.getTelefono());
             stmt.setString(5, e.getEmail());
             stmt.setInt(6, e.getId());
@@ -194,7 +187,7 @@ public class EntidadDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                //tipos.add(new TipoEntidad(rs.getInt("id_tipo"), rs.getString("tipo")));
+                tipos.add(new TipoEntidad(rs.getInt("id_tipo"), rs.getString("tipo")));
             }
 
         } catch (SQLException ex) {

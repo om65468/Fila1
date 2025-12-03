@@ -20,8 +20,7 @@ import javafx.stage.Stage;
 public class SecondaryController {
 
     private EntidadDAO entidadDAO;
-    ///private Connection conn;
-    
+
     @FXML
     private TabPane tabPaneSecondary;
     @FXML
@@ -36,62 +35,99 @@ public class SecondaryController {
     private Tab tabFactura;
 
     @FXML
+    private Button ButtonCancelar;
+
+    @FXML
     private Button ButtonCrear;
 
     @FXML
-    private TextField txtCP;
+    private Button CancelProd;
+
+    //Empresa    
     @FXML
-    private TextField txtCiud;
+    private TextField CPEmp;
+
     @FXML
-    private TextField txtCon;
+    private TextField CiudEmp;
+
     @FXML
-    private TextField txtDir;
+    private TextField DirEmp;
+
     @FXML
-    private TextField txtEmail;
+    private TextField EmailEmp;
+ 
     @FXML
-    private TextField txtID;
+    private TextField NIFEmp;
+
     @FXML
-    private TextField txtNIF;
+    private TextField NomEmp;
+
     @FXML
-    private TextField txtNom;
-    @FXML
-    private TextField txtTel;
+    private TextField TelEmp;
     
-    //cliente
-    
+    //Proveedor
     @FXML
-    private TextField txtNombre;
-    
-    @FXML
-    private TextField txtID2;
-    
-    @FXML
-    private TextField txtCod;
-    @FXML
-    private TextField txtNIF2;
+    private Button ElimProd;
     
     @FXML
-    private TextField txtEmail2;
+    private TextField ProovProd;
+
+    @FXML
+    private TextField RefProd;
     
     @FXML
-    private TextField txtTlf;
+    private TextField StockProd;
+
+    @FXML
+    private TextField VentProd;
     
     @FXML
-    private ComboBox combTipo;
+    private TextField IDProd;
+
+    @FXML
+    private ComboBox<?> IVAProd;
     
+    @FXML
+    private TextField CodProd;
+
+    @FXML
+    private TextField CosteProv;
+
+    @FXML
+    private TextField DescProd;    
+    
+    //Cliente
+    @FXML
+    private TextField CodCli;
+    
+    @FXML
+    private TextField IDCli;
+    
+    @FXML
+    private TextField NIFCli;
+
+    @FXML
+    private TextField NomCli;
+
+    @FXML
+    private ComboBox<?> TipoCli;
+
+    @FXML
+    private TextField TlfCli;
+
     @FXML
     private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
         Stage stage = (Stage) ButtonCrear.getScene().getWindow();
+        App.setRoot("primary");
         stage.close();
     }
 
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
-        if(crearEmpresa()){
-            App.setRoot("ventana_principal");
+        if (crearEmpresa()) {
             Stage stage = (Stage) ButtonCrear.getScene().getWindow();
-            stage.close();
+            App.setRoot("ventana_principal");
+            stage.close();  
         }
     }
 
@@ -108,7 +144,7 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-        
+
     }
 
     public Tab getTabEmpresa() {
@@ -123,18 +159,18 @@ public class SecondaryController {
     private boolean crearEmpresa() {
         try {
             entidadDAO = new EntidadDAO();
-            String nombre = txtNom.getText().trim();
-            String nif = txtNIF.getText().trim();
-            String calle = txtDir.getText().trim();
-            String cp = txtCP.getText().trim();
-            String ciudad = txtCiud.getText().trim();
-            String telefono = txtTel.getText().trim();
-            String email = txtEmail.getText().trim();
+            String nombre = NomEmp.getText().trim();
+            String nif = NIFEmp.getText().trim();
+            String calle = DirEmp.getText().trim();
+            String cp = CPEmp.getText().trim();
+            String ciudad = CiudEmp.getText().trim();
+            String telefono = TelEmp.getText().trim();
+            String email = EmailEmp.getText().trim();
 
-            if(comprobarCli()==true){
-                Entidad entidad = new Entidad( 0, nombre, nif, calle, cp, ciudad, email, telefono);
+            //if (comprobarCli() == true) {
+                Entidad entidad = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
                 entidadDAO.insertar(entidad);
-
+                System.out.println(entidad.toString());
                 Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
                 if (entidadInsertada == null) {
@@ -147,45 +183,40 @@ public class SecondaryController {
 
                 System.out.println("Empresa creada correctamente.");
                 return true;
-            }
-            else{
-                return false;
-            }
+            //} else {
+                //return false;
+           // }
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
-    public boolean comprobarCli(){
-        if (txtNombre.getText().isEmpty()) {
+
+    public boolean comprobarCli() {
+        if (NomCli.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el nombre de persona.");
             return false;
-        }
-        else if(txtID2.getText().isEmpty()){
+        } else if (DirEmp.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el número de personas.");
             return false;
-        }
-        else if(txtCod.getText().isEmpty()){
+        } else if (CPEmp.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el codigo de personas.");
             return false;
-        }
-        else if(txtNIF2.getText().isEmpty()){
+        } else if (NIFEmp.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el NIF de personas.");
             return false;
-        }else if(txtEmail2.getText().isEmpty()){
+        } else if (EmailEmp.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el email de personas.");
             return false;
-        }
-        else if(txtTlf.getText().isEmpty()){
+        } else if (TelEmp.getText().isEmpty()) {
             mostrarAlerta("Incompleto", "Debe indicar el número de telefono.");
             return false;
-        }else{
+        } else {
             return true;
         }
-        
+
     }
-    
+
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
