@@ -163,29 +163,28 @@ public class SecondaryController {
             String telefono = TelEmp.getText().trim();
             String email = EmailEmp.getText().trim();
 
-            //if (comprobarCli() == true) {
+            if (validarEmpresa()) {
                 Entidad entidad = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
                 entidadDAO.insertar(entidad);
                 System.out.println(entidad.toString());
                 Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
-                if (entidadInsertada == null) {
-                    mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
-                    return false;
-                }
+                /*                if (entidadInsertada == null) {
+                mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
+                return false;
+                }*/
 
                 TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
                 tipoDAO.insertar(entidadInsertada.getId(), 1);
 
                 System.out.println("Empresa creada correctamente.");
                 return true;
-            //} else {
-                //return false;
-           // }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
+        return false;
     }
 
     public boolean comprobarCli() {
@@ -220,7 +219,80 @@ public class SecondaryController {
         alert.showAndWait();
     }
     
-    /*private boolean comprobarEmpresa(){
+    // Método principal para validar todos los campos
+private boolean validarEmpresa() {
+    if (!validarNoVacio(NomEmp, "Nombre")) return false;
+    if (!validarNoVacio(NIFEmp, "NIF")) return false;
+    if (!validarNoVacio(CPEmp, "Código Postal")) return false;
+    if (!validarNoVacio(CiudEmp, "Ciudad")) return false;
+    if (!validarNoVacio(DirEmp, "Calle")) return false;
+    if (!validarNoVacio(EmailEmp, "E-mail")) return false;
+    if (!validarNoVacio(TelEmp, "Teléfono")) return false;
+
+    // Validaciones específicas
+    if (!validarNIF(NIFEmp.getText())) return false;
+    if (!validarCodigoPostal(CPEmp.getText())) return false;
+    if (!validarEmail(EmailEmp.getText())) return false;
+    if (!validarTelefono(TelEmp.getText())) return false;
+
+    return true; // Todo válido
+}
+
+// Validación de campo no vacío
+private boolean validarNoVacio(TextField campo, String nombreCampo) {
+    if (campo.getText().trim().isEmpty()) {
+        mostrarError(nombreCampo + " no puede estar vacío");
+        return false;
+    }
+    return true;
+}
+
+// Validar NIF español (simplificado)
+private boolean validarNIF(String nif) {
+    if (!nif.matches("\\d{8}[A-Z]")) { // 8 dígitos + letra
+        mostrarError("NIF inválido");
+        return false;
+    }
+    return true;
+}
+
+// Validar código postal español
+private boolean validarCodigoPostal(String cp) {
+    if (!cp.matches("\\d{5}")) {
+        mostrarError("Código postal inválido");
+        return false;
+    }
+    return true;
+}
+
+// Validar email (muy simple)
+private boolean validarEmail(String email) {
+    if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
+        mostrarError("Email inválido");
+        return false;
+    }
+    return true;
+}
+
+// Validar teléfono (9 dígitos)
+private boolean validarTelefono(String tel) {
+    if (!tel.matches("\\d{9}")) {
+        mostrarError("Teléfono inválido");
+        return false;
+    }
+    return true;
+}
+
+// Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
+private void mostrarError(String mensaje) {
+    //System.out.println("Error: " + mensaje);
+    // Alternativamente, usar Alert:
     
-    }*/
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Validación");
+    alert.setHeaderText(null);
+    alert.setContentText(mensaje);
+    alert.showAndWait();
+    
+}
 }
