@@ -77,21 +77,19 @@ public class EntidadDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String direccion = rs.getString("direccion");
-                String[] partes = direccion.split(" ");
-                String calle = partes.length > 0 ? partes[0] : "";
-                String codPost = partes.length > 1 ? partes[1] : "";
-                String ciudad = partes.length > 2 ? partes[2] : "";
+                String direccion = rs.getString("direccion"); // completa
+                String email = rs.getString("email");
+                String telefono = rs.getString("telefono");
 
                 return new Entidad(
                         rs.getInt("id_entidad"),
                         rs.getString("nombre"),
                         rs.getString("nif"),
-                        calle,
-                        codPost,
-                        ciudad,
-                        rs.getString("email"),
-                        rs.getString("telefono")
+                        "", // calle si quieres separarlo después
+                        "", // codPost
+                        "", // ciudad
+                        email,
+                        telefono
                 );
             }
 
@@ -99,7 +97,7 @@ public class EntidadDAO {
             ex.printStackTrace();
         }
 
-        return null; // Si no encuentra nada
+        return null;
     }
 
     // BUSCAR POR ID
