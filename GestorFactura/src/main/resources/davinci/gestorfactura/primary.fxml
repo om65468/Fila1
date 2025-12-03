@@ -58,7 +58,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pane_abrir" layoutX="248.0" layoutY="110.0" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="pane_abrir" layoutX="248.0" layoutY="110.0" prefHeight="494.0" prefWidth="696.0" style="-fx-background-color: white;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ScrollPane layoutX="200.0" layoutY="115.0" prefHeight="503.0" prefWidth="703.0">
               <content>
