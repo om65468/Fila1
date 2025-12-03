@@ -117,17 +117,13 @@ public class SecondaryController {
 
     @FXML
     private void switchToPrimary() throws IOException {
-        Stage stage = (Stage) ButtonCrear.getScene().getWindow();
         App.setRoot("primary");
-        stage.close();
     }
 
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
         if (crearEmpresa()) {
-            Stage stage = (Stage) ButtonCrear.getScene().getWindow();
             App.setRoot("ventana_principal");
-            stage.close();  
         }
     }
 
@@ -214,9 +210,8 @@ public class SecondaryController {
         } else {
             return true;
         }
-
     }
-
+    
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -225,4 +220,7 @@ public class SecondaryController {
         alert.showAndWait();
     }
     
+    /*private boolean comprobarEmpresa(){
+    
+    }*/
 }
