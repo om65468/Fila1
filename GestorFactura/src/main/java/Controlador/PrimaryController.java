@@ -1,10 +1,15 @@
 package Controlador;
 
+import Modelo.ConexionBBDD;
 import Modelo.Entidad;
+import Modelo.EntidadDAO;
 import Vista.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class PrimaryController implements Initializable{
+public class PrimaryController implements Initializable {
 
     @FXML
     private Button button_abrir;
@@ -32,7 +37,7 @@ public class PrimaryController implements Initializable{
 
     @FXML
     private Button button_nuevo;
-    
+
     @FXML
     private AnchorPane pane_abrir;
 
@@ -41,8 +46,8 @@ public class PrimaryController implements Initializable{
 
     @FXML
     private AnchorPane pane_nuevo;
-    
-        @FXML
+
+    @FXML
     private TableColumn<Entidad, String> TColumn_Direccion;
 
     @FXML
@@ -59,19 +64,24 @@ public class PrimaryController implements Initializable{
 
     @FXML
     private TableView<Entidad> TView_Empresa;
-    
+
+    private EntidadDAO entidadDAO;
+    private ObservableList<Entidad> listaEmpresas;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cursorHand();
+        entidadDAO = new EntidadDAO();
+        listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
         datosTablas();
+        TView_Empresa.setItems(listaEmpresas);
     }
-    
+
     @FXML
     private void onCrearEmpresa(ActionEvent event) throws IOException {
         App.setRoot("secondary");
     }
-    
-    
+
     @FXML
     void onPaneAbrirEmpresa(ActionEvent event) {
         pane_info.setVisible(false);
@@ -85,28 +95,36 @@ public class PrimaryController implements Initializable{
         pane_nuevo.setVisible(false);
         pane_abrir.setVisible(false);
     }
-    
+
     @FXML
     void onPaneNuevaEmpresa(ActionEvent event) {
         pane_info.setVisible(false);
         pane_nuevo.setVisible(true);
         pane_abrir.setVisible(false);
     }
-    
 
-    public void cursorHand(){
+    public void cursorHand() {
         button_abrir.setCursor(Cursor.HAND);
         button_empre.setCursor(Cursor.HAND);
         button_informacion.setCursor(Cursor.HAND);
         button_nuevo.setCursor(Cursor.HAND);
-                
+
     }
-    
+
     public void datosTablas() {
-    TColumn_Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-    TColumn_NIF.setCellValueFactory(new PropertyValueFactory<>("nif"));
-    TColumn_Direccion.setCellValueFactory(new PropertyValueFactory<>("calle"));
-    TColumn_Telefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-    TColumn_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        TColumn_Nombre.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+
+        TColumn_NIF.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getNif()));
+
+        TColumn_Telefono.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+
+        TColumn_email.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+
+        TColumn_Direccion.setCellValueFactory(
+                cellData -> new SimpleStringProperty(cellData.getValue().getDireccionCompleta()));
     }
 }

@@ -89,5 +89,8 @@ public class Entidad {
         this.telefono = telefono;
     }
 
+    public String getDireccionCompleta() {
+        return calle + " " + codPost + " " + ciudad;
+    }
         
 }

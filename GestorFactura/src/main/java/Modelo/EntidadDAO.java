@@ -15,7 +15,6 @@ public class EntidadDAO {
             System.out.println("No funciona la conexioin de EntidadDao a la BBDD, mira el constructor");
             e.printStackTrace();
         }
-        
     }
 
     public boolean insertar(Entidad e) {
@@ -229,6 +228,47 @@ public class EntidadDAO {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    public List<Entidad> obtenerEmpresas() {
+        List<Entidad> lista = new ArrayList<>();
+
+        String sql
+                = "SELECT e.* FROM entidades e "
+                + "JOIN entidad_tipo_relacion rel ON e.id_entidad = rel.id_entidad "
+                + "JOIN tipo_entidad t ON t.id_tipo = rel.id_tipo "
+                + "WHERE t.tipo = 'empresa'";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+
+                String direccion = rs.getString("direccion");
+                String[] partes = direccion != null ? direccion.split(" ") : new String[0];
+
+                String calle = partes.length > 0 ? partes[0] : "";
+                String codPost = partes.length > 1 ? partes[1] : "";
+                String ciudad = partes.length > 2 ? partes[2] : "";
+
+                Entidad e = new Entidad(
+                        rs.getInt("id_entidad"),
+                        rs.getString("nombre"),
+                        rs.getString("nif"),
+                        calle,
+                        codPost,
+                        ciudad,
+                        rs.getString("email"),
+                        rs.getString("telefono")
+                );
+
+                lista.add(e);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return lista;
     }
 
 }
