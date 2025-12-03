@@ -287,12 +287,46 @@ private boolean validarTelefono(String tel) {
 private void mostrarError(String mensaje) {
     //System.out.println("Error: " + mensaje);
     // Alternativamente, usar Alert:
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validación");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
     
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle("Validación");
-    alert.setHeaderText(null);
-    alert.setContentText(mensaje);
-    alert.showAndWait();
+    public Tab getTabProducto() { return tabProducto; }
+    public Tab getTabProveedor() { return tabProveedor; }
+    public Tab getTabFactura() { return tabFactura; }
     
-}
+    
+    public void mostrarTab(Tab tab) {
+        tabPaneSecondary.getSelectionModel().select(tab);
+
+        // 🔒 Opcional: bloquear los demás
+        for (Tab t : tabPaneSecondary.getTabs()) {
+            t.setDisable(t != tab);
+        }
+    }
+    
+    public void mostrarTabSegunTipo(String tipo) {
+        switch (tipo) {
+            case "EMPRESA":
+                mostrarTab(tabEmpresa);
+                break;
+            case "CLIENTE":
+                mostrarTab(tabCliente);
+                break;
+            case "PRODUCTO":
+                mostrarTab(tabProducto);
+                break;
+            case "PROVEEDOR":
+                mostrarTab(tabProveedor);
+                break;
+            case "FACTURA":
+                mostrarTab(tabFactura);
+                break;
+        }
+    }
+
+
 }

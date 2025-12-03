@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class VentanaPrincipalController {
@@ -32,6 +33,14 @@ public class VentanaPrincipalController {
     @FXML
     private Button ButtonCliente;
     
+    @FXML
+    private AnchorPane paneCliente;
+
+    @FXML
+    private AnchorPane paneEmpresa;
+    
+    @FXML
+    private AnchorPane paneProveedor;
     
     @FXML
     public void initialize() {
@@ -62,7 +71,7 @@ public class VentanaPrincipalController {
             tabPane.getTabs().remove(tab_proveedor);
         }
     }
-    
+   
     @FXML
     void onMostrarTabCliente(ActionEvent event) {
         if (!tabPane.getTabs().contains(tab_cliente)) {
@@ -123,5 +132,101 @@ public class VentanaPrincipalController {
         // Aquí llenas tus labels, textfields, etc.
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
+    
+    
+    private void abrirSecondary(String tipoTab) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/davinci/gestorfactura/secondary.fxml")
+            );
+
+            Parent root = loader.load();
+            SecondaryController controller = loader.getController();
+
+            switch (tipoTab) {
+                case "EMPRESA":
+                    controller.mostrarTab(controller.getTabEmpresa());
+                    break;
+                case "CLIENTE":
+                    controller.mostrarTab(controller.getTabCliente());
+                    break;
+                case "PRODUCTO":
+                    controller.mostrarTab(controller.getTabProducto());
+                    break;
+                case "PROVEEDOR":
+                    controller.mostrarTab(controller.getTabProveedor());
+                    break;
+                case "FACTURA":
+                    controller.mostrarTab(controller.getTabFactura());
+                    break;
+            }
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onMostrarCliente() {
+        paneCliente.setVisible(true);
+        cargarEnPane(
+            paneCliente,
+            "/davinci/gestorfactura/secondary.fxml",
+            "CLIENTE"
+        );
+    }
+
+    
+    @FXML
+    private void onMostrarProveedor() {
+        paneCliente.setVisible(true);
+        cargarEnPane(
+            paneCliente,
+            "/davinci/gestorfactura/secondary.fxml",
+            "PROVEEDOR"
+        );
+    }
+
+
+
+    private void cargarEnPane(AnchorPane destino, String fxml, String tipoTab) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource(fxml)
+            );
+
+            Parent vista = loader.load();
+
+            // Ajustar la vista al tamaño del pane
+            AnchorPane.setTopAnchor(vista, 0.0);
+            AnchorPane.setBottomAnchor(vista, 0.0);
+            AnchorPane.setLeftAnchor(vista, 0.0);
+            AnchorPane.setRightAnchor(vista, 0.0);
+
+            destino.getChildren().setAll(vista);
+
+            // Configurar el controller secundario
+            SecondaryController controller = loader.getController();
+            if (tipoTab != null) {
+                controller.mostrarTabSegunTipo(tipoTab);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void ocultarPanes() {
+        paneCliente.setVisible(false);
+        paneEmpresa.setVisible(false);
+        paneProveedor.setVisible(false);
+    }
+    
+    
+
 
 }
