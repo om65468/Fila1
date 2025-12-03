@@ -11,8 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -120,5 +124,35 @@ public class PrimaryController implements Initializable {
 
         TColumn_Direccion.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getDireccionCompleta()));
+    }
+    
+    @FXML
+    void onElegirEmpresa(ActionEvent event) {
+         // 1. Obtener la empresa seleccionada
+        Entidad seleccionada = TView_Empresa.getSelectionModel().getSelectedItem();
+
+        if (seleccionada == null) {
+            System.out.println("Selecciona una empresa.");
+            return;
+        }
+
+        try {
+            // 2. Cargar la nueva vista
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml"));
+            Parent root = loader.load();
+
+            // 3. Obtener el controlador de la nueva vista
+            VentanaPrincipalController controller = loader.getController();
+
+            // 4. Pasar la empresa al nuevo controlador
+            controller.setEmpresa(seleccionada);
+
+            // 5. Cambiar la escena pero en la MISMA ventana
+            Scene escenaActual = ((Node) event.getSource()).getScene();
+            escenaActual.setRoot(root);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Entidad;
 import Vista.App;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -13,6 +14,8 @@ import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 public class VentanaPrincipalController {
+    
+    private Entidad empresa;
     
     @FXML
     private Tab tabArchivo;
@@ -108,4 +111,17 @@ public class VentanaPrincipalController {
         }
         
     }
+    
+        public void setEmpresa(Entidad empresa) {
+        this.empresa = empresa;
+        cargarDatos();
+    }
+
+    private void cargarDatos() {
+        if (empresa == null) return;
+
+        // Aquí llenas tus labels, textfields, etc.
+        System.out.println("Empresa cargada: " + empresa.getNombre());
+    }
+
 }
