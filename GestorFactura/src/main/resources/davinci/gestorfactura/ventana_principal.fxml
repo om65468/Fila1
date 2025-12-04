@@ -35,7 +35,45 @@
           </Tab>
             <Tab fx:id="TabFactura" text="Factura">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="752.0">
+                     <children>
+                        <Button fx:id="Boton_nuevo_fac" contentDisplay="TOP" layoutX="54.0" layoutY="10.0" mnemonicParsing="false" onAction="#onNuevoFactura" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconnuevo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Boton_modificar_fac" contentDisplay="TOP" layoutX="85.0" layoutY="12.0" mnemonicParsing="false" onAction="#onModifiarFactura" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/modificarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="boton_eliminar_fac" contentDisplay="TOP" layoutX="141.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEliminarFactura" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar" AnchorPane.leftAnchor="141.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab fx:id="tab_cliente" text="Cliente">

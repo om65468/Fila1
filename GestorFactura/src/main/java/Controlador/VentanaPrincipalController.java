@@ -223,7 +223,24 @@ public class VentanaPrincipalController {
     }
     
     
+    //Metodos de Factura
+    @FXML
+    private void onNuevoFactura() {
+        //Falta hacer el paneFactura!
+        //ocultarPanes();
+        //paneFactura.setVisible(true);
+        //paneFactura.setManaged(true);
+    }
     
+    @FXML
+    private void onEliminarFactura(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void onModificarFactura(ActionEvent event) {
+
+    }
     
     
     
