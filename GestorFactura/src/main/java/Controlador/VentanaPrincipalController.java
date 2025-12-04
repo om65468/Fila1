@@ -1,12 +1,16 @@
 package Controlador;
 
+import Modelo.EmpresaEntidadRelacionDAO;
 import Modelo.Entidad;
+import Modelo.EntidadDAO;
 import Vista.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class VentanaPrincipalController {
@@ -39,6 +43,90 @@ public class VentanaPrincipalController {
 
     @FXML
     private AnchorPane paneProducto;
+
+    //Proveedor
+    @FXML
+    private Button Boton_Guardar_prov;
+    @FXML
+    private Button Boton_comercial_prov;
+    @FXML
+    private Button Boton_duplicar_prov;
+    @FXML
+    private Button Boton_eliminar_prov;
+    @FXML
+    private Button Boton_nuevo_prov;
+    @FXML
+    private Button Boton_modificar_prov;
+    @FXML
+    private Button Boton_general_prov;
+    @FXML
+    private Button Boton_proveedor;
+    @FXML
+    private TextField CodProv;
+    @FXML
+    private TextField EmailProv;
+    @FXML
+    private TextField IDProv;
+    @FXML
+    private ComboBox<?> TipoProv;
+    @FXML
+    private TextField NIFProv;
+    @FXML
+    private TextField NomProv;
+
+    //Cliente
+    @FXML
+    private Button Boton_comercial_cli;
+    @FXML
+    private Button Boton_duplicar_cli;
+    @FXML
+    private Button Boton_eliminar_cli;
+    @FXML
+    private Button Boton_general_cli;
+    @FXML
+    private Button Boton_guardar_cli;
+    @FXML
+    private Button Boton_modificar_cli;
+    @FXML
+    private Button Boton_nuevo_cli;
+    @FXML
+    private TextField CodCli;
+    @FXML
+    private TextField EmailCli;
+    @FXML
+    private TextField IDCli;
+    @FXML
+    private TextField NIFCli;
+    @FXML
+    private TextField NomCli;
+    @FXML
+    private ComboBox<?> TipoCli;
+
+    //Empresa
+    @FXML
+    private Button Button_Crear_empresa;
+    @FXML
+    private Button Button_cancelar_empresa;
+    @FXML
+    private TextField CPEmp;
+    @FXML
+    private TextField CiudEmp;
+    @FXML
+    private TextField DirEmp;
+    @FXML
+    private TextField EmailEmp;
+    @FXML
+    private TextField NIFEmp;
+    @FXML
+    private TextField NomEmp;
+    @FXML
+    private TextField TelEmp;
+
+    //Extra
+    @FXML
+    private Button Boton_agentes;
+    @FXML
+    private Button Boton_cliente;
 
     @FXML
     public void initialize() {
@@ -155,7 +243,88 @@ public class VentanaPrincipalController {
         // Aquí llenas tus labels, textfields, etc.
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
+    /*OMAR MIRAME PORQUE NO HAY CAMPOS DE DIRECCIÓN EN EL PROVEEDOR NI EN EL CLIENTE*/
+/*
+    @FXML
+    private void guardarCliente() {
 
+        try {
+            EntidadDAO entidadDAO = new EntidadDAO();
+            TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
+
+            // 1. Datos del formulario
+            String nombre = txtNombreCliente.getText().trim();
+            String nif = txtNifCliente.getText().trim();
+            String calle = txtCalleCliente.getText().trim();
+            String cp = txtCpCliente.getText().trim();
+            String ciudad = txtCiudadCliente.getText().trim();
+            String email = txtEmailCliente.getText().trim();
+            String telefono = txtTelefonoCliente.getText().trim();
+
+            // 2. Crear la entidad
+            Entidad nuevoCliente = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+
+            // 3. Insertar la entidad base
+            entidadDAO.insertar(nuevoCliente);
+
+            // 4. Recuperar ID
+            Entidad clienteInsertado = entidadDAO.buscarPorNif(nif);
+
+            if (clienteInsertado == null) {
+                mostrarAlerta("Error", "No se ha podido crear el cliente.");
+                return;
+            }
+
+            // 5. Crear relación: empresa actual → cliente (tipo 2)
+            tipoDAO.insertar(clienteInsertado.getId(), 2);
+            tipoDAO.insertarRelacionEmpresa(empresa.getId(), clienteInsertado.getId());
+
+            mostrarAlerta("Éxito", "Cliente guardado correctamente.");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error", "Ocurrió un error al guardar el cliente.");
+        }
+    }
+
+    @FXML
+    private void guardarProveedor() {
+
+        try {
+            EntidadDAO entidadDAO = new EntidadDAO();
+            EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
+
+            String nombre = NomProv.getText().trim();
+            String nif = NIFProv.getText().trim();
+            String calle = .getText().trim();
+            String cp = txtCpProveedor.getText().trim();
+            String ciudad = txtCiudadProveedor.getText().trim();
+            String email = EmailProv.getText().trim();
+            String telefono = TelP.getText().trim();
+
+            Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+
+            entidadDAO.insertar(nuevoProveedor);
+
+            Entidad proveedorInsertado = entidadDAO.buscarPorNif(nif);
+
+            if (proveedorInsertado == null) {
+                mostrarAlerta("Error", "No se ha podido crear el proveedor.");
+                return;
+            }
+
+            // Crear relación: empresa actual → proveedor (tipo 3)
+            tipoDAO.insertar(proveedorInsertado.getId(), 3);
+            tipoDAO.insertarRelacionEmpresa(empresa.getId(), proveedorInsertado.getId());
+
+            mostrarAlerta("Éxito", "Proveedor guardado correctamente.");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
+        }
+    }
+*/
     /*
     private void abrirSecondary(String tipoTab) {
         try {
