@@ -42,6 +42,9 @@ public class VentanaPrincipalController {
     @FXML
     private AnchorPane paneProveedor;
     
+    @FXML 
+    private AnchorPane paneProducto;
+    
     @FXML
     public void initialize() {
         tabPane.getTabs().remove(tab_cliente);
@@ -71,23 +74,39 @@ public class VentanaPrincipalController {
             tabPane.getTabs().remove(tab_proveedor);
         }
     }
+    
+    @FXML
+    private void mostrarEmpresa() {
+        ocultarPanes();
+        paneEmpresa.setVisible(true);
+        paneEmpresa.setManaged(true);
+    }
+
    
     @FXML
-    void onMostrarTabCliente(ActionEvent event) {
-        if (!tabPane.getTabs().contains(tab_cliente)) {
-            tabPane.getTabs().add(tab_cliente);
-            tabPane.getSelectionModel().select(tab_cliente);
-        }
+    private void onMostrarCliente() {
+        ocultarPanes();
+        paneCliente.setVisible(true);
+        paneCliente.setManaged(true);
+    }
+
+
+    @FXML
+    private void onMostrarProveedor() {
+        ocultarPanes();
+        paneProveedor.setVisible(true);
+        paneProveedor.setManaged(true);
     }
 
     @FXML
-    void onMostrarTabProveedor(ActionEvent event) {
-        if (!tabPane.getTabs().contains(tab_proveedor)) {
-            tabPane.getTabs().add(tab_proveedor);
-            tabPane.getSelectionModel().select(tab_proveedor);
-        }
+    private void onMostrarProducto() {
+        ocultarPanes();
+        paneProducto.setVisible(true);
+        paneProducto.setManaged(true);
     }
+
     
+    /*
     @FXML
     private void switchToSecondaryCli() throws IOException {
         try {
@@ -110,7 +129,7 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void cargarOtraVentana() {
         try {
@@ -134,6 +153,7 @@ public class VentanaPrincipalController {
     }
     
     
+    /*
     private void abrirSecondary(String tipoTab) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -168,31 +188,11 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void onMostrarCliente() {
-        paneCliente.setVisible(true);
-        cargarEnPane(
-            paneCliente,
-            "/davinci/gestorfactura/secondary.fxml",
-            "CLIENTE"
-        );
-    }
-
-    
-    @FXML
-    private void onMostrarProveedor() {
-        paneCliente.setVisible(true);
-        cargarEnPane(
-            paneCliente,
-            "/davinci/gestorfactura/secondary.fxml",
-            "PROVEEDOR"
-        );
-    }
+    }*/
 
 
 
+    /*
     private void cargarEnPane(AnchorPane destino, String fxml, String tipoTab) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -218,13 +218,22 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
     private void ocultarPanes() {
-        paneCliente.setVisible(false);
         paneEmpresa.setVisible(false);
+        paneEmpresa.setManaged(false);
+
+        paneCliente.setVisible(false);
+        paneCliente.setManaged(false);
+
         paneProveedor.setVisible(false);
+        paneProveedor.setManaged(false);
+
+        paneProducto.setVisible(false);
+        paneProducto.setManaged(false);
     }
+
     
     
 
