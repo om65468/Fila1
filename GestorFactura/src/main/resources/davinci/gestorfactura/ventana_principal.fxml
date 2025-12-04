@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
@@ -199,8 +206,261 @@
             </Tab>
         </tabs>
       </TabPane>
-      <AnchorPane fx:id="paneProveedor" layoutY="97.0" prefHeight="616.0" prefWidth="992.0" />
-      <AnchorPane fx:id="paneEmpresa" layoutX="-5.0" layoutY="99.0" prefHeight="610.0" prefWidth="1002.0" />
-      <AnchorPane fx:id="paneCliente" layoutY="94.0" prefHeight="616.0" prefWidth="992.0" />
+      <AnchorPane fx:id="paneEmpresa" layoutX="-5.0" layoutY="99.0" prefHeight="610.0" prefWidth="1002.0" visible="false">
+         <children>
+            <GridPane layoutX="17.0" layoutY="13.0" prefHeight="586.0" prefWidth="953.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="82.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="401.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="152.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="335.0" minWidth="10.0" prefWidth="313.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="67.79999389648438" minHeight="3.000007057189947" prefHeight="35.599999999999994" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="142.99999294281005" minHeight="0.0" prefHeight="30.799999999999997" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="202.79999999999995" minHeight="0.0" prefHeight="31.799993896484366" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="245.80001220703127" minHeight="0.0" prefHeight="31.800006103515628" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="285.20002441406245" minHeight="10.0" prefHeight="35.00002441406251" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="264.0000061035156" minHeight="10.0" prefHeight="198.19997558593747" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="labelCP" text="CP" GridPane.rowIndex="2" />
+                  <Label fx:id="labelNIF" text="NIF" GridPane.columnIndex="2">
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelDir" text="Calle" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelNombre" text="Nombre" />
+                  <Label fx:id="labelTlf" text="Telefono" GridPane.rowIndex="3" />
+                  <Label fx:id="labelCiud" text="Ciudad" GridPane.rowIndex="1" />
+                  <Label fx:id="labelEmail" text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets left="80.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="NIFEmp" GridPane.columnIndex="3" />
+                  <TextField fx:id="CPEmp" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="TelEmp" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="NomEmp" GridPane.columnIndex="1" />
+                  <TextField fx:id="DirEmp" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="CiudEmp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="EmailEmp" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" prefHeight="25.0" prefWidth="81.0" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="80.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="ButtonCancelar" mnemonicParsing="false" onAction="#switchToPrimary" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="100.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </GridPane>
+         </children></AnchorPane>
+      <AnchorPane fx:id="paneCliente" layoutY="94.0" prefHeight="616.0" prefWidth="992.0" visible="false">
+         <children>
+            <GridPane layoutX="14.0" layoutY="142.0" prefHeight="452.0" prefWidth="910.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="labID" text="ID" />
+                  <Label fx:id="labTip" text="Tipo" GridPane.rowIndex="1" />
+                  <Label fx:id="labNIF" text="NIF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="labMail" text="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="labCode" text="Nombre" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="labCod" text="Codigo" GridPane.rowIndex="2" />
+                  <Label fx:id="labTlf" text="Tlf" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="IDCli" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" />
+                  <TextField fx:id="NomCli" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="EmailEmp1" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="TlfCli" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="NIFCli" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="CodCli" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="TipoCli" prefHeight="26.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label text="Datos Personales" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <AnchorPane layoutY="27.0" prefHeight="106.0" prefWidth="825.0">
+               <children>
+                  <GridPane layoutX="62.4" layoutY="41.0" prefHeight="27.0" prefWidth="680.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="41.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="buttGuar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
+                           <graphic>
+                              <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconSave.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttEim" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttGen" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icongeneral.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttCom" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcomercial.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneProveedor" layoutY="97.0" prefHeight="616.0" prefWidth="992.0" visible="false">
+         <children>
+            <GridPane layoutX="14.0" layoutY="142.0" prefHeight="452.0" prefWidth="910.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="labID1" text="ID" />
+                  <Label fx:id="labTip1" text="Tipo" GridPane.rowIndex="1" />
+                  <Label fx:id="labNIF1" text="NIF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="labMail1" text="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="labCode1" text="Nombre" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="labCod1" text="Codigo" GridPane.rowIndex="2" />
+                  <Label fx:id="labTlf1" text="Tlf" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="IDCli1" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" />
+                  <TextField fx:id="NomCli1" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="EmailEmp11" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="TlfCli1" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="NIFCli1" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="CodCli1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="TipoCli1" prefHeight="26.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label text="Datos Personales" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <AnchorPane layoutY="24.0" prefHeight="106.0" prefWidth="825.0">
+               <children>
+                  <GridPane layoutX="62.4" layoutY="41.0" prefHeight="27.0" prefWidth="680.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="41.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="buttGuar1" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
+                           <graphic>
+                              <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconSave.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttEim1" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttGen1" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/icongeneral.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="buttCom1" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
+                           <graphic>
+                              <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconcomercial.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <AnchorPane fx:id="paneProducto" layoutY="120.0" prefHeight="586.0" prefWidth="992.0" visible="false">
+         <children>
+            <Label layoutX="410.0" layoutY="314.0" text="Productos" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
