@@ -267,7 +267,7 @@ private boolean validarCodigoPostal(String cp) {
 
 // Validar email (muy simple)
 private boolean validarEmail(String email) {
-    if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
+    if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
         mostrarError("Email inválido");
         return false;
     }
