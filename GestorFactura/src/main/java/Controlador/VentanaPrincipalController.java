@@ -106,26 +106,6 @@ public class VentanaPrincipalController {
     @FXML
     private ComboBox<?> TipoCli;
 
-    /*    //Empresa
-    @FXML
-    private Button Button_Crear_empresa;
-    @FXML
-    private Button Button_cancelar_empresa;
-    @FXML
-    private TextField CPEmp;
-    @FXML
-    private TextField CiudEmp;
-    @FXML
-    private TextField DirEmp;
-    @FXML
-    private TextField EmailEmp;
-    @FXML
-    private TextField NIFEmp;
-    @FXML
-    private TextField NomEmp;
-    @FXML
-    private TextField TelEmp;*/
-
     //Extra
     @FXML
     private Button Boton_agentes;
@@ -383,8 +363,6 @@ public class VentanaPrincipalController {
         }
     }*/
     private void ocultarPanes() {
-        /*        paneEmpresa.setVisible(false);
-        paneEmpresa.setManaged(false);*/
 
         paneCliente.setVisible(false);
         paneCliente.setManaged(false);
