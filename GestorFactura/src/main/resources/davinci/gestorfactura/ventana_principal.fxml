@@ -250,12 +250,12 @@
                   <TextField fx:id="DirEmp" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <TextField fx:id="CiudEmp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="EmailEmp" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Button fx:id="ButtonCrear" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" prefHeight="25.0" prefWidth="81.0" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <Button fx:id="Button_Crear_empresa" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" prefHeight="25.0" prefWidth="81.0" text="Crear" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="80.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="ButtonCancelar" mnemonicParsing="false" onAction="#switchToPrimary" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Button fx:id="Button_cancelar_empresa" mnemonicParsing="false" onAction="#switchToPrimary" text="Cancelar" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="100.0" />
                      </GridPane.margin>
@@ -295,7 +295,7 @@
                   <Label fx:id="labTlf" text="Tlf" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <TextField fx:id="IDCli" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" />
                   <TextField fx:id="NomCli" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <TextField fx:id="EmailEmp1" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="EmailCli" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                   <TextField fx:id="TlfCli" GridPane.columnIndex="3" GridPane.rowIndex="7" />
                   <TextField fx:id="NIFCli" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <TextField fx:id="CodCli" GridPane.columnIndex="2" GridPane.rowIndex="2" />
@@ -320,7 +320,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="buttGuar" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
+                        <Button fx:id="Boton_guardar_cli" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
                            <graphic>
                               <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -329,7 +329,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttEim" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
+                        <Button fx:id="Boton_eliminar_cli" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -338,7 +338,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttGen" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
+                        <Button fx:id="Boton_general_cli" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -347,7 +347,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttCom" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
+                        <Button fx:id="Boton_comercial_cli" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -389,13 +389,13 @@
                   <Label fx:id="labCode1" text="Nombre" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label fx:id="labCod1" text="Codigo" GridPane.rowIndex="2" />
                   <Label fx:id="labTlf1" text="Tlf" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="IDCli1" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" />
-                  <TextField fx:id="NomCli1" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <TextField fx:id="EmailEmp11" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                  <TextField fx:id="TlfCli1" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <TextField fx:id="NIFCli1" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <TextField fx:id="CodCli1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="TipoCli1" prefHeight="26.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="IDProv" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" />
+                  <TextField fx:id="NomProv" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <TextField fx:id="EmailProv" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <TextField fx:id="TlfProv" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="NIFProv" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <TextField fx:id="CodProv" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="TipoProv" prefHeight="26.0" prefWidth="346.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label text="Datos Personales" GridPane.rowIndex="3">
                      <font>
                         <Font size="18.0" />
@@ -416,7 +416,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Button fx:id="buttGuar1" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
+                        <Button fx:id="Boton_Guardar_prov" contentDisplay="TOP" mnemonicParsing="false" prefHeight="68.0" prefWidth="54.0" text="Guardar">
                            <graphic>
                               <ImageView fitHeight="43.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -425,7 +425,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttEim1" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
+                        <Button fx:id="Boton_eliminar_prov" contentDisplay="TOP" mnemonicParsing="false" text="Eliminar" GridPane.columnIndex="1">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -434,7 +434,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttGen1" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
+                        <Button fx:id="Boton_general_prov" contentDisplay="TOP" mnemonicParsing="false" text="General" GridPane.columnIndex="2">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -443,7 +443,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="buttCom1" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
+                        <Button fx:id="Boton_comercial_prov" contentDisplay="TOP" mnemonicParsing="false" text="Comercial" GridPane.columnIndex="3">
                            <graphic>
                               <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
