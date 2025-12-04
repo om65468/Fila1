@@ -76,7 +76,7 @@ public class VentanaPrincipalController {
     }
     
     @FXML
-    private void mostrarEmpresa() {
+    public void mostrarEmpresa() {
         ocultarPanes();
         paneEmpresa.setVisible(true);
         paneEmpresa.setManaged(true);
@@ -104,7 +104,7 @@ public class VentanaPrincipalController {
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
-
+    
     
     /*
     @FXML

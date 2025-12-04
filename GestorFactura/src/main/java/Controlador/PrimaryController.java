@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
@@ -77,7 +78,32 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void onCrearEmpresa(ActionEvent event) throws IOException {
-        App.setRoot("secondary");
+        App.setRoot("ventana_principal");
+        
+    }
+    
+    @FXML
+    private void onCrearEmpresa() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml")
+            );
+
+            Parent root = loader.load();
+
+            // ✅ ESTE controller ES EL CORRECTO
+            VentanaPrincipalController controller = loader.getController();
+
+            // ✅ FORZAMOS A QUE SOLO SE VEA EMPRESA
+            controller.mostrarEmpresa();
+
+            Stage stage = (Stage) button_empre.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
