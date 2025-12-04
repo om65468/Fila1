@@ -98,7 +98,7 @@
                               <Label fx:id="labTlf" layoutX="257.0" layoutY="605.0" text="Tlf" />
                               <TextField fx:id="IDCli" layoutX="300.79998779296875" layoutY="142.39999389648438" prefHeight="26.0" prefWidth="111.0" />
                               <TextField fx:id="NomCli" layoutX="453.0" layoutY="428.0" />
-                              <TextField fx:id="EmailEmp" layoutX="453.0" layoutY="543.0" />
+                              <TextField fx:id="EmailCli" layoutX="453.0" layoutY="543.0" />
                               <TextField fx:id="TlfCli" layoutX="453.0" layoutY="601.0" />
                               <TextField fx:id="NIFCli" layoutX="453.0" layoutY="486.0" />
                               <TextField fx:id="CodCli" layoutX="300.79998779296875" layoutY="259.20001220703125" />

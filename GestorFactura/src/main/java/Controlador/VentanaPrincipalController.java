@@ -130,32 +130,10 @@ public class VentanaPrincipalController {
 
     @FXML
     public void initialize() {
-        tabPane.getTabs().remove(tab_cliente);
-        tabPane.getTabs().remove(tab_proveedor);
 
-        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-            if (newTab != tab_cliente && newTab != tab_proveedor) {
-                eliminarTabsDinamicos();
-            }
-        });
-
-        tabArchivo.setOnSelectionChanged(event -> {
-            if (tabArchivo.isSelected()) {
-                cargarOtraVentana();
-
-                tabPane.getSelectionModel().selectFirst();
-            }
-        });
+        
     }
 
-    private void eliminarTabsDinamicos() {
-        if (tabPane.getTabs().contains(tab_cliente)) {
-            tabPane.getTabs().remove(tab_cliente);
-        }
-        if (tabPane.getTabs().contains(tab_proveedor)) {
-            tabPane.getTabs().remove(tab_proveedor);
-        }
-    }
 
     @FXML
     public void mostrarEmpresa() {
@@ -184,36 +162,12 @@ public class VentanaPrincipalController {
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
-
-    /*
-    @FXML
-    private void switchToSecondaryCli() throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/secondary.fxml"));
-            Parent root = loader.load();
-
-            SecondaryController secController = loader.getController();
-
-            secController.irATab(secController.getTabCliente());
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-            stage.requestFocus();
-            
-            Stage stage2 = (Stage) ButtonCliente.getScene().getWindow();
-            stage2.close();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+    
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
-
+    
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
         if (SecondaryController.getSc().crearEmpresa()) {

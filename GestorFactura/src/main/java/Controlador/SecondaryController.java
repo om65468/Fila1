@@ -175,10 +175,6 @@ public class SecondaryController {
                 System.out.println(entidad.toString());
                 Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
-                /*                if (entidadInsertada == null) {
-                mostrarAlerta("Incompleto", "No se pudo recuperar la entidad recién creada.");
-                return false;
-                }*/
 
                 TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
                 tipoDAO.insertar(entidadInsertada.getId(), 1);
@@ -238,7 +234,7 @@ private boolean validarEmpresa() {
     // Validaciones específicas
     if (!validarNIF(NIFEmp.getText())) return false;
     if (!validarCodigoPostal(CPEmp.getText())) return false;
-    if (!validarEmail(EmailEmp.getText())) return false;
+    //if (!validarEmail(EmailEmp.getText())) return false;
     if (!validarTelefono(TelEmp.getText())) return false;
 
     return true; // Todo válido
@@ -246,7 +242,7 @@ private boolean validarEmpresa() {
 
 // Validación de campo no vacío
 private boolean validarNoVacio(TextField campo, String nombreCampo) {
-    if (campo.getText().trim().isEmpty()) {
+    if (campo.getText().isEmpty()) {
         mostrarError(nombreCampo + " no puede estar vacío");
         return false;
     }
@@ -271,14 +267,7 @@ private boolean validarCodigoPostal(String cp) {
     return true;
 }
 
-// Validar email (muy simple)
-private boolean validarEmail(String email) {
-    if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-        mostrarError("Email inválido");
-        return false;
-    }
-    return true;
-}
+
 
 // Validar teléfono (9 dígitos)
 private boolean validarTelefono(String tel) {
