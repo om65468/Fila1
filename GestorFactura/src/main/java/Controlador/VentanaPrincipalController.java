@@ -18,16 +18,19 @@ public class VentanaPrincipalController {
     private Entidad empresa;
 
     @FXML
-    private Tab tabArchivo;
-
-    @FXML
     private TabPane tabPane;
+    
+    @FXML
+    private Tab tabArchivo;
 
     @FXML
     private Tab tab_cliente;
 
     @FXML
     private Tab tab_proveedor;
+    
+    @FXML
+    private Tab tabInformacion;
 
     @FXML
     private Button ButtonCliente;
@@ -102,7 +105,7 @@ public class VentanaPrincipalController {
     @FXML
     private ComboBox<?> TipoCli;
 
-    //Empresa
+    /*    //Empresa
     @FXML
     private Button Button_Crear_empresa;
     @FXML
@@ -120,7 +123,7 @@ public class VentanaPrincipalController {
     @FXML
     private TextField NomEmp;
     @FXML
-    private TextField TelEmp;
+    private TextField TelEmp;*/
 
     //Extra
     @FXML
@@ -130,10 +133,18 @@ public class VentanaPrincipalController {
 
     @FXML
     public void initialize() {
-
-        
+        tabPane.getSelectionModel().select(tabInformacion);
+        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+        if (newTab == tabArchivo) {
+            try {
+                // Se seleccionó la pestaña 2, llamar a tu método
+                switchToPrimary();
+            } catch (IOException ex) {
+                System.out.println("Problema en la linea 143");
+            }
+        }
+    });
     }
-
 
     @FXML
     public void mostrarEmpresa() {
@@ -170,11 +181,11 @@ public class VentanaPrincipalController {
     
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
-        if (SecondaryController.getSc().crearEmpresa()) {
-            App.setRoot("ventana_principal");
-        }
+    if (SecondaryController.getSc().crearEmpresa()) {
+    App.setRoot("ventana_principal");
     }
-
+    }
+    
     private void cargarOtraVentana() {
         try {
             App.setRoot("primary");

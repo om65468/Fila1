@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
+import Modelo.TipoEntidadDAO;
 import Vista.App;
 import java.io.IOException;
 import java.net.URL;
@@ -17,9 +18,11 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -63,12 +66,39 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private TableView<Entidad> TView_Empresa;
+    
+    
+    //Empresa
+    @FXML
+    private Button Button_Crear_empresa;
+    @FXML
+    private Button Button_cancelar_empresa;
+    @FXML
+    private TextField CPEmp;
+    @FXML
+    private TextField CiudEmp;
+    @FXML
+    private TextField DirEmp;
+    @FXML
+    private TextField EmailEmp;
+    @FXML
+    private TextField NIFEmp;
+    @FXML
+    private TextField NomEmp;
+    @FXML
+    private TextField TelEmp;
+    
+    @FXML
+    private AnchorPane paneEmpresa;
 
     private EntidadDAO entidadDAO;
     private ObservableList<Entidad> listaEmpresas;
 
+    private Entidad empresaCreada;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        empresaCreada=null;
         cursorHand();
         entidadDAO = new EntidadDAO();
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
@@ -78,20 +108,36 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void onCrearEmpresa(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml")
-        );
+        paneEmpresa.setVisible(true);
+    }
+    
+    @FXML
+    void switchToVentanaPrincipal(ActionEvent event) throws IOException {
+        if (crearEmpresa()){
+            try {
+                // 2. Cargar la nueva vista
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml"));
+                Parent root = loader.load();
 
-        Parent root = loader.load();
+                // 3. Obtener el controlador de la nueva vista
+                VentanaPrincipalController controller = loader.getController();
 
-        VentanaPrincipalController controller = loader.getController();
+                // 4. Pasar la empresa al nuevo controlador
+                controller.setEmpresa(empresaCreada);
 
-        controller.mostrarEmpresa();
+                // 5. Cambiar la escena pero en la MISMA ventana
+                Scene escenaActual = ((Node) event.getSource()).getScene();
+                escenaActual.setRoot(root);
 
-        Stage stage = (Stage) button_empre.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-        
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    @FXML
+    void onCancelarEmpresa(ActionEvent event) {
+           paneEmpresa.setVisible(false);
     }
     
     @FXML
@@ -168,5 +214,114 @@ public class PrimaryController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @FXML
+    public boolean crearEmpresa() {
+        try {
+            entidadDAO = new EntidadDAO();
+            String nombre = NomEmp.getText().trim();
+            String nif = NIFEmp.getText().trim();
+            String calle = DirEmp.getText().trim();
+            String cp = CPEmp.getText().trim();
+            String ciudad = CiudEmp.getText().trim();
+            String telefono = TelEmp.getText().trim();
+            String email = EmailEmp.getText().trim();
+
+            if (validarEmpresa()) {
+                Entidad entidad = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+                entidadDAO.insertar(entidad);
+                System.out.println(entidad.toString());
+                Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
+
+
+                TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
+                tipoDAO.insertar(entidadInsertada.getId(), 1);
+
+                System.out.println("Empresa creada correctamente.");
+                empresaCreada = entidad;
+                return true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+    
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+    
+    // Método principal para validar todos los campos
+    private boolean validarEmpresa() {
+        if (!validarNoVacio(NomEmp, "Nombre")) return false;
+        if (!validarNoVacio(NIFEmp, "NIF")) return false;
+        if (!validarNoVacio(CPEmp, "Código Postal")) return false;
+        if (!validarNoVacio(CiudEmp, "Ciudad")) return false;
+        if (!validarNoVacio(DirEmp, "Calle")) return false;
+        if (!validarNoVacio(EmailEmp, "E-mail")) return false;
+        if (!validarNoVacio(TelEmp, "Teléfono")) return false;
+
+        // Validaciones específicas
+        if (!validarNIF(NIFEmp.getText())) return false;
+        if (!validarCodigoPostal(CPEmp.getText())) return false;
+        //if (!validarEmail(EmailEmp.getText())) return false;
+        if (!validarTelefono(TelEmp.getText())) return false;
+
+        return true; // Todo válido
+    }
+
+    // Validación de campo no vacío
+    private boolean validarNoVacio(TextField campo, String nombreCampo) {
+        if (campo.getText().isEmpty()) {
+            mostrarError(nombreCampo + " no puede estar vacío");
+            return false;
+        }
+        return true;
+    }
+
+    // Validar NIF español (simplificado)
+    private boolean validarNIF(String nif) {
+        if (!nif.matches("\\d{8}[A-Z]")) { // 8 dígitos + letra
+            mostrarError("NIF inválido");
+            return false;
+        }
+        return true;
+    }
+
+    // Validar código postal español
+    private boolean validarCodigoPostal(String cp) {
+        if (!cp.matches("\\d{5}")) {
+            mostrarError("Código postal inválido");
+            return false;
+        }
+        return true;
+    }
+
+
+
+    // Validar teléfono (9 dígitos)
+    private boolean validarTelefono(String tel) {
+        if (!tel.matches("\\d{9}")) {
+            mostrarError("Teléfono inválido");
+            return false;
+        }
+        return true;
+    }
+
+    // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
+    private void mostrarError(String mensaje) {
+        //System.out.println("Error: " + mensaje);
+        // Alternativamente, usar Alert:
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validación");
+            alert.setHeaderText(null);
+            alert.setContentText(mensaje);
+            alert.showAndWait();
     }
 }
