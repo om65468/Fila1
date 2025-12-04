@@ -5,6 +5,7 @@ import Modelo.Entidad;
 import Modelo.EntidadDAO;
 import Vista.App;
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -146,32 +147,61 @@ public class VentanaPrincipalController {
     });
     }
 
-    /*    @FXML
-    public void mostrarEmpresa() {
-    ocultarPanes();
-    paneEmpresa.setVisible(true);
-    paneEmpresa.setManaged(true);
-    }*/
+    //Metodos de Cliente
     @FXML
-    private void onMostrarCliente() {
+    private void onNuevoCliente() {
         ocultarPanes();
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
     }
-
+    
     @FXML
-    private void onMostrarProveedor() {
+    private void onModifiarCliente(ActionEvent event) {
+
+    }
+    
+    @FXML
+    private void onEliminarCliente(ActionEvent event) {
+
+    }
+
+    //Metodos de Proveedor
+    @FXML
+    private void onNuevoProveedor() {
         ocultarPanes();
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
     }
-
+    
     @FXML
-    private void onMostrarProducto() {
+    private void onModificarProveedor(ActionEvent event) {
+
+    }
+    
+    @FXML
+    private void onEliminarProveedor(ActionEvent event) {
+
+    }
+
+
+    //Metodos de Articulo
+    @FXML
+    private void onNuevoArticulo() {
         ocultarPanes();
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
+    
+    @FXML
+    private void onEliminarArticulo(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void onModificarArticulo(ActionEvent event) {
+
+    }
+    
     
     @FXML
     private void switchToPrimary() throws IOException {

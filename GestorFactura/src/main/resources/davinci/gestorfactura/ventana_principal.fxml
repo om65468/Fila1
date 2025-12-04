@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="992.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
    <children>
       <TabPane fx:id="tabPane" focusTraversable="false" layoutY="29.0" prefHeight="119.0" prefWidth="992.0" stylesheets="@css/estilo.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -39,7 +39,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="465.0" prefWidth="992.0">
                      <children>
-                        <Button fx:id="Boton_nuevo_cli" contentDisplay="TOP" layoutX="29.0" layoutY="12.0" mnemonicParsing="false" onAction="#onMostrarCliente" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="12.0">
+                        <Button fx:id="Boton_nuevo_cli" contentDisplay="TOP" layoutX="29.0" layoutY="12.0" mnemonicParsing="false" onAction="#onNuevoCliente" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="12.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -51,7 +51,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="Boton_modificar_cli" contentDisplay="TOP" layoutX="85.0" layoutY="12.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="12.0">
+                        <Button fx:id="Boton_modificar_cli" contentDisplay="TOP" layoutX="85.0" layoutY="12.0" mnemonicParsing="false" onAction="#onModifiarCliente" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="12.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -63,7 +63,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="boton_eliminar_cli" contentDisplay="TOP" layoutX="126.0" layoutY="12.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar" AnchorPane.leftAnchor="141.0" AnchorPane.topAnchor="12.0">
+                        <Button fx:id="boton_eliminar_cli" contentDisplay="TOP" layoutX="126.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEliminarCliente" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar" AnchorPane.leftAnchor="141.0" AnchorPane.topAnchor="12.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -83,7 +83,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="Boton_nuevo_prov" contentDisplay="TOP" layoutX="21.0" layoutY="13.0" mnemonicParsing="false" onAction="#onMostrarProveedor" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="Boton_nuevo_prov" contentDisplay="TOP" layoutX="21.0" layoutY="13.0" mnemonicParsing="false" onAction="#onNuevoProveedor" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="12.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -95,7 +95,7 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="Boton_modificar_prov" contentDisplay="TOP" layoutX="85.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="Boton_modificar_prov" contentDisplay="TOP" layoutX="85.0" layoutY="13.0" mnemonicParsing="false" onAction="#onModificarProveedor" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="12.0">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -107,7 +107,51 @@
                               <Font size="9.0" />
                            </font>
                         </Button>
-                        <Button fx:id="Boton_eliminar_prov" contentDisplay="TOP" layoutX="141.0" layoutY="13.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar" AnchorPane.leftAnchor="141.0" AnchorPane.topAnchor="13.0">
+                        <Button fx:id="Boton_eliminar_prov" contentDisplay="TOP" layoutX="141.0" layoutY="13.0" mnemonicParsing="false" onAction="#onEliminarProveedor" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar" AnchorPane.leftAnchor="141.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabArticulos" text="Articulos">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="Boton_nuevo_art" contentDisplay="TOP" layoutX="28.0" layoutY="12.0" mnemonicParsing="false" onAction="#onNuevoArticulo" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Nuevo" AnchorPane.leftAnchor="29.0" AnchorPane.topAnchor="12.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/iconnuevo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="Boton_modificar_art" contentDisplay="TOP" layoutX="85.0" layoutY="12.0" mnemonicParsing="false" onAction="#onModificarArticulo" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Modificar">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/modificarCliente.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="boton_eliminar_art" contentDisplay="TOP" layoutX="141.0" layoutY="12.0" mnemonicParsing="false" onAction="#onEliminarArticulo" prefHeight="69.0" prefWidth="56.0" styleClass="btn_cliente" text="Eliminar">
                            <graphic>
                               <ImageView fitHeight="45.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -334,7 +378,7 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane fx:id="paneProducto" layoutY="120.0" prefHeight="586.0" prefWidth="992.0" styleClass="form-pane" stylesheets="@css/prueba1.css" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="99.0">
+      <AnchorPane fx:id="paneProducto" layoutY="120.0" prefHeight="586.0" prefWidth="992.0" styleClass="form-pane" stylesheets="@css/prueba1.css" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="99.0">
          <children>
             <GridPane layoutX="41.0" layoutY="134.0" prefHeight="459.0" prefWidth="810.0" styleClass="form-section">
                <columnConstraints>
