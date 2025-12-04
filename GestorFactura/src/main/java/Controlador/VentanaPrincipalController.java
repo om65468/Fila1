@@ -3,70 +3,64 @@ package Controlador;
 import Modelo.Entidad;
 import Vista.App;
 import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class VentanaPrincipalController {
-    
+
     private Entidad empresa;
-    
+
     @FXML
     private Tab tabArchivo;
-    
+
     @FXML
     private TabPane tabPane;
-    
+
     @FXML
     private Tab tab_cliente;
 
     @FXML
     private Tab tab_proveedor;
-    
+
     @FXML
     private Button ButtonCliente;
-    
+
     @FXML
     private AnchorPane paneCliente;
 
     @FXML
     private AnchorPane paneEmpresa;
-    
+
     @FXML
     private AnchorPane paneProveedor;
-    
-    @FXML 
+
+    @FXML
     private AnchorPane paneProducto;
-    
+
     @FXML
     public void initialize() {
         tabPane.getTabs().remove(tab_cliente);
         tabPane.getTabs().remove(tab_proveedor);
-        
+
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
             if (newTab != tab_cliente && newTab != tab_proveedor) {
                 eliminarTabsDinamicos();
             }
         });
-        
+
         tabArchivo.setOnSelectionChanged(event -> {
             if (tabArchivo.isSelected()) {
                 cargarOtraVentana();
 
-                // Regresar al tab anterior
-                tabPane.getSelectionModel().selectFirst(); 
+                tabPane.getSelectionModel().selectFirst();
             }
         });
     }
-    
-    private void eliminarTabsDinamicos(){
+
+    private void eliminarTabsDinamicos() {
         if (tabPane.getTabs().contains(tab_cliente)) {
             tabPane.getTabs().remove(tab_cliente);
         }
@@ -74,7 +68,7 @@ public class VentanaPrincipalController {
             tabPane.getTabs().remove(tab_proveedor);
         }
     }
-    
+
     @FXML
     public void mostrarEmpresa() {
         ocultarPanes();
@@ -82,14 +76,12 @@ public class VentanaPrincipalController {
         paneEmpresa.setManaged(true);
     }
 
-   
     @FXML
     private void onMostrarCliente() {
         ocultarPanes();
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
     }
-
 
     @FXML
     private void onMostrarProveedor() {
@@ -104,8 +96,7 @@ public class VentanaPrincipalController {
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
-    
-    
+
     /*
     @FXML
     private void switchToSecondaryCli() throws IOException {
@@ -130,6 +121,17 @@ public class VentanaPrincipalController {
             e.printStackTrace();
         }
     }*/
+    @FXML
+    private void switchToPrimary() throws IOException {
+        App.setRoot("primary");
+    }
+
+    @FXML
+    private void switchToVentanaPrincipal() throws IOException {
+        if (SecondaryController.getSc().crearEmpresa()) {
+            App.setRoot("ventana_principal");
+        }
+    }
 
     private void cargarOtraVentana() {
         try {
@@ -137,22 +139,23 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-    
-        public void setEmpresa(Entidad empresa) {
+
+    public void setEmpresa(Entidad empresa) {
         this.empresa = empresa;
         cargarDatos();
     }
 
     private void cargarDatos() {
-        if (empresa == null) return;
+        if (empresa == null) {
+            return;
+        }
 
         // Aquí llenas tus labels, textfields, etc.
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
-    
-    
+
     /*
     private void abrirSecondary(String tipoTab) {
         try {
@@ -189,10 +192,7 @@ public class VentanaPrincipalController {
             e.printStackTrace();
         }
     }*/
-
-
-
-    /*
+ /*
     private void cargarEnPane(AnchorPane destino, String fxml, String tipoTab) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -219,7 +219,6 @@ public class VentanaPrincipalController {
             e.printStackTrace();
         }
     }*/
-    
     private void ocultarPanes() {
         paneEmpresa.setVisible(false);
         paneEmpresa.setManaged(false);
@@ -233,9 +232,5 @@ public class VentanaPrincipalController {
         paneProducto.setVisible(false);
         paneProducto.setManaged(false);
     }
-
-    
-    
-
 
 }

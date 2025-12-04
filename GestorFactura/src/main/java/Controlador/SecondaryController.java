@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 public class SecondaryController {
 
+    private static SecondaryController sc;
+    
     private EntidadDAO entidadDAO;
 
     @FXML
@@ -115,6 +117,10 @@ public class SecondaryController {
     @FXML
     private TextField TlfCli;
 
+    public static SecondaryController getSc(){
+        return sc;
+    }
+    
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -140,7 +146,7 @@ public class SecondaryController {
 
     @FXML
     public void initialize() {
-
+        sc = this;
     }
 
     public Tab getTabEmpresa() {
@@ -152,7 +158,7 @@ public class SecondaryController {
     }
 
     @FXML
-    private boolean crearEmpresa() {
+    public boolean crearEmpresa() {
         try {
             entidadDAO = new EntidadDAO();
             String nombre = NomEmp.getText().trim();
