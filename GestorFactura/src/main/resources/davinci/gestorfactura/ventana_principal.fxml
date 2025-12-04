@@ -455,5 +455,25 @@
             </AnchorPane>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="paneInfoClientes" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false">
+         <children>
+            <Label layoutX="456.0" layoutY="287.0" text="Info de clientes" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneInformacion" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
+         <children>
+            <Label layoutX="398.0" layoutY="287.0" text="Aqui va la informacion de la empresa" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="397.0" AnchorPane.topAnchor="287.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneInfoArticulos" layoutX="-2.0" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="119.0">
+         <children>
+            <Label layoutX="348.0" layoutY="287.0" text="Aqui puede estar una lista que se muestre a para buscar" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneInfoProveedores" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false">
+         <children>
+            <Label layoutX="443.0" layoutY="287.0" text="Info de proveedores" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

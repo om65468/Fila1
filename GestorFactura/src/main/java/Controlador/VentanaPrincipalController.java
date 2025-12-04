@@ -15,6 +15,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class VentanaPrincipalController {
+    
+    @FXML
+    private AnchorPane paneInfoArticulos;
+
+    @FXML
+    private AnchorPane paneInfoClientes;
+
+    @FXML
+    private AnchorPane paneInfoProveedores;
+
+    @FXML
+    private AnchorPane paneInformacion;
 
     private Entidad empresa;
 
@@ -29,6 +41,9 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tab_proveedor;
+    
+    @FXML
+    private Tab tabArticulos;
     
     @FXML
     private Tab tabInformacion;
@@ -123,6 +138,31 @@ public class VentanaPrincipalController {
             } catch (IOException ex) {
                 System.out.println("Problema en la linea 143");
             }
+        }else if (newTab == tabInformacion) {
+            paneInfoClientes.setVisible(false);
+            paneInfoProveedores.setVisible(false);
+            paneInfoArticulos.setVisible(false);
+            paneInformacion.setVisible(true);
+        }else if (newTab == tab_cliente) {
+            paneInfoClientes.setVisible(true);
+            paneInfoProveedores.setVisible(false);
+            paneInfoArticulos.setVisible(false);
+            paneInformacion.setVisible(false);
+        }else if (newTab == tab_proveedor) {
+            paneInfoClientes.setVisible(false);
+            paneInfoProveedores.setVisible(true);
+            paneInfoArticulos.setVisible(false);
+            paneInformacion.setVisible(false);
+        }else if (newTab == tabArticulos) {
+            paneInfoClientes.setVisible(false);
+            paneInfoProveedores.setVisible(false);
+            paneInfoArticulos.setVisible(true);
+            paneInformacion.setVisible(false);
+        }else{
+            paneInfoClientes.setVisible(false);
+            paneInfoProveedores.setVisible(false);
+            paneInfoArticulos.setVisible(false);
+            paneInformacion.setVisible(false);
         }
     });
     }
@@ -181,6 +221,10 @@ public class VentanaPrincipalController {
     private void onModificarArticulo(ActionEvent event) {
 
     }
+    
+    
+    
+    
     
     
     @FXML
