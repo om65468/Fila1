@@ -78,34 +78,22 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private void onCrearEmpresa(ActionEvent event) throws IOException {
-        App.setRoot("ventana_principal");
+        FXMLLoader loader = new FXMLLoader(
+            getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml")
+        );
+
+        Parent root = loader.load();
+
+        VentanaPrincipalController controller = loader.getController();
+
+        controller.mostrarEmpresa();
+
+        Stage stage = (Stage) button_empre.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
         
     }
     
-    @FXML
-    private void onCrearEmpresa() {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml")
-            );
-
-            Parent root = loader.load();
-
-            // ✅ ESTE controller ES EL CORRECTO
-            VentanaPrincipalController controller = loader.getController();
-
-            // ✅ FORZAMOS A QUE SOLO SE VEA EMPRESA
-            controller.mostrarEmpresa();
-
-            Stage stage = (Stage) button_empre.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     void onPaneAbrirEmpresa(ActionEvent event) {
         pane_info.setVisible(false);
