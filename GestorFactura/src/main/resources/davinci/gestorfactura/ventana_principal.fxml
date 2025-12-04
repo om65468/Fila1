@@ -4,8 +4,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -457,7 +460,25 @@
       </AnchorPane>
       <AnchorPane fx:id="paneInfoClientes" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false">
          <children>
-            <Label layoutX="456.0" layoutY="287.0" text="Info de clientes" />
+            <Label layoutX="454.0" layoutY="57.0" prefHeight="32.0" prefWidth="85.0" text="Info de clientes" />
+            <ScrollPane layoutX="55.0" layoutY="179.0" prefHeight="377.0" prefWidth="882.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="877.0">
+                     <children>
+                        <TableView fx:id="TV_Clientes" prefHeight="377.0" prefWidth="882.0">
+                           <columns>
+                              <TableColumn fx:id="TC_IdCli" prefWidth="86.0" text="ID" />
+                              <TableColumn fx:id="TC_NomCli" prefWidth="135.0" text="Nombre" />
+                              <TableColumn fx:id="TC_NifCli" prefWidth="101.0" text="NIF" />
+                              <TableColumn fx:id="TC_DirCli" prefWidth="181.0" text="Dirección" />
+                              <TableColumn fx:id="TC_TelCli" prefWidth="142.0" text="Telefono" />
+                              <TableColumn fx:id="TC_MailCli" prefWidth="236.0" text="E-mail" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneInformacion" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
@@ -467,12 +488,49 @@
       </AnchorPane>
       <AnchorPane fx:id="paneInfoArticulos" layoutX="-2.0" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="119.0">
          <children>
-            <Label layoutX="348.0" layoutY="287.0" text="Aqui puede estar una lista que se muestre a para buscar" />
+            <Label layoutX="348.0" layoutY="38.0" prefHeight="32.0" prefWidth="297.0" text="Aqui puede estar una lista que se muestre a para buscar" />
+            <ScrollPane layoutX="56.0" layoutY="177.0" prefHeight="377.0" prefWidth="882.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="877.0">
+                     <children>
+                        <TableView fx:id="TV_Articulos" prefHeight="377.0" prefWidth="882.0">
+                           <columns>
+                              <TableColumn fx:id="TC_IdArt" prefWidth="86.0" text="ID" />
+                              <TableColumn fx:id="TC_DescArt" prefWidth="204.0" text="Descripcion" />
+                              <TableColumn fx:id="TC_IdProArt" prefWidth="141.0" text="ID Proveedor" />
+                              <TableColumn fx:id="TC_CostArt" prefWidth="118.0" text="Coste" />
+                              <TableColumn fx:id="TC_PvpArt" prefWidth="96.0" text="PVP" />
+                              <TableColumn fx:id="TC_IvaArt" prefWidth="57.0" text="IVA" />
+                              <TableColumn fx:id="TC_StockArt" prefWidth="179.0" text="Stock" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneInfoProveedores" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false">
          <children>
-            <Label layoutX="443.0" layoutY="287.0" text="Info de proveedores" />
+            <Label layoutX="440.0" layoutY="61.0" prefHeight="43.0" prefWidth="113.0" text="Info de proveedores" />
+            <ScrollPane layoutX="55.0" layoutY="159.0" prefHeight="377.0" prefWidth="882.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="877.0">
+                     <children>
+                        <TableView fx:id="TV_Proveedores" prefHeight="377.0" prefWidth="882.0">
+                          <columns>
+                            <TableColumn fx:id="TC_IdPro" prefWidth="86.0" text="ID" />
+                            <TableColumn fx:id="TC_NomPro" prefWidth="135.0" text="Nombre" />
+                              <TableColumn fx:id="TC_NifPro" prefWidth="101.0" text="NIF" />
+                              <TableColumn fx:id="TC_DirPro" prefWidth="181.0" text="Dirección" />
+                              <TableColumn fx:id="TC_TelPro" prefWidth="142.0" text="Telefono" />
+                              <TableColumn fx:id="TC_MailPro" prefWidth="236.0" text="E-mail" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </children>
