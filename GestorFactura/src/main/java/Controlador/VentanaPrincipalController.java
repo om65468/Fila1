@@ -38,8 +38,8 @@ public class VentanaPrincipalController {
     @FXML
     private AnchorPane paneCliente;
 
-    @FXML
-    private AnchorPane paneEmpresa;
+    //@FXML
+    //private AnchorPane paneEmpresa;
 
     @FXML
     private AnchorPane paneProveedor;
@@ -146,13 +146,12 @@ public class VentanaPrincipalController {
     });
     }
 
-    @FXML
+    /*    @FXML
     public void mostrarEmpresa() {
-        ocultarPanes();
-        paneEmpresa.setVisible(true);
-        paneEmpresa.setManaged(true);
-    }
-
+    ocultarPanes();
+    paneEmpresa.setVisible(true);
+    paneEmpresa.setManaged(true);
+    }*/
     @FXML
     private void onMostrarCliente() {
         ocultarPanes();
@@ -354,8 +353,8 @@ public class VentanaPrincipalController {
         }
     }*/
     private void ocultarPanes() {
-        paneEmpresa.setVisible(false);
-        paneEmpresa.setManaged(false);
+        /*        paneEmpresa.setVisible(false);
+        paneEmpresa.setManaged(false);*/
 
         paneCliente.setVisible(false);
         paneCliente.setManaged(false);
