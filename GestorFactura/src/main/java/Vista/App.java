@@ -11,6 +11,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    
+    private static Object controller;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -23,12 +25,22 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/davinci/gestorfactura/ventana_principal.fxml"));
+        Parent root = loader.load();
+        scene.setRoot(root);
     }
+
+
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/davinci/gestorfactura/" + fxml + ".fxml"));
-        return fxmlLoader.load();
+        Parent root = fxmlLoader.load();
+    controller = fxmlLoader.getController();
+    return root;
+    }
+    
+    public static Object getController() {
+        return controller;
     }
 
     public static void main(String[] args) {
