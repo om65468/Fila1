@@ -60,15 +60,12 @@ public class VentanaPrincipalController {
     //private AnchorPane paneEmpresa;
     @FXML
     private AnchorPane paneProveedor;
-
     @FXML
     private AnchorPane paneProducto;
 
     //Proveedor
     @FXML
     private Button Boton_Guardar_prov;
-    @FXML
-    private Button Boton_comercial_prov;
     @FXML
     private Button Boton_duplicar_prov;
     @FXML
@@ -77,8 +74,6 @@ public class VentanaPrincipalController {
     private Button Boton_nuevo_prov;
     @FXML
     private Button Boton_modificar_prov;
-    @FXML
-    private Button Boton_general_prov;
     @FXML
     private Button Boton_proveedor;
     @FXML
@@ -93,16 +88,16 @@ public class VentanaPrincipalController {
     private TextField NIFProv;
     @FXML
     private TextField NomProv;
-
+    @FXML
+    private TextField DirProv;
+    
     //Cliente
     @FXML
-    private Button Boton_comercial_cli;
+    private TextField DirCli;
     @FXML
     private Button Boton_duplicar_cli;
     @FXML
     private Button Boton_eliminar_cli;
-    @FXML
-    private Button Boton_general_cli;
     @FXML
     private Button Boton_guardar_cli;
     @FXML
@@ -148,13 +143,9 @@ public class VentanaPrincipalController {
 
     //Productos
     @FXML
-    private Button GeneralProd;
-    @FXML
     private Button GuardarProd;
     @FXML
-    private Button EliminarProd;
-    @FXML
-    private Button ComercialProd;    
+    private Button EliminarProd;   
     @FXML
     private TextField PVPProd;
     @FXML
