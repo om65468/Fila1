@@ -262,4 +262,44 @@ public class EntidadDAO {
         return lista;
     }
 
+    public List<Entidad> listarProveedoresDeEmpresa(int idEmpresa) {
+        List<Entidad> lista = new ArrayList<>();
+        String sql
+                = "SELECT e.* "
+                + "FROM entidades e "
+                + "JOIN empresa_entidad_relacion er ON e.id_entidad = er.id_entidad "
+                + "JOIN entidad_tipo_relacion tr ON e.id_entidad = tr.id_entidad "
+                + "JOIN tipo_entidad t ON tr.id_tipo = t.id_tipo "
+                + "WHERE er.id_empresa = ? AND t.tipo = 'proveedor'";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String direccion = rs.getString("direccion");
+                    // si quieres separar: hazlo con cuidado; aquí lo dejamos igual que antes
+                    String[] partes = direccion != null ? direccion.split(" ") : new String[0];
+                    String calle = partes.length > 0 ? partes[0] : "";
+                    String codPost = partes.length > 1 ? partes[1] : "";
+                    String ciudad = partes.length > 2 ? partes[2] : "";
+
+                    Entidad e = new Entidad(
+                            rs.getInt("id_entidad"),
+                            rs.getString("nombre"),
+                            rs.getString("nif"),
+                            calle,
+                            codPost,
+                            ciudad,
+                            rs.getString("email"),
+                            rs.getString("telefono")
+                    );
+                    lista.add(e);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
 }

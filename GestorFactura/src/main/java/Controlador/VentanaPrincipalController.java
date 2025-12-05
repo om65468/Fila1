@@ -3,38 +3,49 @@ package Controlador;
 import Modelo.EmpresaEntidadRelacionDAO;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
+import Modelo.Producto;
+import Modelo.ProductoDAO;
+import Modelo.TipoEntidadDAO;
 import Vista.App;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class VentanaPrincipalController {
 
     @FXML
     private AnchorPane paneInfoArticulos;
-
     @FXML
     private AnchorPane paneInfoClientes;
-
     @FXML
     private AnchorPane paneInfoProveedores;
-
     @FXML
     private AnchorPane paneInformacion;
 
     private Entidad empresa;
+    private Entidad proveedorSeleccionado;
+    private ObservableList<Entidad> listaProveedores = FXCollections.observableArrayList();
 
     @FXML
     private TabPane tabPane;
-
     @FXML
     private Tab tabArchivo;
 
@@ -92,7 +103,9 @@ public class VentanaPrincipalController {
     private TextField NomProv;
     @FXML
     private TextField DirProv;
-    
+    @FXML
+    private TextField TlfProv;
+
     //Cliente
     @FXML
     private TextField DirCli;
@@ -116,6 +129,8 @@ public class VentanaPrincipalController {
     private TextField NIFCli;
     @FXML
     private TextField NomCli;
+    @FXML
+    private TextField TlfCli;
     @FXML
     private ComboBox<?> TipoCli;
 
@@ -147,7 +162,7 @@ public class VentanaPrincipalController {
     @FXML
     private Button GuardarProd;
     @FXML
-    private Button EliminarProd;   
+    private Button EliminarProd;
     @FXML
     private TextField PVPProd;
     @FXML
@@ -162,8 +177,15 @@ public class VentanaPrincipalController {
     private TextField CosProd;
     @FXML
     private TextArea DescProd;
-    
-    
+
+    //Tabla
+    @FXML
+    private TableView<Entidad> RefProd;
+    @FXML
+    private TableColumn<Entidad, Integer> ColIDProv;
+    @FXML
+    private TableColumn<Entidad, String> ColNomProv;
+
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
@@ -202,6 +224,10 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
             }
         });
+
+        ColIDProv.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColNomProv.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        escucharTablaProv();
     }
 
     //Metodos de Cliente
@@ -312,31 +338,31 @@ public class VentanaPrincipalController {
         if (empresa == null) {
             return;
         }
-
+        cargarProveedoresDeEmpresa();
         // Aquí llenas tus labels, textfields, etc.
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
 
     /*OMAR MIRAME PORQUE NO HAY CAMPOS DE DIRECCIÓN EN EL PROVEEDOR NI EN EL CLIENTE*/
- /*
     @FXML
     private void guardarCliente() {
 
         try {
             EntidadDAO entidadDAO = new EntidadDAO();
-            TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
+            TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
+            EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
             // 1. Datos del formulario
-            String nombre = txtNombreCliente.getText().trim();
-            String nif = txtNifCliente.getText().trim();
-            String calle = txtCalleCliente.getText().trim();
-            String cp = txtCpCliente.getText().trim();
-            String ciudad = txtCiudadCliente.getText().trim();
-            String email = txtEmailCliente.getText().trim();
-            String telefono = txtTelefonoCliente.getText().trim();
+            String nombre = NomCli.getText().trim();
+            String nif = NIFCli.getText().trim();
+            String calle = DirCli.getText().trim();
+            //String cp = txtCpCliente.getText().trim();
+            //String ciudad = txtCiudadCliente.getText().trim();
+            String email = EmailCli.getText().trim();
+            String telefono = TlfCli.getText().trim();
 
             // 2. Crear la entidad
-            Entidad nuevoCliente = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+            Entidad nuevoCliente = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
 
             // 3. Insertar la entidad base
             entidadDAO.insertar(nuevoCliente);
@@ -350,8 +376,8 @@ public class VentanaPrincipalController {
             }
 
             // 5. Crear relación: empresa actual → cliente (tipo 2)
-            tipoDAO.insertar(clienteInsertado.getId(), 2);
-            tipoDAO.insertarRelacionEmpresa(empresa.getId(), clienteInsertado.getId());
+            tipoEntidad.insertar(clienteInsertado.getId(), 2);
+            tipoDAO.insertarRelacion(empresa.getId(), clienteInsertado.getId());
 
             mostrarAlerta("Éxito", "Cliente guardado correctamente.");
 
@@ -366,17 +392,18 @@ public class VentanaPrincipalController {
 
         try {
             EntidadDAO entidadDAO = new EntidadDAO();
+            TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
             String nombre = NomProv.getText().trim();
             String nif = NIFProv.getText().trim();
-            String calle = .getText().trim();
-            String cp = txtCpProveedor.getText().trim();
-            String ciudad = txtCiudadProveedor.getText().trim();
+            String calle = DirProv.getText().trim();
+            //String cp = txtCpProveedor.getText().trim();
+            //String ciudad = txtCiudadProveedor.getText().trim();
             String email = EmailProv.getText().trim();
-            String telefono = TelP.getText().trim();
+            String telefono = TlfProv.getText().trim();
 
-            Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+            Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
 
             entidadDAO.insertar(nuevoProveedor);
 
@@ -388,8 +415,8 @@ public class VentanaPrincipalController {
             }
 
             // Crear relación: empresa actual → proveedor (tipo 3)
-            tipoDAO.insertar(proveedorInsertado.getId(), 3);
-            tipoDAO.insertarRelacionEmpresa(empresa.getId(), proveedorInsertado.getId());
+            tipoEntidad.insertar(proveedorInsertado.getId(), 3);
+            tipoDAO.insertarRelacion(empresa.getId(), proveedorInsertado.getId());
 
             mostrarAlerta("Éxito", "Proveedor guardado correctamente.");
 
@@ -398,8 +425,66 @@ public class VentanaPrincipalController {
             mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
         }
     }
-     */
- /*
+
+    @FXML
+    private void agregarProducto(ActionEvent event) {
+        try {
+            // validar proveedor seleccionado
+            if (proveedorSeleccionado == null) {
+                mostrarAlerta("Proveedor no seleccionado", "Selecciona un proveedor de la lista antes de crear el producto.");
+                return;
+            }
+
+            String descripcion = DescProd.getText().trim();
+            int idProveedor = proveedorSeleccionado.getId();
+            String refProveedor = proveedorSeleccionado.getNombre();
+
+            // parsear valores numéricos con control de errores
+            double coste;
+            double pvp;
+            double iva;
+            int stock;
+            try {
+                coste = Double.parseDouble(CosProd.getText().trim());
+                pvp = Double.parseDouble(PVPProd.getText().trim());
+                iva = Double.parseDouble(IVAProd.getText().trim());
+                stock = Integer.parseInt(StokProd.getText().trim());
+            } catch (NumberFormatException nfe) {
+                mostrarAlerta("Datos numéricos inválidos", "Comprueba coste, pvp, iva y stock (deben ser números).");
+                return;
+            }
+
+            // validaciones básicas
+            if (descripcion.isEmpty()) {
+                mostrarAlerta("Descripción vacía", "Introduce una descripción para el producto.");
+                return;
+            }
+
+            Producto producto = new Producto(0, descripcion, refProveedor, idProveedor, coste, pvp, iva, stock);
+            ProductoDAO productoDAO = new ProductoDAO();
+            productoDAO.insertar(producto); // lanza SQLException si falla
+
+            // si todo OK:
+            IDProd.setText(String.valueOf(producto.getId())); // id autogenerado devuelto en DAO
+            mostrarAlerta("Producto creado", "Producto creado correctamente con id " + producto.getId());
+
+            // limpiar campos si quieres
+            DescProd.clear();
+            ProvProd.clear();
+            CosProd.clear();
+            PVPProd.clear();
+            IVAProd.clear();
+            StokProd.clear();
+            proveedorSeleccionado = null;
+
+            // refrescar listas, tablas, etc. si procede
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error BBDD", "No se pudo insertar el producto: " + ex.getMessage());
+        }
+    }
+
+    /*
     private void abrirSecondary(String tipoTab) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -474,4 +559,34 @@ public class VentanaPrincipalController {
         paneProducto.setManaged(false);
     }
 
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void escucharTablaProv() {
+        RefProd.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            proveedorSeleccionado = newSel;
+            if (newSel != null) {
+                ProvProd.setText(newSel.getNombre()); // referencia = nombre
+                // si quieres mostrar el id en otro campo, por ejemplo IDProdProveedor:
+                // IDProdProveedor.setText(String.valueOf(newSel.getId()));
+            } else {
+                ProvProd.clear();
+            }
+        });
+    }
+
+    public void cargarProveedoresDeEmpresa() {
+        if (empresa == null) {
+            return;
+        }
+        EntidadDAO entidadDAO = new EntidadDAO();
+        List<Entidad> proveedores = entidadDAO.listarProveedoresDeEmpresa(empresa.getId());
+        listaProveedores.setAll(proveedores);
+        RefProd.setItems(listaProveedores);
+    }
 }

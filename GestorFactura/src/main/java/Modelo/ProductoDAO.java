@@ -8,8 +8,13 @@ public class ProductoDAO {
 
     private Connection conn;
 
-    public ProductoDAO(Connection conn) {
-        this.conn = conn;
+    public ProductoDAO() {
+        try {
+            this.conn = ConexionBBDD.get();
+        } catch (Exception e) {
+            System.out.println("No funciona la conexioin de EntidadDao a la BBDD, mira el constructor");
+            e.printStackTrace();
+        }
     }
 
     // Insertar producto
