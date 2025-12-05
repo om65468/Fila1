@@ -62,6 +62,8 @@ public class VentanaPrincipalController {
     private AnchorPane paneProveedor;
     @FXML
     private AnchorPane paneProducto;
+    @FXML
+    private AnchorPane paneFactura;
 
     //Proveedor
     @FXML
@@ -265,10 +267,9 @@ public class VentanaPrincipalController {
     //Metodos de Factura
     @FXML
     private void onNuevoFactura() {
-        //Falta hacer el paneFactura!
-        //ocultarPanes();
-        //paneFactura.setVisible(true);
-        //paneFactura.setManaged(true);
+        ocultarPanes();
+        paneFactura.setVisible(true);
+        paneFactura.setManaged(true);
     }
 
     @FXML
