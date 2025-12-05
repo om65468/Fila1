@@ -9,13 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class VentanaPrincipalController {
-    
+
     @FXML
     private AnchorPane paneInfoArticulos;
 
@@ -32,7 +34,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private TabPane tabPane;
-    
+
     @FXML
     private Tab tabArchivo;
 
@@ -41,10 +43,10 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tab_proveedor;
-    
+
     @FXML
     private Tab tabArticulos;
-    
+
     @FXML
     private Tab tabInformacion;
 
@@ -56,7 +58,6 @@ public class VentanaPrincipalController {
 
     //@FXML
     //private AnchorPane paneEmpresa;
-
     @FXML
     private AnchorPane paneProveedor;
 
@@ -127,44 +128,87 @@ public class VentanaPrincipalController {
     @FXML
     private Button Boton_cliente;
 
+    //Empresa
+    @FXML
+    private Button Boton_info_empresa;
+    @FXML
+    private Label InfoNIF;
+    @FXML
+    private Label InfoNombre;
+    @FXML
+    private TextField txtInfoCP;
+    @FXML
+    private TextField txtInfoCalle;
+    @FXML
+    private TextField txtInfoCiudad;
+    @FXML
+    private TextField txtInfoEmail;
+    @FXML
+    private TextField txtInfoTlf;
+
+    //Productos
+    @FXML
+    private Button GeneralProd;
+    @FXML
+    private Button GuardarProd;
+    @FXML
+    private Button EliminarProd;
+    @FXML
+    private Button ComercialProd;    
+    @FXML
+    private TextField PVPProd;
+    @FXML
+    private TextField ProvProd;
+    @FXML
+    private TextField StokProd;
+    @FXML
+    private TextField IVAProd;
+    @FXML
+    private TextField IDProd;
+    @FXML
+    private TextField CosProd;
+    @FXML
+    private TextArea DescProd;
+    
+    
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-        if (newTab == tabArchivo) {
-            try {
-                // Se seleccionó la pestaña 2, llamar a tu método
-                switchToPrimary();
-            } catch (IOException ex) {
-                System.out.println("Problema en la linea 143");
+            if (newTab == tabArchivo) {
+                try {
+                    // Se seleccionó la pestaña 2, llamar a tu método
+                    switchToPrimary();
+                } catch (IOException ex) {
+                    System.out.println("Problema en la linea 143");
+                }
+            } else if (newTab == tabInformacion) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(true);
+            } else if (newTab == tab_cliente) {
+                paneInfoClientes.setVisible(true);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+            } else if (newTab == tab_proveedor) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(true);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+            } else if (newTab == tabArticulos) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(true);
+                paneInformacion.setVisible(false);
+            } else {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
             }
-        }else if (newTab == tabInformacion) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(true);
-        }else if (newTab == tab_cliente) {
-            paneInfoClientes.setVisible(true);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-        }else if (newTab == tab_proveedor) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(true);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-        }else if (newTab == tabArticulos) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(true);
-            paneInformacion.setVisible(false);
-        }else{
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-        }
-    });
+        });
     }
 
     //Metodos de Cliente
@@ -174,12 +218,12 @@ public class VentanaPrincipalController {
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
     }
-    
+
     @FXML
     private void onModifiarCliente(ActionEvent event) {
 
     }
-    
+
     @FXML
     private void onEliminarCliente(ActionEvent event) {
 
@@ -192,17 +236,16 @@ public class VentanaPrincipalController {
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
     }
-    
+
     @FXML
     private void onModificarProveedor(ActionEvent event) {
 
     }
-    
+
     @FXML
     private void onEliminarProveedor(ActionEvent event) {
 
     }
-
 
     //Metodos de Articulo
     @FXML
@@ -211,7 +254,7 @@ public class VentanaPrincipalController {
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
-    
+
     @FXML
     private void onEliminarArticulo(ActionEvent event) {
 
@@ -221,8 +264,7 @@ public class VentanaPrincipalController {
     private void onModificarArticulo(ActionEvent event) {
 
     }
-    
-    
+
     //Metodos de Factura
     @FXML
     private void onNuevoFactura() {
@@ -231,7 +273,7 @@ public class VentanaPrincipalController {
         //paneFactura.setVisible(true);
         //paneFactura.setManaged(true);
     }
-    
+
     @FXML
     private void onEliminarFactura(ActionEvent event) {
 
@@ -241,21 +283,19 @@ public class VentanaPrincipalController {
     private void onModificarFactura(ActionEvent event) {
 
     }
-    
-    
-    
+
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
     }
-    
+
     @FXML
     private void switchToVentanaPrincipal() throws IOException {
-    if (SecondaryController.getSc().crearEmpresa()) {
-    App.setRoot("ventana_principal");
+        if (SecondaryController.getSc().crearEmpresa()) {
+            App.setRoot("ventana_principal");
+        }
     }
-    }
-    
+
     private void cargarOtraVentana() {
         try {
             App.setRoot("primary");
@@ -278,8 +318,9 @@ public class VentanaPrincipalController {
         // Aquí llenas tus labels, textfields, etc.
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
+
     /*OMAR MIRAME PORQUE NO HAY CAMPOS DE DIRECCIÓN EN EL PROVEEDOR NI EN EL CLIENTE*/
-/*
+ /*
     @FXML
     private void guardarCliente() {
 
@@ -359,8 +400,8 @@ public class VentanaPrincipalController {
             mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
         }
     }
-*/
-    /*
+     */
+ /*
     private void abrirSecondary(String tipoTab) {
         try {
             FXMLLoader loader = new FXMLLoader(
