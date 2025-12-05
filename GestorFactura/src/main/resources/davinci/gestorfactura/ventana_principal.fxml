@@ -419,9 +419,9 @@
                </children>
             </AnchorPane>
          </children></AnchorPane>
-      <AnchorPane fx:id="paneProducto" layoutY="120.0" prefHeight="586.0" prefWidth="992.0" styleClass="form-pane" stylesheets="@css/prueba1.css" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="99.0">
+      <AnchorPane fx:id="paneProducto" layoutX="-7.0" layoutY="109.0" prefHeight="586.0" prefWidth="992.0" styleClass="form-pane" stylesheets="@css/prueba1.css" visible="false" AnchorPane.bottomAnchor="-13.799999999999955" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="-2.599999999999909" AnchorPane.topAnchor="109.0">
          <children>
-            <GridPane layoutX="41.0" layoutY="128.0" prefHeight="465.0" prefWidth="866.0" styleClass="form-section">
+            <GridPane layoutX="40.0" layoutY="87.0" prefHeight="465.0" prefWidth="866.0" styleClass="form-section">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.7999755859375" minWidth="0.0" prefWidth="98.00000610351563" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.79999999999995" minWidth="10.0" prefWidth="250.19998779296878" />
@@ -489,7 +489,7 @@
                   </TableView>
                </children>
             </GridPane>
-            <AnchorPane layoutX="41.0" layoutY="21.0" prefHeight="72.0" prefWidth="569.0">
+            <AnchorPane layoutX="221.0" prefHeight="32.0" prefWidth="560.0">
                <children>
                   <GridPane layoutX="14.0" layoutY="23.0" prefHeight="26.0" prefWidth="545.0">
                      <columnConstraints>
@@ -512,10 +512,10 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneInfoClientes" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false">
+      <AnchorPane fx:id="paneInfoClientes" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;">
          <children>
             <Label layoutX="454.0" layoutY="57.0" prefHeight="32.0" prefWidth="85.0" text="Info de clientes" />
-            <ScrollPane layoutX="55.0" layoutY="179.0" prefHeight="377.0" prefWidth="882.0">
+            <ScrollPane layoutX="55.0" layoutY="159.0" prefHeight="377.0" prefWidth="882.0">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="877.0">
                      <children>
@@ -601,18 +601,18 @@
                   </Label>
                </children>
             </GridPane>
-            <Button fx:id="Boton_info_empresa" layoutX="364.0" layoutY="52.0" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" prefHeight="25.0" prefWidth="81.0" text="Crear" />
-            <Button fx:id="Boton_cancelar_info" layoutX="108.0" layoutY="52.0" mnemonicParsing="false" onAction="#onCancelarEmpresa" text="Cancelar" />
+            <Button fx:id="Boton_info_empresa" layoutX="364.0" layoutY="52.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Crear" />
+            <Button fx:id="Boton_cancelar_info" layoutX="108.0" layoutY="52.0" mnemonicParsing="false" text="Cancelar" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneInfoArticulos" layoutX="-2.0" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="119.0">
          <children>
             <Label layoutX="348.0" layoutY="38.0" prefHeight="32.0" prefWidth="297.0" text="Aqui puede estar una lista que se muestre a para buscar" />
-            <ScrollPane layoutX="56.0" layoutY="177.0" prefHeight="377.0" prefWidth="882.0">
+            <ScrollPane layoutX="55.0" layoutY="159.0" prefHeight="377.0" prefWidth="882.0">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="877.0">
                      <children>
-                        <TableView fx:id="TV_Articulos" prefHeight="377.0" prefWidth="882.0">
+                        <TableView fx:id="TV_Articulos" layoutX="-3.0" layoutY="-4.0" prefHeight="377.0" prefWidth="882.0">
                            <columns>
                               <TableColumn fx:id="TC_IdArt" prefWidth="86.0" text="ID" />
                               <TableColumn fx:id="TC_DescArt" prefWidth="204.0" text="Descripcion" />
@@ -650,6 +650,11 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneFactura" layoutX="-1.0" layoutY="119.0" prefHeight="590.0" prefWidth="1002.0" visible="false">
+         <children>
+            <Label layoutX="226.0" layoutY="179.0" text="Factura" />
          </children>
       </AnchorPane>
    </children>

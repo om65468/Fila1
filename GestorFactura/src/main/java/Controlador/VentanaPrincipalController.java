@@ -215,6 +215,8 @@ public class VentanaPrincipalController {
     @FXML
     private void onNuevoCliente() {
         ocultarPanes();
+        paneInfoClientes.setVisible(false);
+        paneInfoClientes.setManaged(false);
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
     }
@@ -233,6 +235,8 @@ public class VentanaPrincipalController {
     @FXML
     private void onNuevoProveedor() {
         ocultarPanes();
+        paneInfoProveedores.setVisible(false);
+        paneInfoProveedores.setManaged(false);
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
     }
@@ -251,6 +255,8 @@ public class VentanaPrincipalController {
     @FXML
     private void onNuevoArticulo() {
         ocultarPanes();
+        paneInfoArticulos.setVisible(false);
+        paneInfoArticulos.setManaged(false);
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
     }
