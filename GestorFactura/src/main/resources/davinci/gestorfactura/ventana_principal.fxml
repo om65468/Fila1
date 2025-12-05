@@ -521,22 +521,72 @@
       </AnchorPane>
       <AnchorPane fx:id="paneInformacion" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="119.0">
          <children>
-            <Label fx:id="labelCP" layoutX="464.0" layoutY="364.0" text="CP" />
-            <Label fx:id="labelNombre" layoutX="98.0" layoutY="152.0" text="Nombre" />
-            <Label fx:id="labelTlf" layoutX="97.0" layoutY="329.0" text="Telefono" />
-            <Label fx:id="labelCiud" layoutX="101.0" layoutY="286.0" text="Ciudad" />
+            <GridPane layoutX="45.0" layoutY="145.0" prefHeight="378.0" prefWidth="908.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.99998168945314" minWidth="10.0" prefWidth="107.80000152587891" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="417.60000762939455" minWidth="10.0" prefWidth="318.8000122070313" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.3999938964844" minWidth="10.0" prefWidth="140.39998779296877" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="396.0000244140625" minWidth="10.0" prefWidth="336.1999755859375" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="labelCP" text="CP" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelNombre" text="Nombre">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelTlf" text="Telefono" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="labelCiud" text="Ciudad" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label text="NIF" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Label>
+                  <Label text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Calle" GridPane.columnIndex="2">
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="InfoNombre" prefHeight="18.0" prefWidth="46.0" text="empresa" GridPane.columnIndex="1" />
+                  <Label fx:id="InfoNIF" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtInfoCalle" GridPane.columnIndex="3" />
+                  <TextField fx:id="txtInfoCiudad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtInfoCP" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtInfoTlf" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="txtInfoEmail" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                  <Label text="Contacto" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
             <Button fx:id="Boton_info_empresa" layoutX="364.0" layoutY="52.0" mnemonicParsing="false" onAction="#switchToVentanaPrincipal" prefHeight="25.0" prefWidth="81.0" text="Crear" />
             <Button fx:id="Boton_cancelar_info" layoutX="108.0" layoutY="52.0" mnemonicParsing="false" onAction="#onCancelarEmpresa" text="Cancelar" />
-            <Label layoutX="297.0" layoutY="329.0" text="NIF" />
-            <Label layoutX="479.0" layoutY="246.0" text="E-mail" />
-            <Label layoutX="568.0" layoutY="152.0" text="Calle" />
-            <Label fx:id="InfoNombre" layoutX="198.0" layoutY="152.0" text="Label" />
-            <Label fx:id="InfoCiudad" layoutX="198.0" layoutY="286.0" text="Label" />
-            <Label fx:id="InfoTlf" layoutX="198.0" layoutY="329.0" text="Label" />
-            <Label fx:id="InfoNIF" layoutX="357.0" layoutY="329.0" text="Label" />
-            <Label fx:id="InfoCP" layoutX="554.0" layoutY="364.0" text="Label" />
-            <Label fx:id="InfoEmail" layoutX="554.0" layoutY="246.0" text="Label" />
-            <Label fx:id="InfoCalle" layoutX="636.0" layoutY="152.0" text="Label" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneInfoArticulos" layoutX="-2.0" layoutY="119.0" prefHeight="590.0" prefWidth="992.0" style="-fx-background-color: #FCFCFC;" visible="false" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="119.0">
