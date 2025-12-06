@@ -1,82 +1,177 @@
-.button_principal {
-    -fx-background-color:   #DB1818; /* color normal */
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    -fx-text-fill: white;
+/* Paleta de Colores y Tipografía Base */
+.root {
+    /* Define la fuente base y el tamaño para toda la aplicación (semi-dinámico) */
+    -fx-font-family: "Segoe UI", "Tahoma", "Arial";
+    -fx-font-size: 14px;
+    -fx-base-color: #007bff; /* Azul Primario */
+    -fx-secondary-color: #6c757d; /* Gris Secundario */
+    -fx-background-primary: #f4f6f9;
+    -fx-background-secondary: #ffffff;
+    -fx-text-color: #34495e;
+    -fx-border-color-soft: #e0e0e0;
 }
 
-.button_principal:hover {
-    -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
+/* ========================================= */
+/* 1. ESTRUCTURA Y PANELES                   */
+/* ========================================= */
+
+.form-pane {
+    -fx-background-color: -fx-background-primary;
+    -fx-padding: 2em;
 }
 
-.boton_menu {
-    -fx-background-color:   #DB1818; /* color normal */
-    -fx-background-radius: 0;
-    -fx-border-radius: 0;
-    -fx-text-fill: white;
+.form-section {
+    -fx-background-color: -fx-background-secondary;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 1.5em; /* Padding relativo a la fuente base */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 2);
 }
 
-.boton_menu:hover {
-    -fx-background-color: #F21D1D; /* color más claro al pasar el mouse */
+.section-title {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: -fx-base-color;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0.8em 0;
 }
 
-.caja_menu {
-    -fx-background-color:   #DB1818; /* color normal */
-}
+/* ========================================= */
+/* 2. TABPANE (BARRA DE NAVEGACIÓN)          */
+/* ========================================= */
 
-/* Fondo completo detrás de las pestañas */
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #ff0000;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
+    -fx-background-color: -fx-background-secondary;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: -fx-border-color-soft;
 }
 
-/* Altura de la barra superior */
-.tab-pane .tab-header-area {
-    -fx-padding: 0;
-}
-
-/* Cada tab (color + altura) */
 .tab-pane .tab-header-area .tab {
-    -fx-background-color: #ff0000;
-    -fx-background-insets: 0;
-    -fx-padding: 2 15;
-    -fx-min-height: 35px;
-    -fx-max-height: 35px;
+    -fx-background-color: transparent;
+    -fx-padding: 0.6em 1.4em;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
 }
 
-/* Tab seleccionado */
 .tab-pane .tab-header-area .tab:selected {
-    -fx-background-color: #cc0000;
+    -fx-border-width: 0 0 3px 0;
+    -fx-border-color: -fx-base-color;
 }
 
-/* Texto */
 .tab-pane .tab-header-area .tab-label {
-    -fx-text-fill: white;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: 500;
 }
 
-/* Fondo del contenido del tab */
-.tab-pane .tab-content-area {
-    -fx-background-color: white;
+.tab-pane .tab-header-area .tab:selected .tab-label {
+    -fx-text-fill: -fx-base-color;
 }
 
-/* Quitar borde de enfoque del TabPane */
-.tab-pane:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
+/* ========================================= */
+/* 3. ELEMENTOS DE FORMULARIO                */
+/* ========================================= */
+
+.form-label {
+    -fx-font-size: 1em;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: 500;
 }
 
-/* Quitar borde de enfoque de cada Tab */
-.tab:focused {
-    -fx-focus-color: transparent;
-    -fx-faint-focus-color: transparent;
-} 
+.text-field, .text-area, .combo-box {
+    -fx-pref-height: 2.2em;
+    -fx-background-radius: 4;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4;
+    -fx-background-color: -fx-background-secondary;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0.8em;
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: -fx-base-color;
+    -fx-background-color: #f8f9fa;
+}
+
+/* Ajustes para TextArea que ignora el pref-height */
+.text-area {
+    -fx-padding: 0.5em 0.8em;
+}
+
+/* Campos por tamaño (mantiene el max-width, que no es dinámico con em, pero es funcional)*/
+.field-small { -fx-max-width: 140; }
+.field-medium { -fx-max-width: 250; }
+.field-large { -fx-max-width: 400; }
 
 
+/* ========================================= */
+/* 4. BOTONES DE LA BARRA DE PESTAÑAS (Toolbar) */
+/* ========================================= */
+/* btn_cliente usado para Nuevo, Modificar, Eliminar en la barra */
 .btn_cliente {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 0.8em;
+    -fx-padding: 0.4em 0.6em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
 }
 
 .btn_cliente:hover {
-    -fx-background-color: #DDDAD9;
+    -fx-background-color: #e0e0e0;
+    -fx-cursor: hand;
+}
+
+/* ========================================= */
+/* 5. BOTONES DE FORMULARIO (Guardar/Eliminar) */
+/* ========================================= */
+
+.form-button {
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-padding: 0.5em 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+
+.form-button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.form-button-secondary {
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-padding: 0.5em 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+
+.form-button-secondary:hover {
+    -fx-background-color: #5a6268;
+}
+
+/* ========================================= */
+/* 6. TABLA (TableView)                      */
+/* ========================================= */
+
+.table-view {
+    -fx-background-color: -fx-background-secondary;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e9ecef;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 0.5em 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: bold;
 }
