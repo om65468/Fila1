@@ -1,71 +1,207 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 4 dic 2025, 19:08:31
-    Author     : Usuario
-*/
+/* Paleta de Colores y Tipografía Base */
+.root {
+    /* Color principal (Azul) que combina con el gris oscuro/azul marino del PrimaryController */
+    -fx-base-color: #007bff;        /* Azul Principal (para foco, pestañas activas, botones) */
+    -fx-secondary-color: #6c757d;   /* Gris Secundario (Eliminar/Cancelar) */
+    -fx-background-primary: #f4f6f9; /* Fondo principal de contenido (Gris muy claro) */
+    -fx-background-secondary: white; /* Fondo de secciones/paneles de formulario */
+    -fx-sidebar-color: #1b2838;     /* Color oscuro de la barra lateral del PrimaryController */
+    -fx-text-color: #34495e;        /* Gris oscuro para el texto principal */
+    -fx-border-color-soft: #e0e0e0; /* Borde gris suave */
 
-/* para el pane */
-.form-pane {
-    -fx-background-color: #f9fafb;
-    -fx-padding: 20;
+    -fx-font-family: "Segoe UI", "Tahoma", "Arial";
+    -fx-font-size: 14px;
 }
 
-/* para el grid pane*/
+/* ========================================= */
+/* 1. ESTRUCTURA Y PANELES                   */
+/* ========================================= */
+
+.form-pane {
+    -fx-background-color: -fx-background-primary;
+    -fx-padding: 2em;
+}
+
 .form-section {
-    -fx-background-color: white;
-    -fx-border-color: #e0e0e0;
+    -fx-background-color: -fx-background-secondary;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-width: 1;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
-    -fx-padding: 20;
+    -fx-padding: 1.5em;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 2);
 }
+
+.section-title {
+    -fx-font-size: 1.3em;
+    -fx-text-fill: -fx-base-color; /* Azul */
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0.8em 0;
+}
+
+/* ========================================= */
+/* 2. TABPANE (BARRA DE NAVEGACIÓN)          */
+/* Coherencia con la barra lateral oscura del PrimaryController */
+/* ========================================= */
+
+/* Fondo completo de la barra de pestañas (Color Oscuro) */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: -fx-sidebar-color; /* Gris Oscuro/Azul Marino */
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+}
+
+/* Cada tab */
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: -fx-sidebar-color;
+    -fx-padding: 0.6em 1.4em;
+    -fx-min-height: 40px;
+    -fx-max-height: 40px;
+}
+
+/* Tab seleccionado */
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #004b9c; /* Azul Marino Oscuro (hover de tu PrimaryController) */
+    -fx-border-width: 0;
+}
+
+/* Texto de la pestaña */
+.tab-pane .tab-header-area .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+}
+
+/* Texto de la pestaña seleccionada */
+.tab-pane .tab-header-area .tab:selected .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Contenido del Tab (fondo blanco/gris claro) */
+.tab-pane .tab-content-area {
+     -fx-background-color: -fx-background-primary;
+}
+
+/* ========================================= */
+/* 3. ELEMENTOS DE FORMULARIO                */
+/* ========================================= */
 
 /* labels */
 .form-label {
-    -fx-font-size: 13px;
-    -fx-text-fill: #555;
+    -fx-font-size: 1em;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: 500;
 }
 
-/* textfields*/
-.text-field {
-    -fx-pref-height: 32;
+/* textfields, comboboxes, textareas */
+.text-field, .text-area, .combo-box {
+    -fx-pref-height: 2.2em;
     -fx-background-radius: 4;
+    -fx-border-color: #ced4da;
+    -fx-border-radius: 4;
+    -fx-background-color: -fx-background-secondary;
+    -fx-text-fill: #333;
+    -fx-padding: 0 0.8em;
 }
 
-/* Campos por tamaño*/
-.field-small {
-    -fx-max-width: 120;
-    /*-fx-background-color: red; /*si queremos cambiarles o darle un toque navideño para unos puntos extra*/
-
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: -fx-base-color; /* Borde Azul al enfocar */
+    -fx-background-color: #f8f9fa;
 }
 
-.field-medium {
-    -fx-max-width: 220;
+/* Ajustes para TextArea */
+.text-area {
+    -fx-padding: 0.5em 0.8em;
 }
 
-.field-large {
-    -fx-max-width: 350;
+/* Campos por tamaño */
+.field-small { -fx-max-width: 140; }
+.field-medium { -fx-max-width: 250; }
+.field-large { -fx-max-width: 400; }
+
+/* ========================================= */
+/* 4. BOTONES DE LA BARRA DE PESTAÑAS (Toolbar) */
+/* Botones claros sobre la barra oscura */
+/* ========================================= */
+
+.btn_cliente {
+    -fx-base-color: #007bff;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 0.8em;
+    -fx-padding: 0.4em 0.6em;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
 }
 
-/* combobox */
-.combo-box {
-    -fx-pref-height: 32;
+.btn_cliente:hover {
+    -fx-background-color: #e0e0e0;
+    -fx-cursor: hand;
 }
 
-/* botones*/
-.form-button {
-    -fx-background-color: #d32f2f;
+/* ========================================= */
+/* 5. BOTONES DE FORMULARIO (Guardar/Eliminar) */
+/* ========================================= */
+
+.form-button { /* Botón principal (Guardar) */
+    -fx-background-color: -fx-base-color; /* Azul */
     -fx-text-fill: white;
     -fx-background-radius: 4;
-    -fx-padding: 6 16;
+    -fx-padding: 0.5em 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
 }
 
 .form-button:hover {
-    -fx-background-color: #b71c1c;
+    -fx-background-color: #0056b3; /* Azul más oscuro */
+}
+
+.form-button-primary {
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 0.5em 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+
+.form-button-primary:hover {
+     -fx-background-color: #0056b3;
 }
 
 .form-button-secondary {
-    -fx-background-color: #9e9e9e;
+    -fx-background-color: -fx-secondary-color; /* Gris */
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 0.5em 1.2em;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+
+.form-button-secondary:hover {
+    -fx-background-color: #5a6268; /* Gris más oscuro */
+}
+
+/* ========================================= */
+/* 6. TABLA (TableView)                      */
+/* ========================================= */
+
+.table-view {
+    -fx-background-color: -fx-background-secondary;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #e9ecef;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 0.5em 0;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-text-color;
+    -fx-font-weight: bold;
 }

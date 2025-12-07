@@ -175,3 +175,86 @@
     -fx-text-fill: -fx-text-color;
     -fx-font-weight: bold;
 }
+
+/* ========================================= */
+/* VARIABLES DE COLOR (Re-definidas para claridad) */
+/* ========================================= */
+.root {
+    /* ... (mantener variables existentes) ... */
+    -fx-sidebar-color: #1b2838; /* Azul Oscuro/Gris Profundo para el menú lateral */
+}
+
+/* ================================================= */
+/* 7. ESTILOS ESPECÍFICOS: PANTALLA DE INICIO/MENÚ */
+/* ================================================= */
+
+/* Contenedor principal de los paneles de contenido (Nuevo, Abrir, Info, Empresa) */
+.content-pane {
+    -fx-background-color: -fx-background-primary; /* Fondo gris claro: #f4f6f9 */
+    -fx-padding: 2em;
+}
+
+/* Contenedor del menú lateral */
+.sidebar {
+    -fx-background-color: -fx-sidebar-color; /* #1b2838 */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 2, 0);
+}
+
+/* Estilo para los títulos grandes (Nuevo, Abrir, Información) */
+.main-title {
+    -fx-font-size: 2.5em; /* 35px */
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-color; /* Gris oscuro */
+    -fx-padding: 0 0 0.5em 0;
+}
+
+/* Botones de navegación en el menú lateral */
+.boton_menu {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 1.1em;
+    -fx-alignment: center-left;
+    -fx-padding: 10 15 10 20; /* Ajuste el padding para espacio */
+}
+
+.boton_menu:hover {
+    -fx-background-color: #3b506b; /* Gris-azul sutil al pasar el ratón */
+}
+
+/* Tarjeta de acción (ej. "Nueva empresa") */
+.btn-card {
+    -fx-background-color: -fx-background-secondary; /* Fondo blanco */
+    -fx-text-fill: -fx-text-color;
+    -fx-background-radius: 8;
+    -fx-border-color: -fx-border-color-soft;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 15 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 8, 0, 0, 2);
+    -fx-alignment: center-left;
+}
+
+.btn-card:hover {
+    -fx-background-color: #e6f0ff; /* Fondo azul muy claro al hacer hover */
+    -fx-border-color: -fx-base-color;
+}
+
+.card-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-color;
+    -fx-font-size: 1.1em;
+}
+
+/* Botones de formulario primarios (Crear/Entrar) y secundarios (Cancelar) */
+.form-button-primary {
+    /* Usar estilo ya definido en el CSS anterior: -fx-base-color */
+    -fx-background-color: -fx-base-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-padding: 8 20;
+    -fx-font-weight: bold;
+    -fx-font-size: 1em;
+    -fx-cursor: hand;
+}
+/* etc. (El resto de los botones form-button-secondary ya están definidos) */
