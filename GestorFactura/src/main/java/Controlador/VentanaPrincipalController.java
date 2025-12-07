@@ -195,6 +195,7 @@ public class VentanaPrincipalController {
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
+        paneInformacion.setVisible(true);
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
             if (newTab == tabArchivo) {
                 try {
@@ -346,6 +347,7 @@ public class VentanaPrincipalController {
         }
         cargarProveedoresDeEmpresa();
         // Aquí llenas tus labels, textfields, etc.
+        
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
 

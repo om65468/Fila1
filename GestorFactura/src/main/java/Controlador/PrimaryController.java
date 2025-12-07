@@ -192,7 +192,7 @@ public class PrimaryController implements Initializable {
         Entidad seleccionada = TView_Empresa.getSelectionModel().getSelectedItem();
 
         if (seleccionada == null) {
-            System.out.println("Selecciona una empresa.");
+            mostrarError("Selecciona una empresa.");
             return;
         }
 
