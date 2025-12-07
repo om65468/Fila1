@@ -1,0 +1,388 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="Factura" language="java" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da2019be-4e93-4129-876b-b6bf65fe91e2">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BaseFacturas"/>
+	<parameter name="P_NUMERO_FACTURA" class="java.lang.Integer"/>
+	<parameter name="LOGO_STREAM" class="java.io.InputStream"/>
+	<query language="SQL"><![CDATA[SELECT
+    f.id AS idFactura,
+    f.tipo,
+    f.numFactura,
+    DATE(f.fechaEmision) AS fechaEmision,
+    f.concepto,
+    f.base,
+    f.iva AS ivaFactura,
+    f.total,
+    f.estado,
+    f.observaciones,
+    e.id_entidad AS idEntidad,
+    e.nombre AS nombreEntidad,
+    e.nif,
+    e.direccion,
+    e.telefono,
+    e.email,
+    lf.id_linea,
+    lf.cantidad,
+    p.id AS idProducto,
+    p.descripcion AS producto,
+    p.refProveedor,
+    p.coste,
+    p.pvp,
+    p.iva AS ivaProducto
+FROM facturas f
+JOIN entidades e ON f.idSecundario = e.id_entidad
+JOIN lineas_factura lf ON lf.id_factura = f.id
+JOIN productos p ON p.id = lf.id_producto
+WHERE f.numFactura =  $P{P_NUMERO_FACTURA} ]]></query>
+	<field name="idFactura" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="idFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="numFactura" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="numFactura"/>
+		<property name="com.jaspersoft.studio.field.label" value="numFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechaEmision"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaEmision"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="concepto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="concepto"/>
+		<property name="com.jaspersoft.studio.field.label" value="concepto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="base" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="base"/>
+		<property name="com.jaspersoft.studio.field.label" value="base"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="ivaFactura" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="ivaFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total"/>
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="observaciones" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="observaciones"/>
+		<property name="com.jaspersoft.studio.field.label" value="observaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="facturas"/>
+	</field>
+	<field name="idEntidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_entidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="idEntidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="nombreEntidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreEntidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="nif" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nif"/>
+		<property name="com.jaspersoft.studio.field.label" value="nif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="telefono" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.label" value="telefono"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="entidades"/>
+	</field>
+	<field name="id_linea" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id_linea"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_linea"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="lineas_factura"/>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="lineas_factura"/>
+	</field>
+	<field name="idProducto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="idProducto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="producto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.label" value="producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="refProveedor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="refProveedor"/>
+		<property name="com.jaspersoft.studio.field.label" value="refProveedor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="coste" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="coste"/>
+		<property name="com.jaspersoft.studio.field.label" value="coste"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="pvp" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="pvp"/>
+		<property name="com.jaspersoft.studio.field.label" value="pvp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="ivaProducto" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="iva"/>
+		<property name="com.jaspersoft.studio.field.label" value="ivaProducto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<group name="idFactura">
+		<expression><![CDATA[$F{idFactura}]]></expression>
+	</group>
+	<group name="tipo">
+		<expression><![CDATA[$F{tipo}]]></expression>
+	</group>
+	<group name="numFactura">
+		<expression><![CDATA[$F{numFactura}]]></expression>
+	</group>
+	<group name="fechaEmision">
+		<expression><![CDATA[$F{fechaEmision}]]></expression>
+	</group>
+	<group name="concepto">
+		<expression><![CDATA[$F{concepto}]]></expression>
+	</group>
+	<group name="base">
+		<expression><![CDATA[$F{base}]]></expression>
+	</group>
+	<group name="ivaFactura">
+		<expression><![CDATA[$F{ivaFactura}]]></expression>
+	</group>
+	<group name="total">
+		<expression><![CDATA[$F{total}]]></expression>
+	</group>
+	<group name="estado">
+		<expression><![CDATA[$F{estado}]]></expression>
+	</group>
+	<group name="observaciones">
+		<expression><![CDATA[$F{observaciones}]]></expression>
+	</group>
+	<group name="idEntidad">
+		<expression><![CDATA[$F{idEntidad}]]></expression>
+	</group>
+	<group name="nombreEntidad">
+		<expression><![CDATA[$F{nombreEntidad}]]></expression>
+	</group>
+	<group name="nif">
+		<expression><![CDATA[$F{nif}]]></expression>
+	</group>
+	<group name="direccion">
+		<expression><![CDATA[$F{direccion}]]></expression>
+	</group>
+	<group name="telefono">
+		<expression><![CDATA[$F{telefono}]]></expression>
+	</group>
+	<group name="email">
+		<expression><![CDATA[$F{email}]]></expression>
+	</group>
+	<group name="id_linea">
+		<expression><![CDATA[$F{id_linea}]]></expression>
+	</group>
+	<group name="cantidad">
+		<expression><![CDATA[$F{cantidad}]]></expression>
+	</group>
+	<group name="idProducto">
+		<expression><![CDATA[$F{idProducto}]]></expression>
+	</group>
+	<group name="producto">
+		<expression><![CDATA[$F{producto}]]></expression>
+	</group>
+	<group name="refProveedor">
+		<expression><![CDATA[$F{refProveedor}]]></expression>
+	</group>
+	<group name="coste">
+		<expression><![CDATA[$F{coste}]]></expression>
+	</group>
+	<group name="pvp">
+		<expression><![CDATA[$F{pvp}]]></expression>
+	</group>
+	<group name="ivaProducto">
+		<expression><![CDATA[$F{ivaProducto}]]></expression>
+	</group>
+	<background splitType="Stretch"/>
+	<title height="120" splitType="Stretch">
+		<element kind="staticText" uuid="9abfe859-024c-4c48-9293-4581f43e07bf" x="141" y="30" width="130" height="40" fontName="Times New Roman" fontSize="33.0">
+			<text><![CDATA[Factura]]></text>
+		</element>
+		<element kind="image" uuid="0f0e342a-c30a-4353-b25c-9eb8c56b3049" x="41" y="30" width="70" height="70" linkType="None" linkTarget="Self">
+			<expression><![CDATA[$P{LOGO_STREAM}]]></expression>
+		</element>
+		<element kind="staticText" uuid="48e0b4b5-941e-4f70-8a5f-82b3af70f6d8" x="341" y="30" width="70" height="30" fontSize="15.0" bold="true" vTextAlign="Middle">
+			<text><![CDATA[Factura nº ]]></text>
+		</element>
+		<element kind="textField" uuid="4752ed17-85da-4e7a-bbc3-c7c8998164bc" x="411" y="30" width="100" height="30" fontSize="15.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{numFactura}]]></expression>
+		</element>
+		<element kind="textField" uuid="76e3e1a1-e63f-4a09-80e5-78203aa1a5ea" x="341" y="60" width="70" height="30" fontSize="15.0" bold="true" vTextAlign="Middle">
+			<expression><![CDATA["Fecha"]]></expression>
+		</element>
+		<element kind="textField" uuid="ec16cad8-5f1c-4fed-98d9-6b9d69313fc3" x="411" y="60" width="100" height="30" fontSize="15.0" pattern="dd/MM/yyyy" linkType="None" linkTarget="Self" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{fechaEmision}]]></expression>
+		</element>
+	</title>
+	<pageHeader height="92" splitType="Stretch">
+		<element kind="staticText" uuid="8d79a44e-7641-4e0b-9ed3-89e18babf735" x="40" y="10" width="60" height="30" fontSize="13.0" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[Nombre:]]></text>
+		</element>
+		<element kind="line" uuid="49b04af6-0631-40bf-aed1-04c07fd13ca7" x="40" y="0" width="470" height="1"/>
+		<element kind="textField" uuid="bcbf93fe-199c-4fd9-8b04-2874afe625e8" x="350" y="14" width="160" height="30" fontSize="13.0" vTextAlign="Middle">
+			<expression><![CDATA[$F{direccion}]]></expression>
+		</element>
+		<element kind="textField" uuid="cca17afb-d65a-4df8-b2fb-28c9f297d8d6" x="100" y="10" width="100" height="30" fontSize="13.0" vTextAlign="Middle">
+			<expression><![CDATA[$F{nombreEntidad}]]></expression>
+		</element>
+		<element kind="staticText" uuid="2258cde3-d8a9-430c-8eb8-cf4e424e6f21" x="280" y="14" width="70" height="30" fontSize="13.0" vTextAlign="Middle">
+			<text><![CDATA[Dirección:]]></text>
+		</element>
+		<element kind="textField" uuid="8b2a35b3-8bf7-463f-b5ee-13e6ce802fdf" x="100" y="50" width="100" height="30" fontSize="13.0" vTextAlign="Middle">
+			<expression><![CDATA[$F{nif}]]></expression>
+		</element>
+		<element kind="staticText" uuid="51bd2832-cff9-4c0b-87ef-2d0c07f9e8bd" x="40" y="50" width="60" height="30" fontSize="13.0" hTextAlign="Left" vTextAlign="Middle">
+			<text><![CDATA[NIF:]]></text>
+		</element>
+		<element kind="textField" uuid="8ddc0255-e6ec-4840-a71e-079a54d572df" x="350" y="50" width="160" height="30" fontSize="13.0" vTextAlign="Middle">
+			<expression><![CDATA[$F{email}]]></expression>
+		</element>
+		<element kind="staticText" uuid="046906e3-014d-41dc-bbc6-005ecc7c420b" x="280" y="50" width="70" height="30" fontSize="13.0" vTextAlign="Middle">
+			<text><![CDATA[E-mail:]]></text>
+		</element>
+	</pageHeader>
+	<columnHeader height="33" splitType="Stretch">
+		<element kind="staticText" uuid="a0361729-8d35-4cb2-8238-e30abfb26b01" x="40" y="0" width="60" height="30" fontSize="13.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Cantidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3b68430-d099-49c5-9736-be46109cf6d7"/>
+			<box topPadding="0" bottomPadding="0" rightPadding="0">
+				<pen lineWidth="0.0"/>
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="0d58b030-bbed-480a-accd-0775e512ebcd" x="100" y="0" width="220" height="30" fontSize="13.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Concepto]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c1b2982-da4f-4d07-93e3-5c6a89d9ddb2"/>
+			<box topPadding="0" bottomPadding="0" rightPadding="0">
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="c55d51c4-2f52-4c54-8ca7-3fbb44d6ef93" x="320" y="0" width="90" height="30" fontSize="13.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Precio/Unidad]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c27381ee-1ce7-439d-a67a-1bbe07cfd962"/>
+			<box topPadding="0" bottomPadding="0" rightPadding="0">
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+				<rightPen lineWidth="0.25"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="212e5c6b-9ed8-4a02-ad44-1bc1654d1939" x="410" y="0" width="100" height="30" fontSize="13.0" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Total]]></text>
+			<box topPadding="0" bottomPadding="0" rightPadding="0">
+				<topPen lineWidth="0.25"/>
+				<bottomPen lineWidth="0.25"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<element kind="textField" uuid="f9604d56-03c8-4b75-b19a-b249eb23c740" x="40" y="0" width="60" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{cantidad}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3b68430-d099-49c5-9736-be46109cf6d7"/>
+				<box topPadding="0" bottomPadding="0">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="13f5b3bd-5446-4b27-b48f-be6b4aa16097" x="100" y="0" width="220" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{producto}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3c1b2982-da4f-4d07-93e3-5c6a89d9ddb2"/>
+				<box topPadding="0" bottomPadding="0">
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="c87ad750-af51-46cb-a0da-5d7b1b9ba32e" x="320" y="0" width="90" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{pvp}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c27381ee-1ce7-439d-a67a-1bbe07cfd962"/>
+				<box topPadding="0" bottomPadding="0">
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f8c470c9-8149-47a3-956a-f4ab9e73f7fa" x="410" y="0" width="100" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<expression><![CDATA[$F{pvp}.multiply(new java.math.BigDecimal($F{cantidad}))
+]]></expression>
+				<box topPadding="0" bottomPadding="0">
+					<topPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.25"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="105" splitType="Stretch">
+		<element kind="textField" uuid="5d4be6cc-03dd-4f6a-842f-6ceffeca8878" x="410" y="6" width="100" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{base}]]></expression>
+		</element>
+		<element kind="staticText" uuid="7565d777-81be-487f-a53b-1a4eb8ba998c" x="330" y="6" width="70" height="30" fontSize="13.0" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Subtotal]]></text>
+		</element>
+		<element kind="textField" uuid="99ccc4d3-94e1-4046-8a49-e6398e67d11f" x="360" y="39" width="40" height="30" fontSize="13.0" hTextAlign="Right" vTextAlign="Middle">
+			<expression><![CDATA[" "+$F{ivaFactura}]]></expression>
+		</element>
+		<element kind="staticText" uuid="7a91d918-85ef-4cf5-9548-f75390e431b6" x="331" y="39" width="29" height="30" fontSize="13.0" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[IVA]]></text>
+		</element>
+		<element kind="textField" uuid="50dbc7b6-eca9-4ce1-aa19-6d3cc9432650" x="410" y="69" width="100" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{base}.multiply(
+    $F{ivaFactura}
+    .divide(new java.math.BigDecimal("100"))
+    .add(new java.math.BigDecimal("1"))
+)]]></expression>
+		</element>
+		<element kind="staticText" uuid="492073ed-8242-49b5-b88b-75774003ba06" x="330" y="69" width="70" height="30" fontSize="13.0" hTextAlign="Right" vTextAlign="Middle">
+			<text><![CDATA[Total]]></text>
+		</element>
+		<element kind="textField" uuid="0aaf3970-09af-4379-819a-8eb8865d1876" x="410" y="39" width="100" height="30" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+			<expression><![CDATA[$F{base}.multiply($F{ivaFactura}).divide(new java.math.BigDecimal("100"))]]></expression>
+		</element>
+		<element kind="line" uuid="5ec32869-36be-4be8-bbcc-5be0b9fd6e5d" x="410" y="6" width="1" height="96"/>
+		<element kind="line" uuid="1125e07e-1ff8-466c-ae0d-c0f3eb4861a0" x="330" y="102" width="181" height="1"/>
+		<element kind="line" uuid="7ea6581d-c84d-4709-9001-5e43bace4208" x="510" y="6" width="1" height="96"/>
+		<element kind="line" uuid="aa7dc871-a475-4f8c-b218-0b3114013a4c" x="330" y="6" width="1" height="96"/>
+		<element kind="line" uuid="1b92dad7-7084-41be-b404-a96a75dffb8d" x="330" y="6" width="181" height="1"/>
+		<element kind="line" uuid="693d5f57-4fd0-4b54-ab11-3878bd5b0dba" x="330" y="36" width="180" height="1"/>
+		<element kind="line" uuid="5b10f24a-ccff-4d5a-8402-cb9cfde7eed0" x="330" y="69" width="181" height="1"/>
+	</columnFooter>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

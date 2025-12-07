@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.ConexionBBDD;
 import Modelo.EmpresaEntidadRelacionDAO;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
@@ -28,8 +29,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import Modelo.GeneradorFactura;
+import java.sql.Connection;
 
 public class VentanaPrincipalController {
+    @FXML
+    private Button Boton_emitir_fac;
+    private static final int NUMERO_FACTURA_A_EMITIR = 1001;
 
     @FXML
     private AnchorPane paneInfoArticulos;
@@ -589,4 +595,54 @@ public class VentanaPrincipalController {
         listaProveedores.setAll(proveedores);
         RefProd.setItems(listaProveedores);
     }
+    
+    
+    @FXML
+    void onEmitirFactura(ActionEvent event) {
+            Connection connection = null;
+        try {
+        // 1. Obtener la conexión a la BBDD usando tu clase de conexión
+        connection = Modelo.ConexionBBDD.get();
+        
+        if (connection == null) {
+        mostrarAlerta("Error", "No se pudo establecer la conexión a la base de datos.");
+        return;
+        }
+        
+        // 2. Generar el PDF
+        GeneradorFactura generador = new GeneradorFactura();
+        String rutaPDF = generador.generarFacturaPDF(connection, NUMERO_FACTURA_A_EMITIR);
+        
+        if (rutaPDF != null) {
+        mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
+        abrirPDF(rutaPDF);
+        }
+        
+        } catch (Exception e) {
+        e.printStackTrace();
+        mostrarAlerta("Error de Emisión", "Ocurrió un error al generar o guardar el PDF: " + e.getMessage());
+        } finally {
+        // 3. Cerrar la conexión
+        if (connection != null) {
+        try {
+        connection.close();
+        } catch (SQLException e) {
+        e.printStackTrace();
+        }
+        }
+        }
+        }
+        
+        
+        private void abrirPDF(String rutaPDF) {
+            try {
+                java.io.File pdfFile = new java.io.File(rutaPDF);
+                // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
+                if (pdfFile.exists() && java.awt.Desktop.isDesktopSupported()) {
+                    java.awt.Desktop.getDesktop().open(pdfFile);
+                }
+            } catch (java.io.IOException e) {
+                System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
+            }
+        }
 }
