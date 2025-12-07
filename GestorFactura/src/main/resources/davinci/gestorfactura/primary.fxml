@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-
 
 <AnchorPane fx:id="root_pane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/estilo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
     <children>
@@ -39,14 +38,7 @@
                 <children>
                     <Label layoutX="30.0" layoutY="30.0" styleClass="main-title" text="Nuevo Inicio" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                     
-                    <Button fx:id="button_empre"
-                            contentDisplay="LEFT"
-                            mnemonicParsing="false"
-                            onAction="#onCrearEmpresa"
-                            prefHeight="90.0" prefWidth="450.0"
-                            styleClass="btn-card"
-                            AnchorPane.leftAnchor="30.0"
-                            AnchorPane.topAnchor="120.0">
+                    <Button fx:id="button_empre" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onCrearEmpresa" prefHeight="90.0" prefWidth="450.0" styleClass="btn-card" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0">
 
                         <graphic>
                             <HBox alignment="CENTER_LEFT" spacing="15.0">
@@ -117,12 +109,12 @@
                 <children>
                     <Label layoutX="30.0" layoutY="30.0" styleClass="main-title" text="Datos de la Empresa" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                     
-                    <GridPane layoutX="30.0" layoutY="100.0" prefHeight="350.0" prefWidth="782.0" styleClass="form-section" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                    <GridPane layoutX="62.4" layoutY="119.0" prefHeight="404.0" prefWidth="796.0" styleClass="form-section" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="11.0">
                         <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="380.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="380.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="76.60002441406249" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="268.59998168945316" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.99998168945314" minWidth="10.0" prefWidth="74.00004272460939" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.39996337890625" minWidth="10.0" prefWidth="281.19995727539066" />
                         </columnConstraints>
                         <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -139,9 +131,18 @@
                             <Label styleClass="form-label" text="CP" GridPane.rowIndex="2" />
                             <Label styleClass="form-label" text="Teléfono" GridPane.rowIndex="3" />
                             
-                            <Label styleClass="form-label" text="NIF" GridPane.columnIndex="2" />
-                            <Label styleClass="form-label" text="Calle" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                            <Label styleClass="form-label" text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                            <Label styleClass="form-label" text="NIF" GridPane.columnIndex="2">
+                        <GridPane.margin>
+                           <Insets left="20.0" />
+                        </GridPane.margin></Label>
+                            <Label styleClass="form-label" text="Calle" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                           <Insets left="20.0" />
+                        </GridPane.margin></Label>
+                            <Label styleClass="form-label" text="E-mail" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <GridPane.margin>
+                           <Insets left="20.0" />
+                        </GridPane.margin></Label>
                             
                             <TextField fx:id="NomEmp" styleClass="text-field" GridPane.columnIndex="1" />
                             <TextField fx:id="CiudEmp" styleClass="text-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
