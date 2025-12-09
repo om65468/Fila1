@@ -25,6 +25,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class PrimaryController implements Initializable {
+    
+    @FXML
+    private Button btn_eliminar;
 
     @FXML
     private Button button_abrir;
@@ -342,5 +345,10 @@ public class PrimaryController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
+    }
+    
+    @FXML
+    void onEliminarEmpresa(ActionEvent event) {
+
     }
 }
