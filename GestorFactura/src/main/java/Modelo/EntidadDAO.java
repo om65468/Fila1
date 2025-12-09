@@ -302,4 +302,77 @@ public class EntidadDAO {
         return lista;
     }
 
+    public List<Entidad> obtenerClientesEmpresa(int idEmpresa) throws SQLException {
+        String sql = "SELECT e.* FROM entidades e JOIN entidad_tipo_relacion t ON t.id_entidad = e.id_entidad JOIN empresa_entidad_relacion r ON r.id_entidad = e.id_entidad WHERE r.id_empresa = ? AND t.id_tipo = 2";
+
+        List<Entidad> lista = new ArrayList<>();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapEntidad(rs));
+            }
+        }
+        return lista;
+    }
+
+    public List<Entidad> obtenerProveedoresEmpresa(int idEmpresa) throws SQLException {
+        String sql = "SELECT e.* FROM entidades e  JOIN entidad_tipo_relacion t ON t.id_entidad = e.id_entidad JOIN empresa_entidad_relacion r ON r.id_entidad = e.id_entidad WHERE r.id_empresa = ? AND t.id_tipo = 3 ";
+
+        List<Entidad> lista = new ArrayList<>();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapEntidad(rs));
+            }
+        }
+        return lista;
+    }
+
+    public List<Producto> obtenerProductosEmpresa(int idEmpresa) throws SQLException {
+        String sql = " SELECT p.* FROM productos p JOIN empresa_entidad_relacion r ON r.id_entidad = p.idProveedor WHERE r.id_empresa = ? ";
+
+        List<Producto> lista = new ArrayList<>();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapProducto(rs));
+            }
+        }
+        return lista;
+    }
+
+    private Entidad mapEntidad(ResultSet rs) throws SQLException {
+        return new Entidad(
+                rs.getInt("id_entidad"),
+                rs.getString("nombre"),
+                rs.getString("nif"),
+                rs.getString("direccion"),
+                "", // CP (no existe)
+                "", // Ciudad (no existe)
+                rs.getString("email"),
+                rs.getString("telefono")
+        );
+    }
+
+    private Producto mapProducto(ResultSet rs) throws SQLException {
+        return new Producto(
+                rs.getInt("id"),
+                rs.getString("descripcion"),
+                rs.getString("refProveedor"),
+                rs.getInt("idProveedor"),
+                rs.getDouble("coste"),
+                rs.getDouble("pvp"),
+                rs.getDouble("iva"),
+                rs.getInt("stock")
+        );
+    }
 }

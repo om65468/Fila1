@@ -33,6 +33,7 @@ import Modelo.GeneradorFactura;
 import java.sql.Connection;
 
 public class VentanaPrincipalController {
+
     @FXML
     private Button Boton_emitir_fac;
     private static final int NUMERO_FACTURA_A_EMITIR = 1001;
@@ -49,6 +50,8 @@ public class VentanaPrincipalController {
     private Entidad empresa;
     private Entidad proveedorSeleccionado;
     private ObservableList<Entidad> listaProveedores = FXCollections.observableArrayList();
+    private EntidadDAO entidadDAO = new EntidadDAO();
+    private ProductoDAO productoDAO = new ProductoDAO();
 
     @FXML
     private TabPane tabPane;
@@ -57,10 +60,8 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tab_cliente;
-
     @FXML
     private Tab tab_proveedor;
-
     @FXML
     private Tab tabArticulos;
     
@@ -194,6 +195,56 @@ public class VentanaPrincipalController {
     private TableColumn<Entidad, Integer> ColIDProv;
     @FXML
     private TableColumn<Entidad, String> ColNomProv;
+
+    @FXML
+    private TableView<Producto> TV_Articulos;
+
+    @FXML
+    private TableColumn<Producto, Double> TC_PvpArt;
+    @FXML
+    private TableColumn<Producto, Integer> TC_StockArt;
+    @FXML
+    private TableColumn<Producto, Integer> TC_IdProArt;
+    @FXML
+    private TableColumn<Producto, Double> TC_IvaArt;
+    @FXML
+    private TableColumn<Producto, Integer> TC_IdArt;
+    @FXML
+    private TableColumn<Producto, Double> TC_CostArt;
+    @FXML
+    private TableColumn<Producto, String> TC_DescArt;
+
+    @FXML
+    private TableView<Entidad> TV_Proveedores;
+
+    @FXML
+    private TableColumn<Entidad, String> TC_DirPro;
+    @FXML
+    private TableColumn<Entidad, Integer> TC_IdPro;
+    @FXML
+    private TableColumn<Entidad, String> TC_MailPro;
+    @FXML
+    private TableColumn<Entidad, String> TC_NifPro;
+    @FXML
+    private TableColumn<Entidad, String> TC_NomPro;
+    @FXML
+    private TableColumn<Entidad, String> TC_TelPro;
+
+    @FXML
+    private TableView<Entidad> TV_Clientes;
+
+    @FXML
+    private TableColumn<Entidad, String> TC_DirCli;
+    @FXML
+    private TableColumn<Entidad, Integer> TC_IdCli;
+    @FXML
+    private TableColumn<Entidad, String> TC_MailCli;
+    @FXML
+    private TableColumn<Entidad, String> TC_NifCli;
+    @FXML
+    private TableColumn<Entidad, String> TC_NomCli;
+    @FXML
+    private TableColumn<Entidad, String> TC_TelCli;
 
     @FXML
     public void initialize() {
@@ -361,12 +412,16 @@ public class VentanaPrincipalController {
             return;
         }
         cargarProveedoresDeEmpresa();
-        // Aquí llenas tus labels, textfields, etc.
-        
+        InfoNombre.setText(empresa.getNombre());
+        InfoNIF.setText(empresa.getNif());
+        txtInfoCalle.setText(empresa.getDireccionCompleta());
+        txtInfoCP.setText("");       // No existe en BD → se deja vacío
+        txtInfoCiudad.setText("");   // No existe en BD → se deja vacío
+        txtInfoEmail.setText(empresa.getEmail());
+        txtInfoTlf.setText(empresa.getTelefono());
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
 
-    /*OMAR MIRAME PORQUE NO HAY CAMPOS DE DIRECCIÓN EN EL PROVEEDOR NI EN EL CLIENTE*/
     @FXML
     private void guardarCliente() {
 
@@ -484,7 +539,6 @@ public class VentanaPrincipalController {
             }
 
             Producto producto = new Producto(0, descripcion, refProveedor, idProveedor, coste, pvp, iva, stock);
-            ProductoDAO productoDAO = new ProductoDAO();
             productoDAO.insertar(producto); // lanza SQLException si falla
 
             // si todo OK:
@@ -507,69 +561,6 @@ public class VentanaPrincipalController {
         }
     }
 
-    /*
-    private void abrirSecondary(String tipoTab) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/davinci/gestorfactura/secondary.fxml")
-            );
-
-            Parent root = loader.load();
-            SecondaryController controller = loader.getController();
-
-            switch (tipoTab) {
-                case "EMPRESA":
-                    controller.mostrarTab(controller.getTabEmpresa());
-                    break;
-                case "CLIENTE":
-                    controller.mostrarTab(controller.getTabCliente());
-                    break;
-                case "PRODUCTO":
-                    controller.mostrarTab(controller.getTabProducto());
-                    break;
-                case "PROVEEDOR":
-                    controller.mostrarTab(controller.getTabProveedor());
-                    break;
-                case "FACTURA":
-                    controller.mostrarTab(controller.getTabFactura());
-                    break;
-            }
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
- /*
-    private void cargarEnPane(AnchorPane destino, String fxml, String tipoTab) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource(fxml)
-            );
-
-            Parent vista = loader.load();
-
-            // Ajustar la vista al tamaño del pane
-            AnchorPane.setTopAnchor(vista, 0.0);
-            AnchorPane.setBottomAnchor(vista, 0.0);
-            AnchorPane.setLeftAnchor(vista, 0.0);
-            AnchorPane.setRightAnchor(vista, 0.0);
-
-            destino.getChildren().setAll(vista);
-
-            // Configurar el controller secundario
-            SecondaryController controller = loader.getController();
-            if (tipoTab != null) {
-                controller.mostrarTabSegunTipo(tipoTab);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
     private void ocultarPanes() {
 
         paneCliente.setVisible(false);
@@ -607,59 +598,98 @@ public class VentanaPrincipalController {
         if (empresa == null) {
             return;
         }
-        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO = new EntidadDAO();
         List<Entidad> proveedores = entidadDAO.listarProveedoresDeEmpresa(empresa.getId());
         listaProveedores.setAll(proveedores);
         RefProd.setItems(listaProveedores);
     }
-    
-    
+
+    public void cargarTablasEmpresa() {
+        int idEmpresa = empresa.getId();
+
+        try {
+            List<Entidad> clientes = entidadDAO.obtenerClientesEmpresa(idEmpresa);
+            List<Entidad> proveedores = entidadDAO.obtenerProveedoresEmpresa(idEmpresa);
+            List<Producto> productos = entidadDAO.obtenerProductosEmpresa(idEmpresa);
+
+            TV_Clientes.setItems(FXCollections.observableArrayList(clientes));
+            TV_Proveedores.setItems(FXCollections.observableArrayList(proveedores));
+            TV_Articulos.setItems(FXCollections.observableArrayList(productos));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void onEmitirFactura(ActionEvent event) {
-            Connection connection = null;
+        Connection connection = null;
         try {
-        // 1. Obtener la conexión a la BBDD usando tu clase de conexión
-        connection = Modelo.ConexionBBDD.get();
-        
-        if (connection == null) {
-        mostrarAlerta("Error", "No se pudo establecer la conexión a la base de datos.");
-        return;
-        }
-        
-        // 2. Generar el PDF
-        GeneradorFactura generador = new GeneradorFactura();
-        String rutaPDF = generador.generarFacturaPDF(connection, NUMERO_FACTURA_A_EMITIR);
-        
-        if (rutaPDF != null) {
-        mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
-        abrirPDF(rutaPDF);
-        }
-        
+            // 1. Obtener la conexión a la BBDD usando tu clase de conexión
+            connection = Modelo.ConexionBBDD.get();
+
+            if (connection == null) {
+                mostrarAlerta("Error", "No se pudo establecer la conexión a la base de datos.");
+                return;
+            }
+
+            // 2. Generar el PDF
+            GeneradorFactura generador = new GeneradorFactura();
+            String rutaPDF = generador.generarFacturaPDF(connection, NUMERO_FACTURA_A_EMITIR);
+
+            if (rutaPDF != null) {
+                mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
+                abrirPDF(rutaPDF);
+            }
+
         } catch (Exception e) {
-        e.printStackTrace();
-        mostrarAlerta("Error de Emisión", "Ocurrió un error al generar o guardar el PDF: " + e.getMessage());
+            e.printStackTrace();
+            mostrarAlerta("Error de Emisión", "Ocurrió un error al generar o guardar el PDF: " + e.getMessage());
         } finally {
-        // 3. Cerrar la conexión
-        if (connection != null) {
-        try {
-        connection.close();
-        } catch (SQLException e) {
-        e.printStackTrace();
-        }
-        }
-        }
-        }
-        
-        
-        private void abrirPDF(String rutaPDF) {
-            try {
-                java.io.File pdfFile = new java.io.File(rutaPDF);
-                // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
-                if (pdfFile.exists() && java.awt.Desktop.isDesktopSupported()) {
-                    java.awt.Desktop.getDesktop().open(pdfFile);
+            // 3. Cerrar la conexión
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (java.io.IOException e) {
-                System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
             }
         }
+    }
+
+    private void abrirPDF(String rutaPDF) {
+        try {
+            java.io.File pdfFile = new java.io.File(rutaPDF);
+            // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
+            if (pdfFile.exists() && java.awt.Desktop.isDesktopSupported()) {
+                java.awt.Desktop.getDesktop().open(pdfFile);
+            }
+        } catch (java.io.IOException e) {
+            System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
+        }
+    }
+
+    private void cargarTabla() {
+        TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TC_NomCli.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        TC_NifCli.setCellValueFactory(new PropertyValueFactory<>("nif"));
+        TC_DirCli.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        TC_MailCli.setCellValueFactory(new PropertyValueFactory<>("email"));
+        TC_TelCli.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+        TC_IdPro.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TC_NomPro.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        TC_NifPro.setCellValueFactory(new PropertyValueFactory<>("nif"));
+        TC_DirPro.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        TC_MailPro.setCellValueFactory(new PropertyValueFactory<>("email"));
+        TC_TelPro.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+        TC_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TC_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        TC_CostArt.setCellValueFactory(new PropertyValueFactory<>("coste"));
+        TC_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
+        TC_IvaArt.setCellValueFactory(new PropertyValueFactory<>("iva"));
+        TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
+    }
 }

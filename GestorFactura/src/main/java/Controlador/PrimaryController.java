@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
 import Modelo.TipoEntidadDAO;
-import Vista.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
