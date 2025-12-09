@@ -158,11 +158,7 @@ public class VentanaPrincipalController {
     @FXML
     private Label InfoNombre;
     @FXML
-    private TextField txtInfoCP;
-    @FXML
     private TextField txtInfoCalle;
-    @FXML
-    private TextField txtInfoCiudad;
     @FXML
     private TextField txtInfoEmail;
     @FXML
@@ -415,8 +411,6 @@ public class VentanaPrincipalController {
         InfoNombre.setText(empresa.getNombre());
         InfoNIF.setText(empresa.getNif());
         txtInfoCalle.setText(empresa.getDireccionCompleta());
-        txtInfoCP.setText("");       // No existe en BD → se deja vacío
-        txtInfoCiudad.setText("");   // No existe en BD → se deja vacío
         txtInfoEmail.setText(empresa.getEmail());
         txtInfoTlf.setText(empresa.getTelefono());
         System.out.println("Empresa cargada: " + empresa.getNombre());
