@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
 import Modelo.TipoEntidadDAO;
-import Vista.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +23,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class PrimaryController implements Initializable {
 
@@ -66,8 +64,7 @@ public class PrimaryController implements Initializable {
 
     @FXML
     private TableView<Entidad> TView_Empresa;
-    
-    
+
     //Empresa
     @FXML
     private Button Button_Crear_empresa;
@@ -87,7 +84,7 @@ public class PrimaryController implements Initializable {
     private TextField NomEmp;
     @FXML
     private TextField TelEmp;
-    
+
     @FXML
     private AnchorPane paneEmpresa;
 
@@ -95,10 +92,10 @@ public class PrimaryController implements Initializable {
     private ObservableList<Entidad> listaEmpresas;
 
     private Entidad empresaCreada;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        empresaCreada=null;
+        empresaCreada = null;
         cursorHand();
         entidadDAO = new EntidadDAO();
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
@@ -110,10 +107,10 @@ public class PrimaryController implements Initializable {
     private void onCrearEmpresa(ActionEvent event) throws IOException {
         paneEmpresa.setVisible(true);
     }
-    
+
     @FXML
     void switchToVentanaPrincipal(ActionEvent event) throws IOException {
-        if (crearEmpresa()){
+        if (crearEmpresa()) {
             try {
                 // 2. Cargar la nueva vista
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/davinci/gestorfactura/ventana_principal.fxml"));
@@ -134,12 +131,12 @@ public class PrimaryController implements Initializable {
             }
         }
     }
-    
+
     @FXML
     void onCancelarEmpresa(ActionEvent event) {
-           paneEmpresa.setVisible(false);
+        paneEmpresa.setVisible(false);
     }
-    
+
     @FXML
     void onPaneAbrirEmpresa(ActionEvent event) {
         pane_info.setVisible(false);
@@ -185,10 +182,10 @@ public class PrimaryController implements Initializable {
         TColumn_Direccion.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getDireccionCompleta()));
     }
-    
+
     @FXML
     void onElegirEmpresa(ActionEvent event) {
-         // 1. Obtener la empresa seleccionada
+        // 1. Obtener la empresa seleccionada
         Entidad seleccionada = TView_Empresa.getSelectionModel().getSelectedItem();
 
         if (seleccionada == null) {
@@ -215,7 +212,7 @@ public class PrimaryController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     public boolean crearEmpresa() {
         try {
@@ -228,19 +225,23 @@ public class PrimaryController implements Initializable {
             String telefono = TelEmp.getText().trim();
             String email = EmailEmp.getText().trim();
 
-            if (validarEmpresa()) {
-                Entidad entidad = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
-                entidadDAO.insertar(entidad);
-                System.out.println(entidad.toString());
-                Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
+            if (entidadDAO.existe(nif)) {
+                mostrarError("El cliente ya existe (NIF o Email duplicado).");
 
+            } else {
+                if (validarEmpresa()) {
+                    Entidad entidad = new Entidad(0, nombre, nif, calle, cp, ciudad, email, telefono);
+                    entidadDAO.insertar(entidad);
+                    System.out.println(entidad.toString());
+                    Entidad entidadInsertada = entidadDAO.buscarPorNif(nif);
 
-                TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
-                tipoDAO.insertar(entidadInsertada.getId(), 1);
+                    TipoEntidadDAO tipoDAO = new TipoEntidadDAO();
+                    tipoDAO.insertar(entidadInsertada.getId(), 1);
 
-                System.out.println("Empresa creada correctamente.");
-                empresaCreada = entidad;
-                return true;
+                    System.out.println("Empresa creada correctamente.");
+                    empresaCreada = entidad;
+                    return true;
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -248,7 +249,7 @@ public class PrimaryController implements Initializable {
         }
         return false;
     }
-    
+
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -256,22 +257,42 @@ public class PrimaryController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-    
+
     // Método principal para validar todos los campos
     private boolean validarEmpresa() {
-        if (!validarNoVacio(NomEmp, "Nombre")) return false;
-        if (!validarNoVacio(NIFEmp, "NIF")) return false;
-        if (!validarNoVacio(CPEmp, "Código Postal")) return false;
-        if (!validarNoVacio(CiudEmp, "Ciudad")) return false;
-        if (!validarNoVacio(DirEmp, "Calle")) return false;
-        if (!validarNoVacio(EmailEmp, "E-mail")) return false;
-        if (!validarNoVacio(TelEmp, "Teléfono")) return false;
+        if (!validarNoVacio(NomEmp, "Nombre")) {
+            return false;
+        }
+        if (!validarNoVacio(NIFEmp, "NIF")) {
+            return false;
+        }
+        if (!validarNoVacio(CPEmp, "Código Postal")) {
+            return false;
+        }
+        if (!validarNoVacio(CiudEmp, "Ciudad")) {
+            return false;
+        }
+        if (!validarNoVacio(DirEmp, "Calle")) {
+            return false;
+        }
+        if (!validarNoVacio(EmailEmp, "E-mail")) {
+            return false;
+        }
+        if (!validarNoVacio(TelEmp, "Teléfono")) {
+            return false;
+        }
 
         // Validaciones específicas
-        if (!validarNIF(NIFEmp.getText())) return false;
-        if (!validarCodigoPostal(CPEmp.getText())) return false;
+        if (!validarNIF(NIFEmp.getText())) {
+            return false;
+        }
+        if (!validarCodigoPostal(CPEmp.getText())) {
+            return false;
+        }
         //if (!validarEmail(EmailEmp.getText())) return false;
-        if (!validarTelefono(TelEmp.getText())) return false;
+        if (!validarTelefono(TelEmp.getText())) {
+            return false;
+        }
 
         return true; // Todo válido
     }
@@ -303,8 +324,6 @@ public class PrimaryController implements Initializable {
         return true;
     }
 
-
-
     // Validar teléfono (9 dígitos)
     private boolean validarTelefono(String tel) {
         if (!tel.matches("\\d{9}")) {
@@ -318,10 +337,10 @@ public class PrimaryController implements Initializable {
     private void mostrarError(String mensaje) {
         //System.out.println("Error: " + mensaje);
         // Alternativamente, usar Alert:
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Validación");
-            alert.setHeaderText(null);
-            alert.setContentText(mensaje);
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validación");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
