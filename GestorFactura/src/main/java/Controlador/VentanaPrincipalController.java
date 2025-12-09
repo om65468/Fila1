@@ -309,16 +309,6 @@ public class VentanaPrincipalController {
         paneCliente.setManaged(true);
     }
 
-    @FXML
-    private void onModifiarCliente(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void onEliminarCliente(ActionEvent event) {
-
-    }
-
     //Metodos de Proveedor
     @FXML
     private void onNuevoProveedor() {
@@ -329,15 +319,6 @@ public class VentanaPrincipalController {
         paneProveedor.setManaged(true);
     }
 
-    @FXML
-    private void onModificarProveedor(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void onEliminarProveedor(ActionEvent event) {
-
-    }
 
     //Metodos de Articulo
     @FXML
@@ -349,32 +330,12 @@ public class VentanaPrincipalController {
         paneProducto.setManaged(true);
     }
 
-    @FXML
-    private void onEliminarArticulo(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void onModificarArticulo(ActionEvent event) {
-
-    }
-
     //Metodos de Factura
     @FXML
     private void onNuevoFactura() {
         ocultarPanes();
         paneFactura.setVisible(true);
         paneFactura.setManaged(true);
-    }
-
-    @FXML
-    private void onEliminarFactura(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void onModificarFactura(ActionEvent event) {
-
     }
 
     @FXML
