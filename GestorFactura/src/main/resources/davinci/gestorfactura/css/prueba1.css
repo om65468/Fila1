@@ -49,6 +49,8 @@
     -fx-background-color: -fx-sidebar-color; /* Gris Oscuro/Azul Marino */
     -fx-background-insets: 0;
     -fx-border-width: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 /* Cada tab */
@@ -63,6 +65,8 @@
 .tab-pane .tab-header-area .tab:selected {
     -fx-background-color: #004b9c; /* Azul Marino Oscuro (hover de tu PrimaryController) */
     -fx-border-width: 0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 /* Texto de la pestaña */
@@ -75,6 +79,8 @@
 .tab-pane .tab-header-area .tab:selected .tab-label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
 }
 
 /* Contenido del Tab (fondo blanco/gris claro) */

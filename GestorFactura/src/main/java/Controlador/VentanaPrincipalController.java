@@ -63,6 +63,9 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tabArticulos;
+    
+    @FXML
+    private Tab TabFactura;
 
     @FXML
     private Tab tabInformacion;
@@ -209,26 +212,38 @@ public class VentanaPrincipalController {
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(true);
+                paneFactura.setVisible(false);
             } else if (newTab == tab_cliente) {
                 paneInfoClientes.setVisible(true);
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
             } else if (newTab == tab_proveedor) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(true);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
             } else if (newTab == tabArticulos) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(true);
                 paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+            }else if (newTab == TabFactura){
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(true);
             } else {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+
             }
         });
 
