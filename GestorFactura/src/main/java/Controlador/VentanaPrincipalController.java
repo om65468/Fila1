@@ -463,6 +463,18 @@ public class VentanaPrincipalController {
     }
 
     @FXML
+    private void borrarCliente(Entidad cliente) {
+        if (cliente == null) {
+            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
+            return;
+        }
+
+        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(cliente.getId());
+        mostrarAlerta("Éxito", "Cliente eliminado correctamente.");
+    }
+
+    @FXML
     private void guardarProveedor() {
 
         try {
@@ -473,16 +485,14 @@ public class VentanaPrincipalController {
             String nombre = NomProv.getText().trim();
             String nif = NIFProv.getText().trim();
             String calle = DirProv.getText().trim();
-            //String cp = txtCpProveedor.getText().trim();
-            //String ciudad = txtCiudadProveedor.getText().trim();
             String email = EmailProv.getText().trim();
             String telefono = TlfProv.getText().trim();
 
-              if (entidadDAO.existe(nif)) {
+            if (entidadDAO.existe(nif)) {
                 mostrarError("El Proveedor ya existe (NIF o Email duplicado).");
                 return;
             }
-            
+
             Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
 
             entidadDAO.insertar(nuevoProveedor);
@@ -507,6 +517,17 @@ public class VentanaPrincipalController {
     }
 
     @FXML
+    private void borrarProveedor(Entidad proveedor) {
+        if (proveedor == null) {
+            mostrarAlerta("Error", "No hay ningún proveedor seleccionado.");
+            return;
+        }
+        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(proveedor.getId());
+        mostrarAlerta("Éxito", "Proveedor y sus productos eliminados correctamente.");
+    }
+
+    @FXML
     private void agregarProducto(ActionEvent event) {
         try {
             // validar proveedor seleccionado
@@ -519,7 +540,6 @@ public class VentanaPrincipalController {
             int idProveedor = proveedorSeleccionado.getId();
             String refProveedor = proveedorSeleccionado.getNombre();
 
-            // parsear valores numéricos con control de errores
             double coste;
             double pvp;
             double iva;
@@ -560,6 +580,22 @@ public class VentanaPrincipalController {
         } catch (SQLException ex) {
             ex.printStackTrace();
             mostrarAlerta("Error BBDD", "No se pudo insertar el producto: " + ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void borrarProducto(Producto producto) {
+        if (producto == null) {
+            mostrarAlerta("Error", "No hay ningún producto seleccionado.");
+            return;
+        }
+        try {
+            ProductoDAO productoDAO = new ProductoDAO();
+            productoDAO.eliminar(producto.getId());
+            mostrarAlerta("Éxito", "Producto eliminado correctamente.");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error", "No se pudo eliminar el producto: " + ex.getMessage());
         }
     }
 
@@ -623,17 +659,17 @@ public class VentanaPrincipalController {
         }
     }
 
-        // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
+    // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
     private void mostrarError(String mensaje) {
         //System.out.println("Error: " + mensaje);
         // Alternativamente, usar Alert:
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Validación");
-            alert.setHeaderText(null);
-            alert.setContentText(mensaje);
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validación");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
-    
+
     @FXML
     void onEmitirFactura(ActionEvent event) {
         Connection connection = null;

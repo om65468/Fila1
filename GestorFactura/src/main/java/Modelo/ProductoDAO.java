@@ -39,6 +39,23 @@ public class ProductoDAO {
         }
     }
 
+    public boolean articuloExiste(int idArticulo) {
+        String sql = "SELECT COUNT(*) FROM productos WHERE ID = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idArticulo);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // Obtener producto por ID
     public Producto obtenerPorId(int id) throws SQLException {
         String sql = "SELECT * FROM productos WHERE id = ?";
@@ -57,8 +74,7 @@ public class ProductoDAO {
     public List<Producto> listarTodos() throws SQLException {
         List<Producto> lista = new ArrayList<>();
         String sql = "SELECT * FROM productos";
-        try (PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 lista.add(mapearProducto(rs));
             }
@@ -95,15 +111,14 @@ public class ProductoDAO {
     // Mapear ResultSet a Producto
     private Producto mapearProducto(ResultSet rs) throws SQLException {
         return new Producto(
-            rs.getInt("id"),
-            rs.getString("descripcion"),
-            rs.getString("refProveedor"),
-            rs.getInt("idProveedor"),
-            rs.getDouble("coste"),
-            rs.getDouble("pvp"),
-            rs.getDouble("iva"),
-            rs.getInt("stock")
+                rs.getInt("id"),
+                rs.getString("descripcion"),
+                rs.getString("refProveedor"),
+                rs.getInt("idProveedor"),
+                rs.getDouble("coste"),
+                rs.getDouble("pvp"),
+                rs.getDouble("iva"),
+                rs.getInt("stock")
         );
     }
 }
-
