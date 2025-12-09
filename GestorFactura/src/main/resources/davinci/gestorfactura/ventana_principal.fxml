@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
     
     <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="130.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -60,7 +60,7 @@
                             <children>
                                 <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                                     <children>
-                                        <Button fx:id="Boton_nuevo_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
+                                        <Button fx:id="Boton_nuevo_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
                                             <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -69,7 +69,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="Boton_modificar_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
+                                        <Button fx:id="Boton_modificar_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
                                             <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -78,7 +78,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                                        <Button fx:id="boton_eliminar_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
+                                        <Button fx:id="boton_eliminar_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
                                             <graphic>
                                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -87,7 +87,7 @@
                                                 </ImageView>
                                             </graphic>
                                         </Button>
-                              <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
+                              <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -324,7 +324,7 @@
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
-                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Guardar">
+                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" onAction="#modificarInfo" styleClass="form-button-primary" text="Guardar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
                     </Button>
                     <Button fx:id="Boton_cancelar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Cancelar" />

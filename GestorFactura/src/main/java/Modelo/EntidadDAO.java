@@ -392,5 +392,5 @@ public class EntidadDAO {
         }
         return false;
     }
-
+    
 }

@@ -71,6 +71,9 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tabInformacion;
+    
+    @FXML
+    private Button Boton_guardar_info;
 
     @FXML
     private Button ButtonCliente;
@@ -735,5 +738,45 @@ private TableColumn<Factura, ?> TC_LinFac;
         TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
     }
+    
+    @FXML
+    private void modificarInfo(ActionEvent event) {
+        if (empresa == null) {
+            mostrarAlerta("Error", "No hay ninguna empresa seleccionada para modificar.");
+            return;
+        }
+
+        // 1) Actualizar el objeto empresa con los valores de los textfields (lee la UI)
+        empresa.setNombre( InfoNombre.getText() );        // si InfoNombre es Label tal vez tengas un TextField distinto
+        empresa.setNif( InfoNIF.getText() );              // idem
+        empresa.setCalle( txtInfoCalle.getText() );
+        empresa.setTelefono( txtInfoTlf.getText() );
+        empresa.setEmail( txtInfoEmail.getText() );
+
+        // 2) Debug: mostrar lo que vas a mandar
+        System.out.println("Intentando actualizar empresa: id=" + empresa.getId()
+            + " nombre=" + empresa.getNombre()
+            + " nif=" + empresa.getNif()
+            + " direccion=" + empresa.getDireccionCompleta()
+            + " tlf=" + empresa.getTelefono()
+            + " email=" + empresa.getEmail());
+
+        // 3) Llamar al DAO y comprobar resultado
+        EntidadDAO entDao = new EntidadDAO();
+        try {
+            boolean actualizado = entDao.actualizar(empresa);
+            if (actualizado) {
+                mostrarAlerta("Éxito", "Información actualizada correctamente.");
+                // opcional: refrescar tablas / recargar datos de la vista
+                cargarTablasEmpresa(); // o el método que use tu controller para recargar la UI
+            } else {
+                mostrarAlerta("Aviso", "No se han detectado cambios o la actualización falló (0 filas afectadas).");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error BBDD", "Error al actualizar: " + ex.getMessage());
+        }
+    }
+
 
 }
