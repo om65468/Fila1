@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root_pane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/estilo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
+<AnchorPane fx:id="root_pane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/estilo.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.PrimaryController">
     <children>
         <AnchorPane fx:id="pane_menu" maxWidth="150.0" prefHeight="705.0" prefWidth="150.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -69,15 +69,18 @@
                 </children>
             </AnchorPane>
 
-            <AnchorPane fx:id="pane_info" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="pane_info" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
                     <Label layoutX="30.0" layoutY="30.0" styleClass="main-title" text="Información" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
-                    <VBox layoutX="30.0" layoutY="120.0" spacing="15.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="120.0">
+                    <VBox layoutX="82.0" layoutY="164.0" prefHeight="438.0" prefWidth="618.0" spacing="15.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="164.0">
                         <children>
-                            <ImageView fitHeight="250.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" styleClass="form-section">
+                            <ImageView fitHeight="384.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true" styleClass="form-section">
                                 <image><Image url="@images/info.jpg" /></image>
                             </ImageView>
-                            <Label text="Hecho por: Omar Amen, Mohamed Quinte, Stefano González" />
+                            <Label prefHeight="18.0" prefWidth="402.0" text="Hecho por: Omar Quinte, Mohamed Amen, Stefano González">
+                        <VBox.margin>
+                           <Insets left="100.0" />
+                        </VBox.margin></Label>
                         </children>
                     </VBox>
                 </children>
