@@ -69,7 +69,7 @@
                 </children>
             </AnchorPane>
 
-            <AnchorPane fx:id="pane_info" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="pane_info" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
                     <Label layoutX="30.0" layoutY="30.0" styleClass="main-title" text="Información" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                     <VBox layoutX="82.0" layoutY="164.0" prefHeight="438.0" prefWidth="618.0" spacing="15.0" AnchorPane.leftAnchor="82.0" AnchorPane.topAnchor="164.0">
@@ -86,7 +86,7 @@
                 </children>
             </AnchorPane>
 
-            <AnchorPane fx:id="pane_abrir" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="pane_abrir" prefHeight="705.0" prefWidth="842.0" styleClass="content-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <children>
                     <Label layoutX="30.0" layoutY="30.0" styleClass="main-title" text="Abrir Empresa" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="30.0" />
                     
@@ -105,6 +105,7 @@
                     </ScrollPane>
                     
                     <Button fx:id="btn_entrar" mnemonicParsing="false" onAction="#onElegirEmpresa" styleClass="form-button-primary" text="Entrar" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="620.0" />
+               <Button fx:id="btn_eliminar" layoutX="598.0" layoutY="648.0" mnemonicParsing="false" onAction="#onEliminarEmpresa" styleClass="form-button-primary" text="Eliminar" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="620.0" />
                 </children>
             </AnchorPane>
 
