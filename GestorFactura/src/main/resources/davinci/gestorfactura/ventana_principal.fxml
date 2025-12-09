@@ -156,7 +156,7 @@
                     <Button fx:id="Boton_guardar_cli" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarCliente" styleClass="form-button-primary" text="Guardar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarCliente" styleClass="form-button-secondary" text="Eliminar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
                     </Button>
                 </children>
@@ -210,7 +210,7 @@
                     <Button fx:id="Boton_guardar_prov" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarProveedor" styleClass="form-button-primary" text="Guardar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProveedor" styleClass="form-button-secondary" text="Eliminar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
                     </Button>
                 </children>
@@ -268,7 +268,7 @@
                     <Button fx:id="Boton_guardar_art" contentDisplay="LEFT" mnemonicParsing="false" onAction="#agregarProducto" styleClass="form-button-primary" text="Guardar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_art_form" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_art_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProducto" styleClass="form-button-secondary" text="Eliminar">
                         <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
                     </Button>
                 </children>
