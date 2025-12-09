@@ -745,30 +745,20 @@ private TableColumn<Factura, ?> TC_LinFac;
             mostrarAlerta("Error", "No hay ninguna empresa seleccionada para modificar.");
             return;
         }
-
-        // 1) Actualizar el objeto empresa con los valores de los textfields (lee la UI)
-        empresa.setNombre( InfoNombre.getText() );        // si InfoNombre es Label tal vez tengas un TextField distinto
-        empresa.setNif( InfoNIF.getText() );              // idem
+        empresa.setNombre( InfoNombre.getText() );  
+        empresa.setNif( InfoNIF.getText() );  
         empresa.setCalle( txtInfoCalle.getText() );
         empresa.setTelefono( txtInfoTlf.getText() );
         empresa.setEmail( txtInfoEmail.getText() );
 
-        // 2) Debug: mostrar lo que vas a mandar
-        System.out.println("Intentando actualizar empresa: id=" + empresa.getId()
-            + " nombre=" + empresa.getNombre()
-            + " nif=" + empresa.getNif()
-            + " direccion=" + empresa.getDireccionCompleta()
-            + " tlf=" + empresa.getTelefono()
-            + " email=" + empresa.getEmail());
 
-        // 3) Llamar al DAO y comprobar resultado
         EntidadDAO entDao = new EntidadDAO();
         try {
             boolean actualizado = entDao.actualizar(empresa);
             if (actualizado) {
                 mostrarAlerta("Éxito", "Información actualizada correctamente.");
-                // opcional: refrescar tablas / recargar datos de la vista
-                cargarTablasEmpresa(); // o el método que use tu controller para recargar la UI
+                // recargar datos de la vista
+                cargarTablasEmpresa(); 
             } else {
                 mostrarAlerta("Aviso", "No se han detectado cambios o la actualización falló (0 filas afectadas).");
             }
