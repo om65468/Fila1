@@ -253,6 +253,8 @@ public class PrimaryController implements Initializable {
         return false;
     }
 
+
+    
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);

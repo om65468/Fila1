@@ -417,6 +417,18 @@ public class VentanaPrincipalController {
     }
 
     @FXML
+    private void borrarEmpresa() {
+        if (empresa == null) {
+            mostrarAlerta("Error", "No hay ninguna empresa seleccionada.");
+            return;
+        }
+        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(empresa.getId());
+        mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
+        empresa = null; // limpiar referencia
+    }
+
+    @FXML
     private void guardarCliente() {
 
         try {
@@ -463,15 +475,17 @@ public class VentanaPrincipalController {
     }
 
     @FXML
-    private void borrarCliente(Entidad cliente) {
-        if (cliente == null) {
+    private void borrarCliente() {
+        Entidad clienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
+        if (clienteSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
             return;
         }
 
         EntidadDAO entidadDAO = new EntidadDAO();
-        entidadDAO.eliminar(cliente.getId());
+        entidadDAO.eliminar(clienteSeleccionado.getId());
         mostrarAlerta("Éxito", "Cliente eliminado correctamente.");
+        TV_Clientes.getItems().remove(clienteSeleccionado); // actualizar tabla
     }
 
     @FXML
@@ -517,14 +531,16 @@ public class VentanaPrincipalController {
     }
 
     @FXML
-    private void borrarProveedor(Entidad proveedor) {
-        if (proveedor == null) {
+    private void borrarProveedor() {
+        Entidad proveedorSeleccionado = TV_Proveedores.getSelectionModel().getSelectedItem();
+        if (proveedorSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún proveedor seleccionado.");
             return;
         }
-        EntidadDAO entidadDAO = new EntidadDAO();
-        entidadDAO.eliminar(proveedor.getId());
-        mostrarAlerta("Éxito", "Proveedor y sus productos eliminados correctamente.");
+        entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(proveedorSeleccionado.getId());
+        mostrarAlerta("Éxito", "Proveedor y todos sus productos eliminados correctamente.");
+        TV_Proveedores.getItems().remove(proveedorSeleccionado); // actualizar tabla
     }
 
     @FXML
@@ -584,15 +600,18 @@ public class VentanaPrincipalController {
     }
 
     @FXML
-    private void borrarProducto(Producto producto) {
-        if (producto == null) {
+    private void borrarProducto() {
+        Producto productoSeleccionado = TV_Articulos.getSelectionModel().getSelectedItem();
+        if (productoSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún producto seleccionado.");
             return;
         }
+
         try {
-            ProductoDAO productoDAO = new ProductoDAO();
-            productoDAO.eliminar(producto.getId());
+            productoDAO = new ProductoDAO();
+            productoDAO.eliminar(productoSeleccionado.getId());
             mostrarAlerta("Éxito", "Producto eliminado correctamente.");
+            TV_Articulos.getItems().remove(productoSeleccionado); // actualizar tabla
         } catch (SQLException ex) {
             ex.printStackTrace();
             mostrarAlerta("Error", "No se pudo eliminar el producto: " + ex.getMessage());
