@@ -377,7 +377,7 @@ public class EntidadDAO {
     }
 
     public boolean existe(String nif) {
-        String sql = "SELECT COUNT(*) FROM entidad WHERE NIF = ?";
+        String sql = "SELECT COUNT(*) FROM entidades WHERE NIF = ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, nif);
