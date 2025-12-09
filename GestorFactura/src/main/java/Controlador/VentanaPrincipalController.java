@@ -639,7 +639,7 @@ public class VentanaPrincipalController {
 
             if (rutaPDF != null) {
                 mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
-                abrirPDF(rutaPDF);
+                //abrirPDF(rutaPDF);
             }
 
         } catch (Exception e) {
@@ -657,7 +657,7 @@ public class VentanaPrincipalController {
         }
     }
 
-    private void abrirPDF(String rutaPDF) {
+   /* private void abrirPDF(String rutaPDF) {
         try {
             java.io.File pdfFile = new java.io.File(rutaPDF);
             // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
@@ -667,7 +667,7 @@ public class VentanaPrincipalController {
         } catch (java.io.IOException e) {
             System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
         }
-    }
+    }*/
 
     private void cargarTabla() {
         TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
