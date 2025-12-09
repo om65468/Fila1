@@ -4,6 +4,7 @@ import Modelo.ConexionBBDD;
 import Modelo.EmpresaEntidadRelacionDAO;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
+import Modelo.Factura;
 import Modelo.Producto;
 import Modelo.ProductoDAO;
 import Modelo.TipoEntidadDAO;
@@ -242,6 +243,31 @@ public class VentanaPrincipalController {
     @FXML
     private TableColumn<Entidad, String> TC_TelCli;
 
+    
+@FXML
+private TableView<Factura> TV_Factura;
+    
+@FXML
+private TableColumn<Factura, ?> TC_ArtFac;
+
+@FXML
+private TableColumn<Factura, ?> TC_CantFac;
+
+@FXML
+private TableColumn<Factura, ?> TC_DTO1Fac;
+
+@FXML
+private TableColumn<Factura, ?> TC_DTO2Fac;
+
+@FXML
+private TableColumn<Factura, ?> TC_DescFac;
+
+@FXML
+private TableColumn<Factura, ?> TC_IVAFac;
+
+@FXML
+private TableColumn<Factura, ?> TC_LinFac;
+    
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);

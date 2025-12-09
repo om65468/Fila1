@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
     
     <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="130.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -434,10 +434,23 @@
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
-            <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Panel de Edición de Facturas" />
-            <Label layoutX="40.0" layoutY="80.0" text="Contenido del Formulario de Facturación se añadiría aquí." />
+         <ScrollPane prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
+            <content>
+               <TableView fx:id="TV_Factura" prefHeight="396.0" prefWidth="810.0" styleClass="table-view">
+                  <columns>
+                     <TableColumn fx:id="TC_LinFac" prefWidth="57.60001039505005" text="LINEA" />
+                     <TableColumn fx:id="TC_ArtFac" prefWidth="92.00004577636719" text="ARTICULO" />
+                     <TableColumn fx:id="TC_DescFac" prefWidth="382.39990234375" text="Descripcion" />
+                     <TableColumn fx:id="TC_CantFac" prefWidth="91.19998168945312" text="CANTIDAD" />
+                     <TableColumn fx:id="TC_DTO1Fac" prefWidth="65.5999755859375" text="DTO 1" />
+                     <TableColumn fx:id="TC_DTO2Fac" prefWidth="68.79998779296875" text="DTO 2" />
+                     <TableColumn fx:id="TC_IVAFac" prefWidth="52.800048828125" text="IVA" />
+                  </columns>
+               </TableView>
+            </content>
+         </ScrollPane>
         </children>
     </AnchorPane>
 </AnchorPane>
