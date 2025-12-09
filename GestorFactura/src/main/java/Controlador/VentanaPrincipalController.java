@@ -323,6 +323,7 @@ private TableColumn<Factura, ?> TC_LinFac;
         ColIDProv.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColNomProv.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         escucharTablaProv();
+        cargarTabla();
     }
 
     //Metodos de Cliente
@@ -442,7 +443,7 @@ private TableColumn<Factura, ?> TC_LinFac;
             tipoDAO.insertarRelacion(empresa.getId(), clienteInsertado.getId());
 
             mostrarAlerta("Éxito", "Cliente guardado correctamente.");
-
+            cargarTablasEmpresa();
         } catch (Exception ex) {
             ex.printStackTrace();
             mostrarAlerta("Error", "Ocurrió un error al guardar el cliente.");
@@ -498,7 +499,7 @@ private TableColumn<Factura, ?> TC_LinFac;
             tipoDAO.insertarRelacion(empresa.getId(), proveedorInsertado.getId());
 
             mostrarAlerta("Éxito", "Proveedor guardado correctamente.");
-
+            cargarTablasEmpresa();
         } catch (Exception ex) {
             ex.printStackTrace();
             mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
@@ -557,7 +558,7 @@ private TableColumn<Factura, ?> TC_LinFac;
             // si todo OK:
             IDProd.setText(String.valueOf(producto.getId())); // id autogenerado devuelto en DAO
             mostrarAlerta("Producto creado", "Producto creado correctamente con id " + producto.getId());
-
+            cargarTablasEmpresa();
             // limpiar campos si quieres
             DescProd.clear();
             ProvProd.clear();
@@ -715,14 +716,14 @@ private TableColumn<Factura, ?> TC_LinFac;
         TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_NomCli.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         TC_NifCli.setCellValueFactory(new PropertyValueFactory<>("nif"));
-        TC_DirCli.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        TC_DirCli.setCellValueFactory(new PropertyValueFactory<>("DireccionCompleta"));
         TC_MailCli.setCellValueFactory(new PropertyValueFactory<>("email"));
         TC_TelCli.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
         TC_IdPro.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_NomPro.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         TC_NifPro.setCellValueFactory(new PropertyValueFactory<>("nif"));
-        TC_DirPro.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+        TC_DirPro.setCellValueFactory(new PropertyValueFactory<>("DireccionCompleta"));
         TC_MailPro.setCellValueFactory(new PropertyValueFactory<>("email"));
         TC_TelPro.setCellValueFactory(new PropertyValueFactory<>("telefono"));
 
