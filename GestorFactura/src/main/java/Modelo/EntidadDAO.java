@@ -375,4 +375,22 @@ public class EntidadDAO {
                 rs.getInt("stock")
         );
     }
+
+    public boolean existe(String nif) {
+        String sql = "SELECT COUNT(*) FROM entidad WHERE NIF = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nif);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;  // Si hay alguno, ya existe
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

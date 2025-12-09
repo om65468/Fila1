@@ -64,7 +64,7 @@ public class VentanaPrincipalController {
     private Tab tab_proveedor;
     @FXML
     private Tab tabArticulos;
-    
+
     @FXML
     private Tab TabFactura;
 
@@ -278,7 +278,7 @@ public class VentanaPrincipalController {
                 paneInfoArticulos.setVisible(true);
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
-            }else if (newTab == TabFactura){
+            } else if (newTab == TabFactura) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
@@ -428,10 +428,13 @@ public class VentanaPrincipalController {
             String nombre = NomCli.getText().trim();
             String nif = NIFCli.getText().trim();
             String calle = DirCli.getText().trim();
-            //String cp = txtCpCliente.getText().trim();
-            //String ciudad = txtCiudadCliente.getText().trim();
             String email = EmailCli.getText().trim();
             String telefono = TlfCli.getText().trim();
+
+            if (entidadDAO.existe(nif)) {
+                mostrarError("El cliente ya existe (NIF o Email duplicado).");
+                return;
+            }
 
             // 2. Crear la entidad
             Entidad nuevoCliente = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
@@ -463,7 +466,7 @@ public class VentanaPrincipalController {
     private void guardarProveedor() {
 
         try {
-            EntidadDAO entidadDAO = new EntidadDAO();
+            entidadDAO = new EntidadDAO();
             TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
@@ -475,6 +478,11 @@ public class VentanaPrincipalController {
             String email = EmailProv.getText().trim();
             String telefono = TlfProv.getText().trim();
 
+              if (entidadDAO.existe(nif)) {
+                mostrarError("El Proveedor ya existe (NIF o Email duplicado).");
+                return;
+            }
+            
             Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
 
             entidadDAO.insertar(nuevoProveedor);
@@ -615,6 +623,17 @@ public class VentanaPrincipalController {
         }
     }
 
+        // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
+    private void mostrarError(String mensaje) {
+        //System.out.println("Error: " + mensaje);
+        // Alternativamente, usar Alert:
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validación");
+            alert.setHeaderText(null);
+            alert.setContentText(mensaje);
+            alert.showAndWait();
+    }
+    
     @FXML
     void onEmitirFactura(ActionEvent event) {
         Connection connection = null;
@@ -651,7 +670,7 @@ public class VentanaPrincipalController {
         }
     }
 
-   /* private void abrirPDF(String rutaPDF) {
+    /* private void abrirPDF(String rutaPDF) {
         try {
             java.io.File pdfFile = new java.io.File(rutaPDF);
             // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
@@ -662,7 +681,6 @@ public class VentanaPrincipalController {
             System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
         }
     }*/
-
     private void cargarTabla() {
         TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_NomCli.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -686,4 +704,5 @@ public class VentanaPrincipalController {
         TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
     }
+
 }
