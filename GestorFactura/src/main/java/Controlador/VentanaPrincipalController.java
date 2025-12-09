@@ -404,18 +404,6 @@ private TableColumn<Factura, ?> TC_LinFac;
     }
 
     @FXML
-    private void borrarEmpresa() {
-        if (empresa == null) {
-            mostrarAlerta("Error", "No hay ninguna empresa seleccionada.");
-            return;
-        }
-        EntidadDAO entidadDAO = new EntidadDAO();
-        entidadDAO.eliminar(empresa.getId());
-        mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
-        empresa = null; // limpiar referencia
-    }
-
-    @FXML
     private void guardarCliente() {
 
         try {

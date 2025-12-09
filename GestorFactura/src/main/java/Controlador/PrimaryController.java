@@ -25,7 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class PrimaryController implements Initializable {
-    
+
     @FXML
     private Button btn_eliminar;
 
@@ -214,6 +214,19 @@ public class PrimaryController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @FXML
+    private void borrarEmpresa() {
+        Entidad empresa = TView_Empresa.getSelectionModel().getSelectedItem();
+        if (empresa == null) {
+            mostrarAlerta("Error", "No hay ninguna empresa seleccionada.");
+            return;
+        }
+        entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(empresa.getId());
+        mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
     }
 
     @FXML
@@ -253,8 +266,6 @@ public class PrimaryController implements Initializable {
         return false;
     }
 
-
-    
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -348,7 +359,7 @@ public class PrimaryController implements Initializable {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-    
+
     @FXML
     void onEliminarEmpresa(ActionEvent event) {
 
