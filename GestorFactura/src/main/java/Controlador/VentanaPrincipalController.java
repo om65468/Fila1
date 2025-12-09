@@ -443,6 +443,18 @@ private TableColumn<Factura, ?> TC_LinFac;
     }
 
     @FXML
+    private void borrarEmpresa() {
+        if (empresa == null) {
+            mostrarAlerta("Error", "No hay ninguna empresa seleccionada.");
+            return;
+        }
+        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(empresa.getId());
+        mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
+        empresa = null; // limpiar referencia
+    }
+
+    @FXML
     private void guardarCliente() {
 
         try {
@@ -489,6 +501,20 @@ private TableColumn<Factura, ?> TC_LinFac;
     }
 
     @FXML
+    private void borrarCliente() {
+        Entidad clienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
+        if (clienteSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
+            return;
+        }
+
+        EntidadDAO entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(clienteSeleccionado.getId());
+        mostrarAlerta("Éxito", "Cliente eliminado correctamente.");
+        TV_Clientes.getItems().remove(clienteSeleccionado); // actualizar tabla
+    }
+
+    @FXML
     private void guardarProveedor() {
 
         try {
@@ -499,16 +525,14 @@ private TableColumn<Factura, ?> TC_LinFac;
             String nombre = NomProv.getText().trim();
             String nif = NIFProv.getText().trim();
             String calle = DirProv.getText().trim();
-            //String cp = txtCpProveedor.getText().trim();
-            //String ciudad = txtCiudadProveedor.getText().trim();
             String email = EmailProv.getText().trim();
             String telefono = TlfProv.getText().trim();
 
-              if (entidadDAO.existe(nif)) {
+            if (entidadDAO.existe(nif)) {
                 mostrarError("El Proveedor ya existe (NIF o Email duplicado).");
                 return;
             }
-            
+
             Entidad nuevoProveedor = new Entidad(0, nombre, nif, calle, "", "", email, telefono);
 
             entidadDAO.insertar(nuevoProveedor);
@@ -533,6 +557,19 @@ private TableColumn<Factura, ?> TC_LinFac;
     }
 
     @FXML
+    private void borrarProveedor() {
+        Entidad proveedorSeleccionado = TV_Proveedores.getSelectionModel().getSelectedItem();
+        if (proveedorSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún proveedor seleccionado.");
+            return;
+        }
+        entidadDAO = new EntidadDAO();
+        entidadDAO.eliminar(proveedorSeleccionado.getId());
+        mostrarAlerta("Éxito", "Proveedor y todos sus productos eliminados correctamente.");
+        TV_Proveedores.getItems().remove(proveedorSeleccionado); // actualizar tabla
+    }
+
+    @FXML
     private void agregarProducto(ActionEvent event) {
         try {
             // validar proveedor seleccionado
@@ -545,7 +582,6 @@ private TableColumn<Factura, ?> TC_LinFac;
             int idProveedor = proveedorSeleccionado.getId();
             String refProveedor = proveedorSeleccionado.getNombre();
 
-            // parsear valores numéricos con control de errores
             double coste;
             double pvp;
             double iva;
@@ -586,6 +622,25 @@ private TableColumn<Factura, ?> TC_LinFac;
         } catch (SQLException ex) {
             ex.printStackTrace();
             mostrarAlerta("Error BBDD", "No se pudo insertar el producto: " + ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void borrarProducto() {
+        Producto productoSeleccionado = TV_Articulos.getSelectionModel().getSelectedItem();
+        if (productoSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún producto seleccionado.");
+            return;
+        }
+
+        try {
+            productoDAO = new ProductoDAO();
+            productoDAO.eliminar(productoSeleccionado.getId());
+            mostrarAlerta("Éxito", "Producto eliminado correctamente.");
+            TV_Articulos.getItems().remove(productoSeleccionado); // actualizar tabla
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error", "No se pudo eliminar el producto: " + ex.getMessage());
         }
     }
 
@@ -649,17 +704,17 @@ private TableColumn<Factura, ?> TC_LinFac;
         }
     }
 
-        // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
+    // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
     private void mostrarError(String mensaje) {
         //System.out.println("Error: " + mensaje);
         // Alternativamente, usar Alert:
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Validación");
-            alert.setHeaderText(null);
-            alert.setContentText(mensaje);
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validación");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
-    
+
     @FXML
     void onEmitirFactura(ActionEvent event) {
         Connection connection = null;
