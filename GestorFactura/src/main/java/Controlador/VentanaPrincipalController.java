@@ -71,6 +71,9 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tabInformacion;
+    
+    @FXML
+    private Button Boton_guardar_info;
 
     @FXML
     private Button ButtonCliente;
@@ -755,6 +758,35 @@ private TableColumn<Factura, ?> TC_LinFac;
         TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
     }
     
+    @FXML
+    private void modificarInfo(ActionEvent event) {
+        if (empresa == null) {
+            mostrarAlerta("Error", "No hay ninguna empresa seleccionada para modificar.");
+            return;
+        }
+        empresa.setNombre( InfoNombre.getText() );  
+        empresa.setNif( InfoNIF.getText() );  
+        empresa.setCalle( txtInfoCalle.getText() );
+        empresa.setTelefono( txtInfoTlf.getText() );
+        empresa.setEmail( txtInfoEmail.getText() );
+
+
+        EntidadDAO entDao = new EntidadDAO();
+        try {
+            boolean actualizado = entDao.actualizar(empresa);
+            if (actualizado) {
+                mostrarAlerta("Éxito", "Información actualizada correctamente.");
+                // recargar datos de la vista
+                cargarTablasEmpresa(); 
+            } else {
+                mostrarAlerta("Aviso", "No se han detectado cambios o la actualización falló (0 filas afectadas).");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error BBDD", "Error al actualizar: " + ex.getMessage());
+        }
+    }
+
     
     private void escucharTablaResultadosArticulo() {
         TV_ResultadosArticulo.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
