@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
     
     <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="130.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -453,11 +453,11 @@
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
-                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Guardar">
+                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" onAction="#modificarInfo" styleClass="form-button-primary" text="Guardar">
                         <graphic>
                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -466,7 +466,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Boton_cancelar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Cancelar" />
+                    <Button fx:id="Boton_cancelar_info" contentDisplay="LEFT" mnemonicParsing="false" onAction="#cancelarCambioInfo" styleClass="form-button-secondary" text="Cancelar" />
                 </children>
             </HBox>
 
@@ -663,7 +663,7 @@
             </ScrollPane>
         </children>
     </AnchorPane>
-   <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="602.0" prefWidth="992.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+   <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="602.0" prefWidth="992.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
       <children>
          <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Facturas" />
          <ScrollPane layoutX="31.0" layoutY="84.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section">

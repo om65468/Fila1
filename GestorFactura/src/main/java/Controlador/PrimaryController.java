@@ -5,10 +5,13 @@ import Modelo.EntidadDAO;
 import Modelo.TipoEntidadDAO;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -95,15 +98,48 @@ public class PrimaryController implements Initializable {
     private ObservableList<Entidad> listaEmpresas;
 
     private Entidad empresaCreada;
+    
+    @FXML
+    private TextField txtBuscarEmpresa;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         empresaCreada = null;
         cursorHand();
+
         entidadDAO = new EntidadDAO();
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
+
         datosTablas();
-        TView_Empresa.setItems(listaEmpresas);
+
+        // esta parte lo filtra por nombre
+        FilteredList<Entidad> filteredData = new FilteredList<>(listaEmpresas, p -> true);
+
+        txtBuscarEmpresa.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(empresa -> {
+
+                // Si no hay nada muestra todas
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String filtro = newValue.toLowerCase();
+
+                // Comparación por nombre o NIF
+                if (empresa.getNombre().toLowerCase().contains(filtro)) return true;
+                if (empresa.getNif().toLowerCase().contains(filtro)) return true;
+
+                return false;
+            });
+        });
+
+        // Ordenación automática del TableView
+        SortedList<Entidad> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(TView_Empresa.comparatorProperty());
+
+        // Y ahora asignamos esta lista filtrada y ordenada a la tabla
+        TView_Empresa.setItems(sortedData);
     }
 
     @FXML
@@ -226,6 +262,7 @@ public class PrimaryController implements Initializable {
         }
         entidadDAO = new EntidadDAO();
         entidadDAO.eliminar(empresa.getId());
+        recargarTablaEmpresas();
         mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
         datosTablas();
@@ -354,8 +391,6 @@ public class PrimaryController implements Initializable {
 
     // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
     private void mostrarError(String mensaje) {
-        //System.out.println("Error: " + mensaje);
-        // Alternativamente, usar Alert:
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validación");
         alert.setHeaderText(null);
@@ -367,4 +402,14 @@ public class PrimaryController implements Initializable {
     void onEliminarEmpresa(ActionEvent event) {
 
     }
+    
+    private void recargarTablaEmpresas() {
+        EntidadDAO dao = new EntidadDAO();
+        List<Entidad> empresas = dao.obtenerEmpresas();
+        TView_Empresa.getItems().clear();
+        TView_Empresa.getItems().addAll(empresas);
+
+        System.out.println("Empresas recargadas: " + empresas.size());
+    }
+
 }
