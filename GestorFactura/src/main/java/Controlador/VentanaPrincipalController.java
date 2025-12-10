@@ -5,6 +5,7 @@ import Modelo.EmpresaEntidadRelacionDAO;
 import Modelo.Entidad;
 import Modelo.EntidadDAO;
 import Modelo.Factura;
+import Modelo.FacturaDAO;
 import Modelo.Producto;
 import Modelo.ProductoDAO;
 import Modelo.TipoEntidadDAO;
@@ -12,15 +13,12 @@ import Vista.App;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -31,13 +29,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import Modelo.GeneradorFactura;
+import Modelo.LineaFactura;
 import java.sql.Connection;
 
 public class VentanaPrincipalController {
 
     @FXML
     private Button Boton_emitir_fac;
-    private static final int NUMERO_FACTURA_A_EMITIR = 1001;
 
     @FXML
     private AnchorPane paneInfoArticulos;
@@ -53,6 +51,7 @@ public class VentanaPrincipalController {
     private ObservableList<Entidad> listaProveedores = FXCollections.observableArrayList();
     private EntidadDAO entidadDAO = new EntidadDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
+    private FacturaDAO facturaDAO = new FacturaDAO();
 
     @FXML
     private TabPane tabPane;
@@ -81,8 +80,6 @@ public class VentanaPrincipalController {
     @FXML
     private AnchorPane paneCliente;
 
-    //@FXML
-    //private AnchorPane paneEmpresa;
     @FXML
     private AnchorPane paneProveedor;
     @FXML
@@ -257,21 +254,51 @@ public class VentanaPrincipalController {
     private TableColumn<Producto, Double> TCR_PvpArt;
 
     @FXML
+    private TableView<LineaFactura> TV_FacturaLinea;
+    @FXML
+    private TableColumn<Factura, Integer> TC_ArtFacLi;
+    @FXML
+    private TableColumn<Factura, Integer> TC_CantFacLi;
+    @FXML
+    private TableColumn<Factura, Integer> TC_DTO1FacLi;
+    @FXML
+    private TableColumn<Factura, Integer> TC_DTO2FacLi;
+    @FXML
+    private TableColumn<Factura, String> TC_DescFacLi;
+    @FXML
+    private TableColumn<Factura, Integer> TC_IVAFacLi;
+    @FXML
+    private TableColumn<Factura, Integer> TC_LinFacLi;
+    
+    @FXML
     private TableView<Factura> TV_Factura;
+
     @FXML
-    private TableColumn<Factura, ?> TC_ArtFac;
+    private TableColumn<Factura, String> TC_FEmisionFac;
+
     @FXML
-    private TableColumn<Factura, ?> TC_CantFac;
+    private TableColumn<Factura, Double> TC_IVAFac;
+
     @FXML
-    private TableColumn<Factura, ?> TC_DTO1Fac;
+    private TableColumn<Factura, Integer> TC_IdClienteFac;
+    
     @FXML
-    private TableColumn<Factura, ?> TC_DTO2Fac;
+    private TableColumn<Factura, String> TC_ConFac;
+
     @FXML
-    private TableColumn<Factura, ?> TC_DescFac;
+    private TableColumn<Factura, Integer> TC_IdFac;
+
     @FXML
-    private TableColumn<Factura, ?> TC_IVAFac;
+    private TableColumn<Factura, Integer> TC_NumFac;
+
     @FXML
-    private TableColumn<Factura, ?> TC_LinFac;
+    private TableColumn<Factura, String> TC_TipoFac;
+
+    @FXML
+    private TableColumn<Factura, Double> TC_TotalFac;
+
+    @FXML
+    private TableColumn<Factura, Integer> TC_DescFac;
 
     @FXML
     public void initialize() {
@@ -687,9 +714,20 @@ public class VentanaPrincipalController {
 
     @FXML
     void onEmitirFactura(ActionEvent event) {
+        Factura facturaSeleccionada = TV_Factura.getSelectionModel().getSelectedItem();
+
+        if (facturaSeleccionada == null) {
+            mostrarAlerta("Advertencia", "Debes seleccionar una factura de la tabla para poder emitirla.");
+            return; // Sale del método si no hay selección
+        }
+
+        // Obtener el número (ID) de la factura seleccionada para el PDF
+        int idFacturaAEmitir = facturaSeleccionada.getId();
+        int numFacturaAEmitir = facturaSeleccionada.getNumFactura();
+
         Connection connection = null;
         try {
-            // 1. Obtener la conexión a la BBDD usando tu clase de conexión
+            // 2. Obtener la conexión a la BBDD
             connection = Modelo.ConexionBBDD.get();
 
             if (connection == null) {
@@ -697,12 +735,17 @@ public class VentanaPrincipalController {
                 return;
             }
 
-            // 2. Generar el PDF
+            // 3. Generar el PDF usando el ID de la factura seleccionada
             GeneradorFactura generador = new GeneradorFactura();
-            String rutaPDF = generador.generarFacturaPDF(connection, NUMERO_FACTURA_A_EMITIR);
+            
+            // NOTA: Tu GeneradorFactura.generarFacturaPDF usa NUMERO_FACTURA_A_EMITIR
+            // Si el método realmente necesita el ID interno de la tabla (id), usa idFacturaAEmitir
+            // Si el método realmente necesita el número de factura visible (numFactura), usa numFacturaAEmitir
+            // Asumo que tu generador usa el número de factura para el PDF:
+            String rutaPDF = generador.generarFacturaPDF(connection, numFacturaAEmitir); 
 
             if (rutaPDF != null) {
-                mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
+                mostrarAlerta("Éxito", "Factura N° " + numFacturaAEmitir + " generada.");
                 abrirPDF(rutaPDF);
             }
 
@@ -710,7 +753,7 @@ public class VentanaPrincipalController {
             e.printStackTrace();
             mostrarAlerta("Error de Emisión", "Ocurrió un error al generar o guardar el PDF: " + e.getMessage());
         } finally {
-            // 3. Cerrar la conexión
+            // 4. Cerrar la conexión
             if (connection != null) {
                 try {
                     connection.close();
@@ -759,6 +802,25 @@ public class VentanaPrincipalController {
         TCR_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
         TCR_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
+        
+        TC_IdFac.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TC_TipoFac.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        TC_NumFac.setCellValueFactory(new PropertyValueFactory<>("numFactura"));
+        TC_FEmisionFac.setCellValueFactory(new PropertyValueFactory<>("fechaEmision"));
+        TC_IdClienteFac.setCellValueFactory(new PropertyValueFactory<>("idSecundario"));
+        TC_ConFac.setCellValueFactory(new PropertyValueFactory<>("concepto"));
+
+        // Mapeo de Double, ajustado desde tu definición inicial
+        TC_IVAFac.setCellValueFactory(new PropertyValueFactory<>("iva"));
+        TC_TotalFac.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        try {
+            List<Factura> facturas = facturaDAO.obtenerTodasLasFacturas(); 
+            TV_Factura.setItems(FXCollections.observableArrayList(facturas));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarError("Error al cargar las facturas: " + e.getMessage());
+        }
     }
 
     @FXML

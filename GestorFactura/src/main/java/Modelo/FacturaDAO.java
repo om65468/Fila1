@@ -8,8 +8,13 @@ public class FacturaDAO {
 
     private Connection conn;
 
-    public FacturaDAO(Connection conn) {
-        this.conn = conn;
+    public FacturaDAO() {
+        try {
+            this.conn = ConexionBBDD.get();
+        } catch (Exception e) {
+            System.out.println("No funciona la conexioin de EntidadDao a la BBDD, mira el constructor");
+            e.printStackTrace();
+        }
     }
 
     // Insertar una factura
@@ -108,6 +113,22 @@ public class FacturaDAO {
         f.setEstado(rs.getString("estado"));
         f.setObservaciones(rs.getString("observaciones"));
         return f;
+    }
+    
+    public List<Factura> obtenerTodasLasFacturas() throws SQLException {
+        List<Factura> lista = new ArrayList<>();
+        // En un entorno multi-empresa, esta consulta usaría un JOIN a 'empresa_entidad_relacion'
+        // para filtrar por clientes/proveedores de la 'idEmpresa'.
+        String sql = "SELECT * FROM facturas ORDER BY numFactura DESC"; 
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql); 
+             ResultSet rs = ps.executeQuery()) {
+            
+            while (rs.next()) {
+                lista.add(mapearFactura(rs));
+            }
+        }
+        return lista;
     }
 }
 
