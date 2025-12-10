@@ -227,6 +227,9 @@ public class PrimaryController implements Initializable {
         entidadDAO = new EntidadDAO();
         entidadDAO.eliminar(empresa.getId());
         mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
+        listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
+        datosTablas();
+        TView_Empresa.setItems(listaEmpresas);
     }
 
     @FXML
