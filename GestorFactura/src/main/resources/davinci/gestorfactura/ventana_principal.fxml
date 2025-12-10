@@ -665,17 +665,17 @@
     </AnchorPane>
    <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="602.0" prefWidth="992.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
       <children>
-         <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Clientes" />
-         <ScrollPane layoutX="30.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section">
+         <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Facturas" />
+         <ScrollPane layoutX="31.0" layoutY="84.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section">
             <content>
-               <TableView fx:id="TV_Clientes1" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
+               <TableView fx:id="TV_Factura" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
                   <columns>
-                     <TableColumn fx:id="TC_IdCli1" prefWidth="80.0" text="ID" />
-                     <TableColumn fx:id="TC_NomCli1" prefWidth="180.0" text="Nombre" />
-                     <TableColumn fx:id="TC_NifCli1" prefWidth="100.0" text="NIF" />
-                     <TableColumn fx:id="TC_DirCli1" prefWidth="240.0" text="Dirección" />
-                     <TableColumn fx:id="TC_TelCli1" prefWidth="120.0" text="Telefono" />
-                     <TableColumn fx:id="TC_MailCli1" prefWidth="200.0" text="E-mail" />
+                     <TableColumn fx:id="TC_IdFac" prefWidth="80.0" text="ID" />
+                     <TableColumn fx:id="TC_NomFac" prefWidth="180.0" text="Nombre" />
+                     <TableColumn fx:id="TC_NifFac" prefWidth="100.0" text="NIF" />
+                     <TableColumn fx:id="TC_DirFac" prefWidth="240.0" text="Dirección" />
+                     <TableColumn fx:id="TC_TelFac" prefWidth="120.0" text="Telefono" />
+                     <TableColumn fx:id="TC_MailFac" prefWidth="200.0" text="E-mail" />
                   </columns>
                </TableView>
             </content>
