@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
     
     <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="130.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -114,6 +114,15 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
+                           <Button fx:id="Boton_ver_fac" contentDisplay="TOP" mnemonicParsing="false" onAction="#onVerLineasFacturas" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Lineas">
+                              <graphic>
+                                 <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@images/Factura.png" />
+                                    </image>
+                                 </ImageView>
+                              </graphic>
+                           </Button>
                                 </children>
                             </HBox>
                         </children>

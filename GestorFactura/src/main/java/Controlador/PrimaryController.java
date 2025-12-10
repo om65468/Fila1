@@ -398,10 +398,6 @@ public class PrimaryController implements Initializable {
         alert.showAndWait();
     }
 
-    @FXML
-    void onEliminarEmpresa(ActionEvent event) {
-
-    }
     
     private void recargarTablaEmpresas() {
         EntidadDAO dao = new EntidadDAO();
