@@ -121,4 +121,22 @@ public class ProductoDAO {
                 rs.getInt("stock")
         );
     }
+    
+    public List<Producto> buscarPorDescripcion(String descripcion) throws SQLException {
+        List<Producto> lista = new ArrayList<>();
+        // Usamos LIKE con comodines '%' para buscar coincidencias parciales.
+        String sql = "SELECT * FROM productos WHERE descripcion LIKE ?"; 
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            // El comodín '%' se añade al valor para buscar la subcadena en cualquier posición.
+            ps.setString(1, "%" + descripcion + "%"); 
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearProducto(rs));
+                }
+            }
+        }
+        return lista;
+    }
 }

@@ -244,6 +244,20 @@ public class VentanaPrincipalController {
     private TableColumn<Entidad, String> TC_TelCli;
 
     
+    // Buscador de Artículos para Factura
+    @FXML
+    private TextField txtBuscadorArticulo;
+    @FXML
+    private Button Boton_buscar_art;
+    @FXML
+    private TableView<Producto> TV_ResultadosArticulo;
+    @FXML
+    private TableColumn<Producto, Integer> TCR_IdArt;
+    @FXML
+    private TableColumn<Producto, String> TCR_DescArt;
+    @FXML
+    private TableColumn<Producto, Double> TCR_PvpArt;
+    
 @FXML
 private TableView<Factura> TV_Factura;
     
@@ -324,6 +338,7 @@ private TableColumn<Factura, ?> TC_LinFac;
         ColNomProv.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         escucharTablaProv();
         cargarTabla();
+        escucharTablaResultadosArticulo();
     }
 
     //Metodos de Cliente
@@ -734,6 +749,50 @@ private TableColumn<Factura, ?> TC_LinFac;
         TC_IvaArt.setCellValueFactory(new PropertyValueFactory<>("iva"));
         TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
+        
+        TCR_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TCR_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
     }
+    
+    
+    private void escucharTablaResultadosArticulo() {
+        TV_ResultadosArticulo.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+            if (newSel != null) {
+                mostrarAlerta("Artículo Seleccionado", "El artículo '" + newSel.getDescripcion() + "' ha sido seleccionado para la línea de factura.");
+                // Aquí podrías añadir la lógica para rellenar los campos de la nueva línea de factura
+            }
+        });
+    }
+    
+    @FXML
+    private void onBuscarArticulo(ActionEvent event) {
+        String descripcionBusqueda = txtBuscadorArticulo.getText().trim();
 
+        if (descripcionBusqueda.isEmpty()) {
+            mostrarAlerta("Búsqueda vacía", "Introduce una descripción o parte de ella para buscar artículos.");
+            TV_ResultadosArticulo.getItems().clear();
+            return;
+        }
+
+        try {
+            // Asume que ProductoDAO tiene un método para buscar por descripción, o lo usaremos desde EntidadDAO
+            // Como tu productoDAO es un campo de la clase, lo usaremos.
+            productoDAO = new ProductoDAO();
+            
+            // Suponemos que tienes un método en ProductoDAO para buscar por descripción.
+            // Si no lo tienes, deberás añadirlo en la clase Modelo.ProductoDAO
+            List<Producto> resultados = productoDAO.buscarPorDescripcion(descripcionBusqueda); 
+
+            if (resultados.isEmpty()) {
+                mostrarAlerta("Sin resultados", "No se encontraron artículos con la descripción: " + descripcionBusqueda);
+            }
+
+            TV_ResultadosArticulo.setItems(FXCollections.observableArrayList(resultados));
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error BBDD", "Ocurrió un error al buscar los artículos: " + ex.getMessage());
+        }
+    }
 }

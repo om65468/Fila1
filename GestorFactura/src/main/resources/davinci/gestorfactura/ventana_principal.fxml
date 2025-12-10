@@ -40,13 +40,31 @@
                             <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                                 <children>
                                     <Button fx:id="Boton_nuevo_cli" contentDisplay="TOP" mnemonicParsing="false" onAction="#onNuevoCliente" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconnuevo.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconnuevo.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="Boton_modificar_cli" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/modificarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/modificarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="boton_eliminar_cli" contentDisplay="TOP" mnemonicParsing="false" onAction="#borrarCliente" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconEliminarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                 </children>
                             </HBox>
@@ -54,54 +72,54 @@
                     </AnchorPane>
                 </content>
             </Tab>
-                <Tab fx:id="TabFactura" text="Factura">
-                    <content>
-                        <AnchorPane styleClass="tab-content-area">
-                            <children>
-                                <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
-                                    <children>
-                                        <Button fx:id="Boton_nuevo_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
-                                            <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@images/iconnuevo.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Button fx:id="Boton_modificar_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
-                                            <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@images/modificarCliente.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                                        <Button fx:id="boton_eliminar_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
-                                            <graphic>
-                                                <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@images/iconEliminarCliente.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </graphic>
-                                        </Button>
-                              <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false"  prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
-                                 <graphic>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@images/iconnuevo.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
+            <Tab fx:id="TabFactura" text="Factura">
+                <content>
+                    <AnchorPane styleClass="tab-content-area">
+                        <children>
+                            <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                <children>
+                                    <Button fx:id="Boton_nuevo_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconnuevo.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Button fx:id="Boton_modificar_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/modificarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Button fx:id="boton_eliminar_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconEliminarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                    <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconnuevo.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                    </Button>
+                                </children>
+                            </HBox>
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
 
             <Tab fx:id="tab_proveedor" text="Proveedores">
                 <content>
@@ -110,13 +128,31 @@
                             <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                                 <children>
                                     <Button fx:id="Boton_nuevo_prov" contentDisplay="TOP" mnemonicParsing="false" onAction="#onNuevoProveedor" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconnuevo.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconnuevo.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="Boton_modificar_prov" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/modificarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/modificarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="Boton_eliminar_prov" contentDisplay="TOP" mnemonicParsing="false" onAction="#borrarProveedor" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconEliminarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                 </children>
                             </HBox>
@@ -132,13 +168,31 @@
                             <HBox layoutX="20.0" layoutY="10.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
                                 <children>
                                     <Button fx:id="Boton_nuevo_art" contentDisplay="TOP" mnemonicParsing="false" onAction="#onNuevoArticulo" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Nuevo">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconnuevo.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconnuevo.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="Boton_modificar_art" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/modificarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/modificarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                     <Button fx:id="boton_eliminar_art" contentDisplay="TOP" mnemonicParsing="false" onAction="#borrarProducto" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Eliminar">
-                                        <graphic><ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@images/iconEliminarCliente.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
                                     </Button>
                                 </children>
                             </HBox>
@@ -154,10 +208,22 @@
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
                     <Button fx:id="Boton_guardar_cli" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarCliente" styleClass="form-button-primary" text="Guardar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconSave.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                     <Button fx:id="Boton_eliminar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarCliente" styleClass="form-button-secondary" text="Eliminar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                 </children>
             </HBox>
@@ -184,13 +250,15 @@
                     <Label styleClass="form-label" text="NIF" GridPane.rowIndex="3" />
                     <Label styleClass="form-label" text="E-mail" GridPane.rowIndex="4" />
                     <Label styleClass="form-label" text="Tlf" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                  <GridPane.margin>
-                     <Insets left="20.0" />
-                  </GridPane.margin></Label>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Label>
                     <Label styleClass="form-label" text="Direccion" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets left="20.0" />
-                  </GridPane.margin></Label>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Label>
                     <TextField fx:id="CodCli" styleClass="text-field, field-small" GridPane.columnIndex="1" />
                     <TextField fx:id="NomCli" styleClass="text-field, field-large" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <TextField fx:id="NIFCli" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -198,7 +266,9 @@
                     <TextField fx:id="TlfCli" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                     <TextField fx:id="DirCli" styleClass="text-field, field-large" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                 </children>
-                <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
             </GridPane>
         </children>
     </AnchorPane>
@@ -208,10 +278,22 @@
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
                     <Button fx:id="Boton_guardar_prov" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarProveedor" styleClass="form-button-primary" text="Guardar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconSave.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                     <Button fx:id="Boton_eliminar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProveedor" styleClass="form-button-secondary" text="Eliminar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                 </children>
             </HBox>
@@ -242,13 +324,15 @@
                     <Label styleClass="form-label" text="NIF" GridPane.rowIndex="4" />
                     <Label styleClass="form-label" text="E-mail" GridPane.rowIndex="5" />
                     <Label styleClass="form-label" text="Tlf" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets left="20.0" />
-                  </GridPane.margin></Label>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Label>
                     <Label styleClass="form-label" text="Direccion" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                     <Insets left="20.0" />
-                  </GridPane.margin></Label>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Label>
                     <TextField fx:id="CodProv" styleClass="text-field, field-small" GridPane.columnIndex="1" />
                     <TextField fx:id="NomProv" styleClass="text-field, field-large" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <TextField fx:id="NIFProv" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="4" />
@@ -256,7 +340,9 @@
                     <TextField fx:id="TlfProv" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                     <TextField fx:id="DirProv" styleClass="text-field, field-large" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 </children>
-                <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
             </GridPane>
         </children>
     </AnchorPane>
@@ -266,10 +352,22 @@
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
                     <Button fx:id="Boton_guardar_art" contentDisplay="LEFT" mnemonicParsing="false" onAction="#agregarProducto" styleClass="form-button-primary" text="Guardar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconSave.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                     <Button fx:id="Boton_eliminar_art_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProducto" styleClass="form-button-secondary" text="Eliminar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconEliminarCliente.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                 </children>
             </HBox>
@@ -290,24 +388,57 @@
                     <Label styleClass="form-label" text="ID" />
                     <TextField fx:id="IDProd" styleClass="text-field, field-small" GridPane.columnIndex="1" />
                     <Label styleClass="form-label" text="Stock" GridPane.columnIndex="2">
-                  <GridPane.margin>
-                     <Insets left="20.0" />
-                  </GridPane.margin></Label>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Label>
                     <TextField fx:id="StokProd" styleClass="text-field, field-small" GridPane.columnIndex="3" />
 
-                    <Label styleClass="form-label" text="Descripción" GridPane.rowIndex="1" GridPane.valignment="TOP"><GridPane.margin><Insets top="5.0" /></GridPane.margin></Label>
+                    <Label styleClass="form-label" text="Descripción" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets top="5.0" />
+                        </GridPane.margin>
+                    </Label>
                     <TextArea fx:id="DescProd" prefHeight="138.0" prefWidth="250.0" styleClass="text-area" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     
-                    <Label styleClass="form-label" text="PVP" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP"><GridPane.margin><Insets left="20.0" top="5.0" /></GridPane.margin></Label>
-                    <TextField fx:id="PVPProd" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP"><GridPane.margin><Insets top="5.0" /></GridPane.margin></TextField>
+                    <Label styleClass="form-label" text="PVP" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets left="20.0" top="5.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="PVPProd" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets top="5.0" />
+                        </GridPane.margin>
+                    </TextField>
 
-                    <Label styleClass="form-label" text="IVA" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM"><GridPane.margin><Insets bottom="60.0" left="20.0" /></GridPane.margin></Label>
-                    <TextField fx:id="IVAProd" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM"><GridPane.margin><Insets bottom="60.0" /></GridPane.margin></TextField>
+                    <Label styleClass="form-label" text="IVA" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <GridPane.margin>
+                            <Insets bottom="60.0" left="20.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="IVAProd" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <GridPane.margin>
+                            <Insets bottom="60.0" />
+                        </GridPane.margin>
+                    </TextField>
 
-                    <Label styleClass="form-label" text="Coste" GridPane.rowIndex="2" GridPane.valignment="TOP"><GridPane.margin><Insets top="20.0" /></GridPane.margin></Label>
-                    <TextField fx:id="CosProd" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP"><GridPane.margin><Insets top="20.0" /></GridPane.margin></TextField>
+                    <Label styleClass="form-label" text="Coste" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets top="20.0" />
+                        </GridPane.margin>
+                    </Label>
+                    <TextField fx:id="CosProd" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets top="20.0" />
+                        </GridPane.margin>
+                    </TextField>
 
-                    <Label styleClass="form-label" text="Ref. Proveedor" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP"><GridPane.margin><Insets left="20.0" top="5.0" /></GridPane.margin></Label>
+                    <Label styleClass="form-label" text="Ref. Proveedor" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                        <GridPane.margin>
+                            <Insets left="20.0" top="5.0" />
+                        </GridPane.margin>
+                    </Label>
                     <TableView fx:id="RefProd" styleClass="table-view" GridPane.columnIndex="3" GridPane.rowIndex="2">
                         <columns>
                             <TableColumn fx:id="ColIDProv" prefWidth="100.0" text="ID" />
@@ -315,17 +446,25 @@
                         </columns>
                     </TableView>
                 </children>
-                <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
             </GridPane>
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
                     <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Guardar">
-                        <graphic><ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true"><image><Image url="@images/iconSave.png" /></image></ImageView></graphic>
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconSave.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
                     </Button>
                     <Button fx:id="Boton_cancelar_info" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Cancelar" />
                 </children>
@@ -361,25 +500,29 @@
                     <TextField fx:id="txtInfoCalle" styleClass="text-field, field-large" GridPane.columnIndex="3" />
                     <TextField fx:id="txtInfoEmail" styleClass="text-field, field-large" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 </children>
-                <padding><Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /></padding>
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
             </GridPane>
         </children>
     </AnchorPane>
     
-    <AnchorPane fx:id="paneInfoClientes" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneInfoClientes" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Clientes" />
             <ScrollPane layoutX="30.0" layoutY="80.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
-                <content><TableView fx:id="TV_Clientes" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
-                    <columns>
-                        <TableColumn fx:id="TC_IdCli" prefWidth="80.0" text="ID" />
-                        <TableColumn fx:id="TC_NomCli" prefWidth="180.0" text="Nombre" />
-                        <TableColumn fx:id="TC_NifCli" prefWidth="100.0" text="NIF" />
-                        <TableColumn fx:id="TC_DirCli" prefWidth="240.0" text="Dirección" />
-                        <TableColumn fx:id="TC_TelCli" prefWidth="120.0" text="Telefono" />
-                        <TableColumn fx:id="TC_MailCli" prefWidth="200.0" text="E-mail" />
-                    </columns>
-                </TableView></content>
+                <content>
+                    <TableView fx:id="TV_Clientes" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
+                        <columns>
+                            <TableColumn fx:id="TC_IdCli" prefWidth="80.0" text="ID" />
+                            <TableColumn fx:id="TC_NomCli" prefWidth="180.0" text="Nombre" />
+                            <TableColumn fx:id="TC_NifCli" prefWidth="100.0" text="NIF" />
+                            <TableColumn fx:id="TC_DirCli" prefWidth="240.0" text="Dirección" />
+                            <TableColumn fx:id="TC_TelCli" prefWidth="120.0" text="Telefono" />
+                            <TableColumn fx:id="TC_MailCli" prefWidth="200.0" text="E-mail" />
+                        </columns>
+                    </TableView>
+                </content>
             </ScrollPane>
         </children>
     </AnchorPane>
@@ -388,16 +531,18 @@
         <children>
             <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Proveedores" />
             <ScrollPane layoutX="30.0" layoutY="80.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
-                <content><TableView fx:id="TV_Proveedores" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
-                    <columns>
-                        <TableColumn fx:id="TC_IdPro" prefWidth="80.0" text="ID" />
-                        <TableColumn fx:id="TC_NomPro" prefWidth="180.0" text="Nombre" />
-                        <TableColumn fx:id="TC_NifPro" prefWidth="100.0" text="NIF" />
-                        <TableColumn fx:id="TC_DirPro" prefWidth="240.0" text="Dirección" />
-                        <TableColumn fx:id="TC_TelPro" prefWidth="120.0" text="Telefono" />
-                        <TableColumn fx:id="TC_MailPro" prefWidth="200.0" text="E-mail" />
-                    </columns>
-                </TableView></content>
+                <content>
+                    <TableView fx:id="TV_Proveedores" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
+                        <columns>
+                            <TableColumn fx:id="TC_IdPro" prefWidth="80.0" text="ID" />
+                            <TableColumn fx:id="TC_NomPro" prefWidth="180.0" text="Nombre" />
+                            <TableColumn fx:id="TC_NifPro" prefWidth="100.0" text="NIF" />
+                            <TableColumn fx:id="TC_DirPro" prefWidth="240.0" text="Dirección" />
+                            <TableColumn fx:id="TC_TelPro" prefWidth="120.0" text="Telefono" />
+                            <TableColumn fx:id="TC_MailPro" prefWidth="200.0" text="E-mail" />
+                        </columns>
+                    </TableView>
+                </content>
             </ScrollPane>
         </children>
     </AnchorPane>
@@ -406,38 +551,116 @@
         <children>
             <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Artículos" />
             <ScrollPane layoutX="30.0" layoutY="80.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
-                <content><TableView fx:id="TV_Articulos" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
-                    <columns>
-                        <TableColumn fx:id="TC_IdArt" prefWidth="70.0" text="ID" />
-                        <TableColumn fx:id="TC_DescArt" prefWidth="250.0" text="Descripcion" />
-                        <TableColumn fx:id="TC_IdProArt" prefWidth="130.0" text="ID Proveedor" />
-                        <TableColumn fx:id="TC_CostArt" prefWidth="100.0" text="Coste" />
-                        <TableColumn fx:id="TC_PvpArt" prefWidth="90.0" text="PVP" />
-                        <TableColumn fx:id="TC_IvaArt" prefWidth="50.0" text="IVA" />
-                        <TableColumn fx:id="TC_StockArt" prefWidth="170.0" text="Stock" />
-                    </columns>
-                </TableView></content>
+                <content>
+                    <TableView fx:id="TV_Articulos" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
+                        <columns>
+                            <TableColumn fx:id="TC_IdArt" prefWidth="70.0" text="ID" />
+                            <TableColumn fx:id="TC_DescArt" prefWidth="250.0" text="Descripcion" />
+                            <TableColumn fx:id="TC_IdProArt" prefWidth="130.0" text="ID Proveedor" />
+                            <TableColumn fx:id="TC_CostArt" prefWidth="100.0" text="Coste" />
+                            <TableColumn fx:id="TC_PvpArt" prefWidth="90.0" text="PVP" />
+                            <TableColumn fx:id="TC_IvaArt" prefWidth="50.0" text="IVA" />
+                            <TableColumn fx:id="TC_StockArt" prefWidth="170.0" text="Stock" />
+                        </columns>
+                    </TableView>
+                </content>
             </ScrollPane>
         </children>
     </AnchorPane>
 
     <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
-         <ScrollPane prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
-            <content>
-               <TableView fx:id="TV_Factura" prefHeight="396.0" prefWidth="810.0" styleClass="table-view">
-                  <columns>
-                     <TableColumn fx:id="TC_LinFac" prefWidth="57.60001039505005" text="LINEA" />
-                     <TableColumn fx:id="TC_ArtFac" prefWidth="92.00004577636719" text="ARTICULO" />
-                     <TableColumn fx:id="TC_DescFac" prefWidth="382.39990234375" text="Descripcion" />
-                     <TableColumn fx:id="TC_CantFac" prefWidth="91.19998168945312" text="CANTIDAD" />
-                     <TableColumn fx:id="TC_DTO1Fac" prefWidth="65.5999755859375" text="DTO 1" />
-                     <TableColumn fx:id="TC_DTO2Fac" prefWidth="68.79998779296875" text="DTO 2" />
-                     <TableColumn fx:id="TC_IVAFac" prefWidth="52.800048828125" text="IVA" />
-                  </columns>
-               </TableView>
-            </content>
-         </ScrollPane>
+            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" spacing="20.0">
+                <children>
+                    <Button fx:id="Boton_guardar_linea" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Guardar">
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconSave.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Boton_eliminar_linea" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Eliminar">
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconEliminarCliente.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="Boton_modificar_linea" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-primary" text="Modificar">
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/modificarCliente.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </children>
+            </HBox>
+
+            <Label layoutX="30.0" layoutY="65.0" styleClass="section-title" text="Buscar Artículo para Facturar" />
+            <GridPane layoutX="30.0" layoutY="90.0" prefHeight="150.0" prefWidth="932.0" styleClass="form-section" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="272.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="129.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="350.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+               <RowConstraints />
+                </rowConstraints>
+                <children>
+                    <Label styleClass="form-label" text="Descripción" />
+                    <TextField fx:id="txtBuscadorArticulo" promptText="Introduce parte de la descripción..." styleClass="text-field, field-large" GridPane.columnIndex="1" />
+                    <Button fx:id="Boton_buscar_art" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onBuscarArticulo" styleClass="form-button-primary" text="Buscar" GridPane.columnIndex="2">
+                        <graphic>
+                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@images/iconsupplier.png" />
+                                </image>
+                            </ImageView>
+                        </graphic>
+                        <GridPane.margin>
+                            <Insets left="20.0" />
+                        </GridPane.margin>
+                    </Button>
+                    <TableView fx:id="TV_ResultadosArticulo" prefHeight="100.0" prefWidth="350.0" styleClass="table-view" GridPane.columnIndex="3" GridPane.rowSpan="2">
+                        <columns>
+                            <TableColumn fx:id="TCR_IdArt" prefWidth="60.0" text="ID" />
+                            <TableColumn fx:id="TCR_DescArt" prefWidth="180.0" text="Descripción" />
+                            <TableColumn fx:id="TCR_PvpArt" prefWidth="100.0" text="PVP" />
+                        </columns>
+                        <GridPane.margin>
+                            <Insets bottom="5.0" right="5.0" top="5.0" />
+                        </GridPane.margin>
+                    </TableView>
+                </children>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            </GridPane>
+
+            <Label layoutX="30.0" layoutY="231.0" styleClass="section-title" text="Líneas de Factura" />
+            <ScrollPane layoutX="62.0" layoutY="301.0" prefHeight="245.0" prefWidth="857.0" styleClass="form-section" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+                <content>
+                    <TableView fx:id="TV_Factura" prefHeight="199.0" prefWidth="832.0" styleClass="table-view">
+                        <columns>
+                            <TableColumn fx:id="TC_LinFac" prefWidth="57.60001039505005" text="LINEA" />
+                            <TableColumn fx:id="TC_ArtFac" prefWidth="92.00004577636719" text="ARTICULO" />
+                            <TableColumn fx:id="TC_DescFac" prefWidth="427.0" text="Descripcion" />
+                            <TableColumn fx:id="TC_CantFac" text="CANTIDAD" />
+                            <TableColumn fx:id="TC_DTO1Fac" prefWidth="49.0" text="DTO 1" />
+                            <TableColumn fx:id="TC_DTO2Fac" prefWidth="54.0" text="DTO 2" />
+                            <TableColumn fx:id="TC_IVAFac" prefWidth="67.0" text="IVA" />
+                        </columns>
+                    </TableView>
+                </content>
+            </ScrollPane>
         </children>
     </AnchorPane>
 </AnchorPane>
