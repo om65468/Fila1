@@ -579,6 +579,7 @@ public class VentanaPrincipalController {
             mostrarAlerta("Producto creado", "Producto creado correctamente con id " + producto.getId());
             cargarTablasEmpresa();
             // limpiar campos si quieres
+            /*
             DescProd.clear();
             ProvProd.clear();
             CosProd.clear();
@@ -586,7 +587,7 @@ public class VentanaPrincipalController {
             IVAProd.clear();
             StokProd.clear();
             proveedorSeleccionado = null;
-
+            */
             // refrescar listas, tablas, etc. si procede
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -634,7 +635,7 @@ public class VentanaPrincipalController {
     }
 
     private void escucharTablaProv() {
-        RefProd.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+        /*RefProd.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             proveedorSeleccionado = newSel;
             if (newSel != null) {
                 ProvProd.setText(newSel.getNombre()); // referencia = nombre
@@ -643,7 +644,7 @@ public class VentanaPrincipalController {
             } else {
                 ProvProd.clear();
             }
-        });
+        });*/
     }
 
     public void cargarProveedoresDeEmpresa() {
