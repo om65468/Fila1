@@ -777,7 +777,6 @@ public class VentanaPrincipalController {
         try {
             boolean actualizado = entDao.actualizar(empresa);
             if (actualizado) {
-                mostrarAlerta("Éxito", "Información actualizada correctamente.");
                 // recargar datos de la vista
                 cargarTablasEmpresa();
             } else {

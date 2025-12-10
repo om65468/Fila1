@@ -5,6 +5,7 @@ import Modelo.EntidadDAO;
 import Modelo.TipoEntidadDAO;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -104,6 +105,7 @@ public class PrimaryController implements Initializable {
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
         datosTablas();
         TView_Empresa.setItems(listaEmpresas);
+        recargarTablaEmpresas();
     }
 
     @FXML
@@ -226,6 +228,7 @@ public class PrimaryController implements Initializable {
         }
         entidadDAO = new EntidadDAO();
         entidadDAO.eliminar(empresa.getId());
+        recargarTablaEmpresas();
         mostrarAlerta("Éxito", "Empresa y todos sus datos relacionados eliminados.");
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
         datosTablas();
@@ -354,8 +357,6 @@ public class PrimaryController implements Initializable {
 
     // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
     private void mostrarError(String mensaje) {
-        //System.out.println("Error: " + mensaje);
-        // Alternativamente, usar Alert:
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validación");
         alert.setHeaderText(null);
@@ -367,4 +368,14 @@ public class PrimaryController implements Initializable {
     void onEliminarEmpresa(ActionEvent event) {
 
     }
+    
+    private void recargarTablaEmpresas() {
+        EntidadDAO dao = new EntidadDAO();
+        List<Entidad> empresas = dao.obtenerEmpresas();
+        TView_Empresa.getItems().clear();
+        TView_Empresa.getItems().addAll(empresas);
+
+        System.out.println("Empresas recargadas: " + empresas.size());
+    }
+
 }
