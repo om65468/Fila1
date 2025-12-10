@@ -779,6 +779,7 @@ public class VentanaPrincipalController {
             if (actualizado) {
                 // recargar datos de la vista
                 cargarTablasEmpresa();
+                mostrarAlerta("Correcto", "Se han guardado los cambios");
             } else {
                 mostrarAlerta("Aviso", "No se han detectado cambios o la actualización falló (0 filas afectadas).");
             }
@@ -786,6 +787,16 @@ public class VentanaPrincipalController {
             ex.printStackTrace();
             mostrarAlerta("Error BBDD", "Error al actualizar: " + ex.getMessage());
         }
+    }
+    
+    @FXML
+    private void cancelarCambioInfo(ActionEvent event){
+        InfoNombre.setText(empresa.getNombre());
+        InfoNIF.setText(empresa.getNif());
+        txtInfoCalle.setText(empresa.getDireccionCompleta());
+        txtInfoEmail.setText(empresa.getEmail());
+        txtInfoTlf.setText(empresa.getTelefono());
+        System.out.println("Empresa cargada: " + empresa.getNombre());
     }
 
     private void escucharTablaResultadosArticulo() {

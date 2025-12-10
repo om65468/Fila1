@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,16 +98,48 @@ public class PrimaryController implements Initializable {
     private ObservableList<Entidad> listaEmpresas;
 
     private Entidad empresaCreada;
+    
+    @FXML
+    private TextField txtBuscarEmpresa;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         empresaCreada = null;
         cursorHand();
+
         entidadDAO = new EntidadDAO();
         listaEmpresas = FXCollections.observableArrayList(entidadDAO.obtenerEmpresas());
+
         datosTablas();
-        TView_Empresa.setItems(listaEmpresas);
-        recargarTablaEmpresas();
+
+        // esta parte lo filtra por nombre
+        FilteredList<Entidad> filteredData = new FilteredList<>(listaEmpresas, p -> true);
+
+        txtBuscarEmpresa.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(empresa -> {
+
+                // Si no hay nada muestra todas
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String filtro = newValue.toLowerCase();
+
+                // Comparación por nombre o NIF
+                if (empresa.getNombre().toLowerCase().contains(filtro)) return true;
+                if (empresa.getNif().toLowerCase().contains(filtro)) return true;
+
+                return false;
+            });
+        });
+
+        // Ordenación automática del TableView
+        SortedList<Entidad> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(TView_Empresa.comparatorProperty());
+
+        // Y ahora asignamos esta lista filtrada y ordenada a la tabla
+        TView_Empresa.setItems(sortedData);
     }
 
     @FXML
