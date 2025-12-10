@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
+<AnchorPane fx:id="rootPane" prefHeight="705.0" prefWidth="992.0" stylesheets="@css/prueba1.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controlador.VentanaPrincipalController">
     
     <TabPane fx:id="tabPane" focusTraversable="false" prefHeight="130.0" prefWidth="992.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -105,7 +105,7 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
+                                    <Button fx:id="Boton_emitir_fac" contentDisplay="TOP" mnemonicParsing="false" onAction="#onEmitirFactura" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Emitir">
                                         <graphic>
                                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -507,7 +507,7 @@
         </children>
     </AnchorPane>
     
-    <AnchorPane fx:id="paneInfoClientes" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneInfoClientes" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Clientes" />
             <ScrollPane layoutX="30.0" layoutY="80.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
@@ -568,7 +568,7 @@
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneFacturaLinea" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" spacing="20.0">
                 <children>
@@ -663,4 +663,23 @@
             </ScrollPane>
         </children>
     </AnchorPane>
+   <AnchorPane fx:id="paneFactura" layoutY="130.0" prefHeight="602.0" prefWidth="992.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+      <children>
+         <Label layoutX="40.0" layoutY="30.0" styleClass="section-title" text="Listado de Clientes" />
+         <ScrollPane layoutX="30.0" prefHeight="470.0" prefWidth="930.0" styleClass="form-section">
+            <content>
+               <TableView fx:id="TV_Clientes1" prefHeight="468.0" prefWidth="928.0" styleClass="table-view">
+                  <columns>
+                     <TableColumn fx:id="TC_IdCli1" prefWidth="80.0" text="ID" />
+                     <TableColumn fx:id="TC_NomCli1" prefWidth="180.0" text="Nombre" />
+                     <TableColumn fx:id="TC_NifCli1" prefWidth="100.0" text="NIF" />
+                     <TableColumn fx:id="TC_DirCli1" prefWidth="240.0" text="Dirección" />
+                     <TableColumn fx:id="TC_TelCli1" prefWidth="120.0" text="Telefono" />
+                     <TableColumn fx:id="TC_MailCli1" prefWidth="200.0" text="E-mail" />
+                  </columns>
+               </TableView>
+            </content>
+         </ScrollPane>
+      </children>
+   </AnchorPane>
 </AnchorPane>

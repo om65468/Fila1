@@ -261,29 +261,29 @@ public class VentanaPrincipalController {
     @FXML
     private TableColumn<Producto, Double> TCR_PvpArt;
     
-@FXML
-private TableView<Factura> TV_Factura;
-    
-@FXML
-private TableColumn<Factura, ?> TC_ArtFac;
+    @FXML
+    private TableView<Factura> TV_Factura;
 
-@FXML
-private TableColumn<Factura, ?> TC_CantFac;
+    @FXML
+    private TableColumn<Factura, ?> TC_ArtFac;
 
-@FXML
-private TableColumn<Factura, ?> TC_DTO1Fac;
+    @FXML
+    private TableColumn<Factura, ?> TC_CantFac;
 
-@FXML
-private TableColumn<Factura, ?> TC_DTO2Fac;
+    @FXML
+    private TableColumn<Factura, ?> TC_DTO1Fac;
 
-@FXML
-private TableColumn<Factura, ?> TC_DescFac;
+    @FXML
+    private TableColumn<Factura, ?> TC_DTO2Fac;
 
-@FXML
-private TableColumn<Factura, ?> TC_IVAFac;
+    @FXML
+    private TableColumn<Factura, ?> TC_DescFac;
 
-@FXML
-private TableColumn<Factura, ?> TC_LinFac;
+    @FXML
+    private TableColumn<Factura, ?> TC_IVAFac;
+
+    @FXML
+    private TableColumn<Factura, ?> TC_LinFac;
     
     @FXML
     public void initialize() {
@@ -414,6 +414,7 @@ private TableColumn<Factura, ?> TC_LinFac;
             return;
         }
         cargarProveedoresDeEmpresa();
+        cargarTablasEmpresa();
         InfoNombre.setText(empresa.getNombre());
         InfoNIF.setText(empresa.getNif());
         txtInfoCalle.setText(empresa.getDireccionCompleta());
@@ -701,7 +702,7 @@ private TableColumn<Factura, ?> TC_LinFac;
 
             if (rutaPDF != null) {
                 mostrarAlerta("Éxito", "Factura N° " + NUMERO_FACTURA_A_EMITIR + " generada.");
-                //abrirPDF(rutaPDF);
+                abrirPDF(rutaPDF);
             }
 
         } catch (Exception e) {
@@ -719,7 +720,7 @@ private TableColumn<Factura, ?> TC_LinFac;
         }
     }
 
-    /* private void abrirPDF(String rutaPDF) {
+    private void abrirPDF(String rutaPDF) {
         try {
             java.io.File pdfFile = new java.io.File(rutaPDF);
             // Usamos java.awt.Desktop para interactuar con el SO (Requiere 'requires java.desktop;')
@@ -729,7 +730,8 @@ private TableColumn<Factura, ?> TC_LinFac;
         } catch (java.io.IOException e) {
             System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
         }
-    }*/
+    }
+    
     private void cargarTabla() {
         TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_NomCli.setCellValueFactory(new PropertyValueFactory<>("nombre"));
