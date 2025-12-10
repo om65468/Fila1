@@ -71,7 +71,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private Tab tabInformacion;
-    
+
     @FXML
     private Button Boton_guardar_info;
 
@@ -110,8 +110,6 @@ public class VentanaPrincipalController {
     @FXML
     private TextField IDProv;
     @FXML
-    private ComboBox<?> TipoProv;
-    @FXML
     private TextField NIFProv;
     @FXML
     private TextField NomProv;
@@ -121,8 +119,6 @@ public class VentanaPrincipalController {
     private TextField TlfProv;
 
     //Cliente
-    @FXML
-    private TextField DirCli;
     @FXML
     private Button Boton_duplicar_cli;
     @FXML
@@ -146,7 +142,7 @@ public class VentanaPrincipalController {
     @FXML
     private TextField TlfCli;
     @FXML
-    private ComboBox<?> TipoCli;
+    private TextField DirCli;
 
     //Extra
     @FXML
@@ -246,7 +242,6 @@ public class VentanaPrincipalController {
     @FXML
     private TableColumn<Entidad, String> TC_TelCli;
 
-    
     // Buscador de Artículos para Factura
     @FXML
     private TextField txtBuscadorArticulo;
@@ -260,31 +255,24 @@ public class VentanaPrincipalController {
     private TableColumn<Producto, String> TCR_DescArt;
     @FXML
     private TableColumn<Producto, Double> TCR_PvpArt;
-    
+
     @FXML
     private TableView<Factura> TV_Factura;
-
     @FXML
     private TableColumn<Factura, ?> TC_ArtFac;
-
     @FXML
     private TableColumn<Factura, ?> TC_CantFac;
-
     @FXML
     private TableColumn<Factura, ?> TC_DTO1Fac;
-
     @FXML
     private TableColumn<Factura, ?> TC_DTO2Fac;
-
     @FXML
     private TableColumn<Factura, ?> TC_DescFac;
-
     @FXML
     private TableColumn<Factura, ?> TC_IVAFac;
-
     @FXML
     private TableColumn<Factura, ?> TC_LinFac;
-    
+
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
@@ -321,6 +309,7 @@ public class VentanaPrincipalController {
                 paneInfoArticulos.setVisible(true);
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
+                cargarProveedoresDeEmpresa();
             } else if (newTab == TabFactura) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -363,7 +352,6 @@ public class VentanaPrincipalController {
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
     }
-
 
     //Metodos de Articulo
     @FXML
@@ -421,13 +409,13 @@ public class VentanaPrincipalController {
         txtInfoEmail.setText(empresa.getEmail());
         txtInfoTlf.setText(empresa.getTelefono());
         System.out.println("Empresa cargada: " + empresa.getNombre());
+        paneFactura.setVisible(false);
     }
 
     @FXML
     private void guardarCliente() {
 
         try {
-            EntidadDAO entidadDAO = new EntidadDAO();
             TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
@@ -467,6 +455,13 @@ public class VentanaPrincipalController {
             ex.printStackTrace();
             mostrarAlerta("Error", "Ocurrió un error al guardar el cliente.");
         }
+        CodCli.clear();
+        EmailCli.clear();
+        NIFCli.clear();
+        NomCli.clear();
+        TlfCli.clear();
+        DirCli.clear();
+
     }
 
     @FXML
@@ -477,7 +472,6 @@ public class VentanaPrincipalController {
             return;
         }
 
-        EntidadDAO entidadDAO = new EntidadDAO();
         entidadDAO.eliminar(clienteSeleccionado.getId());
         mostrarAlerta("Éxito", "Cliente eliminado correctamente.");
         TV_Clientes.getItems().remove(clienteSeleccionado); // actualizar tabla
@@ -523,6 +517,12 @@ public class VentanaPrincipalController {
             ex.printStackTrace();
             mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
         }
+            CodProv.clear();
+            EmailProv.clear();
+            NIFProv.clear();
+            NomProv.clear();
+            DirProv.clear();
+            TlfProv.clear();
     }
 
     @FXML
@@ -579,7 +579,7 @@ public class VentanaPrincipalController {
             mostrarAlerta("Producto creado", "Producto creado correctamente con id " + producto.getId());
             cargarTablasEmpresa();
             // limpiar campos si quieres
-            /*
+
             DescProd.clear();
             ProvProd.clear();
             CosProd.clear();
@@ -587,7 +587,7 @@ public class VentanaPrincipalController {
             IVAProd.clear();
             StokProd.clear();
             proveedorSeleccionado = null;
-            */
+
             // refrescar listas, tablas, etc. si procede
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -732,7 +732,7 @@ public class VentanaPrincipalController {
             System.err.println("No se pudo abrir el archivo PDF: " + e.getMessage());
         }
     }
-    
+
     private void cargarTabla() {
         TC_IdCli.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_NomCli.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -755,24 +755,23 @@ public class VentanaPrincipalController {
         TC_IvaArt.setCellValueFactory(new PropertyValueFactory<>("iva"));
         TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
-        
+
         TCR_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
         TCR_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
     }
-    
+
     @FXML
     private void modificarInfo(ActionEvent event) {
         if (empresa == null) {
             mostrarAlerta("Error", "No hay ninguna empresa seleccionada para modificar.");
             return;
         }
-        empresa.setNombre( InfoNombre.getText() );  
-        empresa.setNif( InfoNIF.getText() );  
-        empresa.setCalle( txtInfoCalle.getText() );
-        empresa.setTelefono( txtInfoTlf.getText() );
-        empresa.setEmail( txtInfoEmail.getText() );
-
+        empresa.setNombre(InfoNombre.getText());
+        empresa.setNif(InfoNIF.getText());
+        empresa.setCalle(txtInfoCalle.getText());
+        empresa.setTelefono(txtInfoTlf.getText());
+        empresa.setEmail(txtInfoEmail.getText());
 
         EntidadDAO entDao = new EntidadDAO();
         try {
@@ -780,7 +779,7 @@ public class VentanaPrincipalController {
             if (actualizado) {
                 mostrarAlerta("Éxito", "Información actualizada correctamente.");
                 // recargar datos de la vista
-                cargarTablasEmpresa(); 
+                cargarTablasEmpresa();
             } else {
                 mostrarAlerta("Aviso", "No se han detectado cambios o la actualización falló (0 filas afectadas).");
             }
@@ -790,7 +789,6 @@ public class VentanaPrincipalController {
         }
     }
 
-    
     private void escucharTablaResultadosArticulo() {
         TV_ResultadosArticulo.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             if (newSel != null) {
@@ -799,7 +797,7 @@ public class VentanaPrincipalController {
             }
         });
     }
-    
+
     @FXML
     private void onBuscarArticulo(ActionEvent event) {
         String descripcionBusqueda = txtBuscadorArticulo.getText().trim();
@@ -814,10 +812,10 @@ public class VentanaPrincipalController {
             // Asume que ProductoDAO tiene un método para buscar por descripción, o lo usaremos desde EntidadDAO
             // Como tu productoDAO es un campo de la clase, lo usaremos.
             productoDAO = new ProductoDAO();
-            
+
             // Suponemos que tienes un método en ProductoDAO para buscar por descripción.
             // Si no lo tienes, deberás añadirlo en la clase Modelo.ProductoDAO
-            List<Producto> resultados = productoDAO.buscarPorDescripcion(descripcionBusqueda); 
+            List<Producto> resultados = productoDAO.buscarPorDescripcion(descripcionBusqueda);
 
             if (resultados.isEmpty()) {
                 mostrarAlerta("Sin resultados", "No se encontraron artículos con la descripción: " + descripcionBusqueda);
