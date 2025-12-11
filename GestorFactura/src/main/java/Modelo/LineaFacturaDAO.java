@@ -95,4 +95,46 @@ public class LineaFacturaDAO {
             rs.getInt("cantidad")
         );
     }
+    
+    
+    public static class LineaCalculoDTO {
+        public int idLinea;
+        public int cantidad;
+        public double pvp;
+        public double iva; // Tasa de IVA del producto (ej: 0.21)
+
+        public LineaCalculoDTO(int idLinea, int cantidad, double pvp, double iva) {
+            this.idLinea = idLinea;
+            this.cantidad = cantidad;
+            this.pvp = pvp;
+            this.iva = iva;
+        }
+    }
+    
+    public List<LineaCalculoDTO> obtenerDetallesParaCalculo(int idFactura) throws SQLException {
+    List<LineaCalculoDTO> lista = new ArrayList<>();
+    
+    String sql = "SELECT lf.id_linea, lf.cantidad, p.pvp, p.iva " +
+                 "FROM lineas_factura lf " +
+                 "JOIN productos p ON lf.id_producto = p.id " +
+                 "WHERE lf.id_factura = ?";
+    
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, idFactura);
+        
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                // p.pvp y p.iva son los campos clave
+                lista.add(new LineaCalculoDTO(
+                    rs.getInt("id_linea"),
+                    rs.getInt("cantidad"),
+                    rs.getDouble("pvp"),
+                    rs.getDouble("iva")
+                ));
+            }
+        }
+    }
+    return lista;
+}
+    
 }

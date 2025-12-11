@@ -597,7 +597,7 @@
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneFacturaLinea" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneFacturaLinea" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" spacing="20.0">
                 <children>
@@ -701,7 +701,7 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <AnchorPane fx:id="paneFacturaNueva" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+   <AnchorPane fx:id="paneFacturaNueva" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
@@ -759,7 +759,7 @@
                     <TextField fx:id="txtFacIdSecundario" promptText="ID Cliente/Proveedor" styleClass="text-field, field-small" GridPane.columnIndex="3" GridPane.rowIndex="2" />
 
                     <Label styleClass="form-label" text="Base (€)" GridPane.rowIndex="3" />
-                    <TextField fx:id="txtFacBase" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <TextField fx:id="txtFacBase" disable="true" styleClass="text-field, field-small" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                     <Label styleClass="form-label" text="IVA (%)" GridPane.columnIndex="2" GridPane.rowIndex="3">
                         <GridPane.margin>

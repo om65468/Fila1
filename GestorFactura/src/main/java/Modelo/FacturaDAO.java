@@ -153,5 +153,18 @@ public class FacturaDAO {
         return lista;
     }
     
+    public void actualizarBaseTotal(int idFactura, double nuevaBase, double nuevoTotal) throws SQLException {
+        // Nota: Mantener el IVA (tasa) intacto ya que eso se introduce manualmente.
+        String sql = "UPDATE facturas SET base = ?, total = ? WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setDouble(1, nuevaBase);
+            ps.setDouble(2, nuevoTotal);
+            ps.setInt(3, idFactura);
+
+            ps.executeUpdate();
+        }
+    }
+    
 }
 

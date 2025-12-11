@@ -377,7 +377,6 @@ public class VentanaPrincipalController {
 
     @FXML
     public void initialize() {
-        System.out.println(empresa);
         tabPane.getSelectionModel().select(tabInformacion);
         paneInformacion.setVisible(true);
 
@@ -683,86 +682,93 @@ public class VentanaPrincipalController {
         txtFacTotal.clear();
         txtFacEstado.clear();
         txtFacObservaciones.clear();
+        txtFacBase.setEditable(false);
+        txtFacTotal.setEditable(false);
     }
 
     @FXML
     private void guardarFactura() {
-        System.out.println(empresa.getId());
         if (empresa == null) {
             mostrarError("Debe haber una empresa cargada para guardar una factura.");
             return;
         }
 
-        // 1. Validar y parsear datos de entrada
+        // --- Variables para guardar ---
+        char tipo;
+        int numFactura;
+        String fechaEmision;
+        int idSecundario;
+        String concepto;
+        double base;
+        double iva;
+        double total;
+        String estado;
+        String observaciones;
+        int idEmpresa = empresa.getId();
+
         try {
-            char tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
-            int numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
+            // 1. Parsing y validación de campos obligatorios
+
+            tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
+            numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
+
             LocalDate localDate = txtFacFechaEmision.getValue();
             if (localDate == null) {
                 mostrarError("Debes seleccionar una fecha de emisión.");
                 return;
             }
+            fechaEmision = localDate.toString();
 
-            // 1. Validar y parsear datos de entrada
-            try {
-                tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
-                numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
-                localDate = txtFacFechaEmision.getValue();
-                if (localDate == null) {
-                    mostrarError("Debes seleccionar una fecha de emisión.");
-                    return;
-                }
-                String fechaEmision = localDate.toString();
-                int idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
-                int idEmpresa = empresa.getId(); // ** <--- NUEVO: Obtener ID de la empresa **
+            idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
 
-                String concepto = txtFacConcepto.getText().trim();
-                double base = Double.parseDouble(txtFacBase.getText().trim());
-                double iva = Double.parseDouble(txtFacIva.getText().trim());
-                double total = base * (1 + iva / 100.0); // Recalculamos para mayor seguridad
-                String estado = txtFacEstado.getText().trim();
-                String observaciones = txtFacObservaciones.getText().trim();
+            concepto = txtFacConcepto.getText().trim();
+            estado = txtFacEstado.getText().trim();
+            observaciones = txtFacObservaciones.getText().trim();
 
-                // 2. Validación básica
-                if (tipo == ' ' || fechaEmision.isEmpty() || concepto.isEmpty() || idSecundario <= 0) {
-                    mostrarError("Faltan campos obligatorios (Tipo, Fecha, Concepto o ID Entidad).");
-                    return;
-                }
+            // --- 2. Manejo de Base, IVA, y Total ---
+            // Leemos Base e IVA de los campos, o asumimos cero si están vacíos.
+            // Esto es necesario porque el usuario podría guardar la cabecera ANTES de añadir líneas.
 
-                // Re-validar tipo de factura (C=Compra, V=Venta)
-                if (tipo != 'C' && tipo != 'V') {
-                    mostrarError("El tipo de factura debe ser 'C' (Compra) o 'V' (Venta).");
-                    return;
-                }
+            // Si Base/IVA están vacíos, usamos 0.0 para no fallar
+            base = txtFacBase.getText().trim().isEmpty() ? 0.0 : Double.parseDouble(txtFacBase.getText().trim());
+            iva = txtFacIva.getText().trim().isEmpty() ? 0.0 : Double.parseDouble(txtFacIva.getText().trim());
 
-                Factura nuevaFactura = new Factura(
-                        0,
-                        tipo,
-                        numFactura,
-                        fechaEmision,
-                        idSecundario,
-                        idEmpresa,
-                        concepto,
-                        base,
-                        iva,
-                        total,
-                        estado,
-                        observaciones
-                );
+            // Calculamos el total con los valores actuales (o 0.0)
+            total = base * (1 + iva / 100.0);
 
-                // 4. Insertar en la BBDD
-                facturaDAO.insertar(nuevaFactura);
 
-                // 5. Notificación y limpieza
-                mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada correctamente con ID " + nuevaFactura.getId());
-
-                // Vuelve a la vista de lista de facturas
-                cancelarNuevaFactura();
-
-            } catch (NumberFormatException e) {
-                mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
-                e.printStackTrace();
+            // --- 3. Validación de Reglas ---
+            if (tipo == ' ' || fechaEmision.isEmpty() || concepto.isEmpty() || idSecundario <= 0) {
+                mostrarError("Faltan campos obligatorios (Tipo, Fecha, Concepto o ID Entidad).");
+                return;
             }
+            if (tipo != 'C' && tipo != 'V') {
+                mostrarError("El tipo de factura debe ser 'C' (Compra) o 'V' (Venta).");
+                return;
+            }
+
+            // --- 4. Creación e Inserción ---
+            Factura nuevaFactura = new Factura(
+                0, tipo, numFactura, fechaEmision, idSecundario, idEmpresa, 
+                concepto, base, iva, total, estado, observaciones
+            );
+
+            facturaDAO.insertar(nuevaFactura);
+
+            // --- 5. Notificación y Transición ---
+            mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada con ID " + nuevaFactura.getId());
+
+            // Después de guardar la cabecera, se debe poder ir a añadir líneas.
+            // NO llamamos a cancelarNuevaFactura(), sino que actualizamos txtFacId y mantenemos la vista.
+
+            txtFacId.setText(String.valueOf(nuevaFactura.getId())); // Mostrar el ID generado
+
+            // Si el objetivo es volver al listado:
+            // cancelarNuevaFactura();
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
+            e.printStackTrace();
         } catch (SQLException e) {
             mostrarError("Error BBDD al guardar la factura: " + e.getMessage());
             e.printStackTrace();
@@ -1487,7 +1493,7 @@ public class VentanaPrincipalController {
     void onVerLineasFacturas(ActionEvent event) {
         // 1. Verificar si hay una factura seleccionada en la tabla TV_Factura
         Factura facturaSeleccionada = TV_Factura.getSelectionModel().getSelectedItem();
-
+    
         if (facturaSeleccionada == null) {
             mostrarAdvertencia("Advertencia", "Por favor, selecciona una factura de la lista para ver sus líneas.");
             return; // Sale del método si no hay selección
@@ -1507,6 +1513,7 @@ public class VentanaPrincipalController {
         // Esto es útil para el botón de "Añadir Línea"
         if (txtFacId != null) {
             txtFacId.setText(String.valueOf(idFactura));
+            txtFacIva.setText(String.valueOf(facturaSeleccionada.getIva()));
         }
 
         // 3. Cargar las líneas de la factura seleccionada
@@ -1537,7 +1544,7 @@ public class VentanaPrincipalController {
         }
 
         if (productoActual == null) {
-            mostrarAdvertencia("Selección Requerida", "Debes seleccionar un artículo del ComboBox para añadir una línea.");
+            mostrarAdvertencia("Selección Requerida", "Debes seleccionar un artículo para añadir una línea.");
             return;
         }
 
@@ -1580,6 +1587,8 @@ public class VentanaPrincipalController {
             // 5. Refrescar la tabla y limpiar campos
             cargarLineasFactura(idFacturaActual); // Recarga la tabla de líneas
 
+            recalcularTotalesFactura(idFacturaActual);
+            
             txtCantidadLinea.clear();
             // Nota: NO limpiamos el ComboBox o productoSeleccionado aquí, 
             // ya que el usuario podría querer añadir más unidades del mismo producto.
@@ -1639,6 +1648,8 @@ public class VentanaPrincipalController {
                 int idFacturaActual = lineaSeleccionada.getIdFactura();
                 // recalcularTotalesFactura(idFacturaActual); // <-- Lógica pendiente
 
+                recalcularTotalesFactura(idFacturaActual);
+                
                 mostrarAlerta("Éxito", "Línea eliminada correctamente.");
 
             } catch (SQLException ex) {
@@ -1648,4 +1659,60 @@ public class VentanaPrincipalController {
         }
     }
 
+    private void recalcularTotalesFactura(int idFactura) {
+        try {
+            // 1. Obtener los detalles de las líneas del DAO
+            List<LineaFacturaDAO.LineaCalculoDTO> detalles = lineaDAO.obtenerDetallesParaCalculo(idFactura);
+
+            double baseTotal = 0.0;
+            double ivaMontoTotal = 0.0;
+
+            // --- Obtener la Tasa de IVA ---
+            double tasaIvaCabecera;
+            try {
+                // Leemos la tasa de IVA del campo de texto (que el usuario puede haber introducido)
+                tasaIvaCabecera = Double.parseDouble(txtFacIva.getText().trim());
+            } catch (NumberFormatException e) {
+                mostrarAdvertencia("IVA Inválido", "La tasa de IVA de la cabecera no es válida. Usando 0% para el cálculo.");
+                tasaIvaCabecera = 0.0;
+            }
+
+            // 2. Sumar Base y calcular el Monto del IVA
+            for (LineaFacturaDAO.LineaCalculoDTO detalle : detalles) {
+                double precioUnitario = detalle.pvp;
+                int cantidad = detalle.cantidad;
+
+                // Base Imponible de la Línea (PVP * Cantidad)
+                double baseLinea = precioUnitario * cantidad;
+                baseTotal += baseLinea;
+
+                // Calculamos el monto de IVA de la línea usando la tasa de la cabecera
+                double ivaLinea = baseLinea * (tasaIvaCabecera / 100.0);
+                ivaMontoTotal += ivaLinea;
+            }
+
+            // 3. Calcular Total final
+            double totalFactura = baseTotal + ivaMontoTotal;
+
+            // 4. Actualizar campos de la cabecera en la UI
+            txtFacBase.setText(String.format("%.2f", baseTotal));
+            txtFacTotal.setText(String.format("%.2f", totalFactura));
+
+            // 5. Actualizar los totales en la Base de Datos
+            // NOTA: El campo 'iva' en la tabla Facturas (según tu modelo) almacena la tasa,
+            // pero tu método FacturaDAO no usa la tasa, sino solo la base y total. 
+            // Si quieres guardar el MONTO TOTAL del IVA (ivaMontoTotal), necesitarás modificar
+            // FacturaDAO.actualizarBaseTotal para que acepte 3 parámetros (Base, MontoIVA, Total).
+
+            // Asumo que solo necesitas actualizar Base y Total en BBDD:
+            facturaDAO.actualizarBaseTotal(idFactura, baseTotal, totalFactura);
+
+            // Opcional: Refrescar la tabla de listado principal (TV_Factura)
+            // cargarFacturas(); 
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarError("Error BBDD al recalcular totales: " + e.getMessage());
+        }
+    }
 }
