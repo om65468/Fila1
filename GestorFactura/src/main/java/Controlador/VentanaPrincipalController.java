@@ -784,7 +784,7 @@ public class VentanaPrincipalController {
             IVAProd.clear();
             StokProd.clear();
             IDProd.clear();
-            ProvProd.clear();
+//            ProvProd.clear();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -951,7 +951,7 @@ public class VentanaPrincipalController {
             // limpiar campos si quieres
 
             DescProd.clear();
-            ProvProd.clear();
+//            ProvProd.clear();
             CosProd.clear();
             PVPProd.clear();
             IVAProd.clear();
