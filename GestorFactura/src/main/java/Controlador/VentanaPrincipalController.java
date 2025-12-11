@@ -315,6 +315,9 @@ public class VentanaPrincipalController {
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneCliente.setVisible(false);
+                paneProducto.setVisible(false);
+                paneProveedor.setVisible(false);
                 paneFactura.setVisible(true);
             } else {
                 paneInfoClientes.setVisible(false);
@@ -419,7 +422,6 @@ public class VentanaPrincipalController {
             TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
-            // 1. Datos del formulario
             String nombre = NomCli.getText().trim();
             String nif = NIFCli.getText().trim();
             String calle = DirCli.getText().trim();
@@ -462,6 +464,17 @@ public class VentanaPrincipalController {
         TlfCli.clear();
         DirCli.clear();
 
+    }
+    
+    @FXML
+    private void modificarCliente(){
+        Entidad ClienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
+        if (ClienteSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
+            return;
+        }
+        
+        
     }
 
     @FXML
