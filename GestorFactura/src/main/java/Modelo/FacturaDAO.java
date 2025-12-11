@@ -130,5 +130,23 @@ public class FacturaDAO {
         }
         return lista;
     }
+    
+    public List<Factura> obtenerFacturasPorEmpresa(int idEmpresa) throws SQLException {
+        List<Factura> lista = new ArrayList<>();
+        // Consulta SQL que filtra por la nueva columna id_empresa
+        String sql = "SELECT * FROM facturas WHERE id_empresa = ? ORDER BY numFactura DESC"; 
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idEmpresa); // Establecer el parámetro id_empresa
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearFactura(rs));
+                }
+            }
+        }
+        return lista;
+    }
+    
 }
 

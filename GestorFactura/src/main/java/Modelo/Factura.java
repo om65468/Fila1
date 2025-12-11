@@ -6,6 +6,7 @@ public class Factura {
     private int numFactura;
     private String fechaEmision;
     private int idSecundario;
+    private int idEmpresa; // <--- ¡NUEVO CAMPO!
     private String concepto;
     private double base;
     private double iva;
@@ -15,12 +16,14 @@ public class Factura {
     
     public Factura(){}
     
-    public Factura(int id, char tipo, int numFactura, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
+    // CONSTRUCTOR 1: Sin fecha de emisión (asume fecha actual) - AÑADIDO idEmpresa
+    public Factura(int id, char tipo, int numFactura, int idSecundario, int idEmpresa, String concepto, double base, double iva, double total, String estado, String observaciones) {
         this.id = id;
         this.tipo = tipo;
         this.numFactura = numFactura;
-        //La fecha de emisión será el día de hoy.
+        // La fecha de emisión se establecerá aparte o en el DAO
         this.idSecundario = idSecundario;
+        this.idEmpresa = idEmpresa; // <--- ¡ASIGNADO!
         this.concepto = concepto;
         this.base = base;
         this.iva = iva;
@@ -29,12 +32,14 @@ public class Factura {
         this.observaciones = observaciones;
     }
     
-    public Factura(int id, char tipo, int numFactura, String fechaEmision, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
+    // CONSTRUCTOR 2: Con fecha de emisión - AÑADIDO idEmpresa
+    public Factura(int id, char tipo, int numFactura, String fechaEmision, int idSecundario, int idEmpresa, String concepto, double base, double iva, double total, String estado, String observaciones) {
         this.id = id;
         this.tipo = tipo;
         this.numFactura = numFactura;
-        this.fechaEmision = fechaEmision; // <-- Aquí se usa la fecha
+        this.fechaEmision = fechaEmision; 
         this.idSecundario = idSecundario;
+        this.idEmpresa = idEmpresa; // <--- ¡ASIGNADO!
         this.concepto = concepto;
         this.base = base;
         this.iva = iva;
@@ -43,6 +48,8 @@ public class Factura {
         this.observaciones = observaciones;
     }
 
+    // --- Getters y Setters Actualizados ---
+
     public int getId() {
         return id;
     }
@@ -50,6 +57,7 @@ public class Factura {
     public void setId(int id) {
         this.id = id;
     }
+    // ... (resto de getters y setters existentes)
 
     public char getTipo() {
         return tipo;
@@ -82,6 +90,16 @@ public class Factura {
     public void setIdSecundario(int idSecundario) {
         this.idSecundario = idSecundario;
     }
+    
+    // --- NUEVOS GETTER Y SETTER PARA idEmpresa ---
+    public int getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    public void setIdEmpresa(int idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+    // ---------------------------------------------
 
     public String getConcepto() {
         return concepto;

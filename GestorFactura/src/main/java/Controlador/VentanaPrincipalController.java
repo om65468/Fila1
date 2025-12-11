@@ -348,6 +348,7 @@ public class VentanaPrincipalController {
 
     @FXML
     public void initialize() {
+        System.out.println(empresa);
         tabPane.getSelectionModel().select(tabInformacion);
         paneInformacion.setVisible(true);
 
@@ -578,51 +579,76 @@ public class VentanaPrincipalController {
     }
 
     @FXML
-    private void guardarFactura() {
-        // 1. Validar y parsear datos de entrada
-        try {
-            char tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
-            int numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
-            LocalDate localDate = txtFacFechaEmision.getValue();
-            if (localDate == null) {
-                mostrarError("Debes seleccionar una fecha de emisión.");
-                return;
-            }
-            String fechaEmision = localDate.toString();
-            int idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
-            String concepto = txtFacConcepto.getText().trim();
-            double base = Double.parseDouble(txtFacBase.getText().trim());
-            double iva = Double.parseDouble(txtFacIva.getText().trim());
-            double total = base * (1 + iva / 100.0); // Recalculamos para mayor seguridad
-            String estado = txtFacEstado.getText().trim();
-            String observaciones = txtFacObservaciones.getText().trim();
-
-            // 2. Validación básica (puedes añadir más)
-            if (tipo == ' ' || fechaEmision.isEmpty() || concepto.isEmpty() || idSecundario <= 0) {
-                mostrarError("Faltan campos obligatorios (Tipo, Fecha, Concepto o ID Entidad).");
-                return;
-            }
-
-            // 3. Crear el objeto Factura (asumo que tienes un constructor adecuado)
-            Factura nuevaFactura = new Factura(0, tipo, numFactura, fechaEmision, idSecundario, concepto, base, iva, total, estado, observaciones);
-
-            // 4. Insertar en la BBDD
-            facturaDAO.insertar(nuevaFactura);
-
-            // 5. Notificación y limpieza
-            mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada correctamente con ID " + nuevaFactura.getId());
-
-            // Vuelve a la vista de lista de facturas
-            cancelarNuevaFactura();
-
-        } catch (NumberFormatException e) {
-            mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
-            e.printStackTrace();
-        } catch (SQLException e) {
-            mostrarError("Error BBDD al guardar la factura: " + e.getMessage());
-            e.printStackTrace();
-        }
+private void guardarFactura() {
+    if (empresa == null) {
+        mostrarError("Debe haber una empresa cargada para guardar una factura.");
+        return;
     }
+    
+    // 1. Validar y parsear datos de entrada
+    try {
+        char tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
+        int numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
+        LocalDate localDate = txtFacFechaEmision.getValue();
+        if (localDate == null) {
+            mostrarError("Debes seleccionar una fecha de emisión.");
+            return;
+        }
+        String fechaEmision = localDate.toString();
+        int idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
+        int idEmpresa = empresa.getId(); // ** <--- NUEVO: Obtener ID de la empresa **
+        
+        String concepto = txtFacConcepto.getText().trim();
+        double base = Double.parseDouble(txtFacBase.getText().trim());
+        double iva = Double.parseDouble(txtFacIva.getText().trim());
+        double total = base * (1 + iva / 100.0); // Recalculamos para mayor seguridad
+        String estado = txtFacEstado.getText().trim();
+        String observaciones = txtFacObservaciones.getText().trim();
+
+        // 2. Validación básica
+        if (tipo == ' ' || fechaEmision.isEmpty() || concepto.isEmpty() || idSecundario <= 0) {
+            mostrarError("Faltan campos obligatorios (Tipo, Fecha, Concepto o ID Entidad).");
+            return;
+        }
+        
+        // Re-validar tipo de factura (C=Compra, V=Venta)
+        if (tipo != 'C' && tipo != 'V') {
+             mostrarError("El tipo de factura debe ser 'C' (Compra) o 'V' (Venta).");
+             return;
+        }
+
+        Factura nuevaFactura = new Factura(
+            0, 
+            tipo, 
+            numFactura, 
+            fechaEmision, 
+            idSecundario, 
+            idEmpresa,
+            concepto, 
+            base, 
+            iva, 
+            total, 
+            estado, 
+            observaciones
+        );
+
+        // 4. Insertar en la BBDD
+        facturaDAO.insertar(nuevaFactura);
+
+        // 5. Notificación y limpieza
+        mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada correctamente con ID " + nuevaFactura.getId());
+
+        // Vuelve a la vista de lista de facturas
+        cancelarNuevaFactura();
+
+    } catch (NumberFormatException e) {
+        mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
+        e.printStackTrace();
+    } catch (SQLException e) {
+        mostrarError("Error BBDD al guardar la factura: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
 
     @FXML
     private void cancelarNuevaFactura() {
@@ -1147,23 +1173,30 @@ public class VentanaPrincipalController {
         TC_IdClienteFac.setCellValueFactory(new PropertyValueFactory<>("idSecundario"));
         TC_ConFac.setCellValueFactory(new PropertyValueFactory<>("concepto"));
 
-        cargarFacturas();
-
     }
 
     private void cargarFacturas() {
-        // Mapeo de Double, ajustado desde tu definición inicial
-        TC_IVAFac.setCellValueFactory(new PropertyValueFactory<>("iva"));
-        TC_TotalFac.setCellValueFactory(new PropertyValueFactory<>("total"));
+    // Mapeo de Double, ajustado desde tu definición inicial
+    TC_IVAFac.setCellValueFactory(new PropertyValueFactory<>("iva"));
+    TC_TotalFac.setCellValueFactory(new PropertyValueFactory<>("total"));
 
-        try {
-            List<Factura> facturas = facturaDAO.obtenerTodasLasFacturas();
-            TV_Factura.setItems(FXCollections.observableArrayList(facturas));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            mostrarError("Error al cargar las facturas: " + e.getMessage());
+    try {
+        if (empresa == null) {
+             TV_Factura.setItems(FXCollections.observableArrayList()); // Muestra vacío si no hay empresa
+             mostrarError("No se ha cargado la empresa para filtrar facturas.");
+             return;
         }
+        
+        // ** CAMBIO CLAVE: Llama a un método en DAO para filtrar por id_empresa **
+        // DEBES implementar FacturaDAO.obtenerFacturasPorEmpresa(int idEmpresa)
+        List<Factura> facturas = facturaDAO.obtenerFacturasPorEmpresa(empresa.getId()); 
+        TV_Factura.setItems(FXCollections.observableArrayList(facturas));
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+        mostrarError("Error al cargar las facturas de la empresa: " + e.getMessage());
     }
+}
 
     @FXML
     private void modificarInfo(ActionEvent event) {
