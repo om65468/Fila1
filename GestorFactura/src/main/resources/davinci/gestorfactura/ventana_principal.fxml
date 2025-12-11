@@ -494,11 +494,11 @@
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
-                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" onAction="#modificarInfo" styleClass="form-button-primary" text="Guardar">
+                    <Button fx:id="Boton_guardar_info" contentDisplay="LEFT" mnemonicParsing="false" onAction="#modificarInfo" styleClass="form-button-primary" text="Modificar">
                         <graphic>
                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@images/iconSave.png" />
+                                    <Image url="@images/modificarCliente.png" />
                                 </image>
                             </ImageView>
                         </graphic>

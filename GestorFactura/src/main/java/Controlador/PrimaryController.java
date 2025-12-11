@@ -180,6 +180,7 @@ public class PrimaryController implements Initializable {
     void onPaneAbrirEmpresa(ActionEvent event) {
         pane_info.setVisible(false);
         pane_nuevo.setVisible(false);
+        paneEmpresa.setVisible(false);
         pane_abrir.setVisible(true);
     }
 
@@ -188,6 +189,7 @@ public class PrimaryController implements Initializable {
         pane_info.setVisible(true);
         pane_nuevo.setVisible(false);
         pane_abrir.setVisible(false);
+        paneEmpresa.setVisible(false);
     }
 
     @FXML
