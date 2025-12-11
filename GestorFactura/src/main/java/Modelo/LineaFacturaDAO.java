@@ -8,13 +8,18 @@ public class LineaFacturaDAO {
 
     private Connection conn;
 
-    public LineaFacturaDAO(Connection conn) {
-        this.conn = conn;
+    public LineaFacturaDAO() {
+        try {
+            this.conn = ConexionBBDD.get();
+        } catch (Exception e) {
+            System.out.println("No funciona la conexioin de LineaFacturaDAO a la BBDD, mira el constructor");
+            e.printStackTrace();
+        }
     }
 
     // Insertar línea
     public void insertar(LineaFactura l) throws SQLException {
-        String sql = "INSERT INTO lineas_factura (idFactura, idProducto, cantidad) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO lineas_factura (id_factura, id_producto, cantidad) VALUES (?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, l.getIdFactura());
             ps.setInt(2, l.getIdProducto());
@@ -32,7 +37,7 @@ public class LineaFacturaDAO {
 
     // Obtener línea por ID
     public LineaFactura obtenerPorId(int idLinea) throws SQLException {
-        String sql = "SELECT * FROM lineas_factura WHERE idLinea = ?";
+        String sql = "SELECT * FROM lineas_factura WHERE id_linea = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idLinea);
             try (ResultSet rs = ps.executeQuery()) {
@@ -47,7 +52,7 @@ public class LineaFacturaDAO {
     // Listar todas las líneas de una factura
     public List<LineaFactura> listarPorFactura(int idFactura) throws SQLException {
         List<LineaFactura> lista = new ArrayList<>();
-        String sql = "SELECT * FROM lineas_factura WHERE idFactura = ?";
+        String sql = "SELECT * FROM lineas_factura WHERE id_factura = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idFactura);
             try (ResultSet rs = ps.executeQuery()) {
@@ -61,7 +66,7 @@ public class LineaFacturaDAO {
 
     // Actualizar línea
     public void actualizar(LineaFactura l) throws SQLException {
-        String sql = "UPDATE lineas_factura SET idFactura=?, idProducto=?, cantidad=? WHERE idLinea=?";
+        String sql = "UPDATE lineas_factura SET id_factura=?, id_producto=?, cantidad=? WHERE id_linea=?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, l.getIdFactura());
             ps.setInt(2, l.getIdProducto());
@@ -74,7 +79,7 @@ public class LineaFacturaDAO {
 
     // Eliminar línea
     public void eliminar(int idLinea) throws SQLException {
-        String sql = "DELETE FROM lineas_factura WHERE idLinea=?";
+        String sql = "DELETE FROM lineas_factura WHERE id_linea=?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, idLinea);
             ps.executeUpdate();
@@ -84,11 +89,10 @@ public class LineaFacturaDAO {
     // Mapear ResultSet a LineaFactura
     private LineaFactura mapearLinea(ResultSet rs) throws SQLException {
         return new LineaFactura(
-            rs.getInt("idLinea"),
-            rs.getInt("idFactura"),
-            rs.getInt("idProducto"),
+            rs.getInt("id_linea"),
+            rs.getInt("id_factura"),
+            rs.getInt("id_producto"),
             rs.getInt("cantidad")
         );
     }
 }
-

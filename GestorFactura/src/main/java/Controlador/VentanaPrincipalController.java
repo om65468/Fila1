@@ -30,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import Modelo.GeneradorFactura;
 import Modelo.LineaFactura;
+import Modelo.LineaFacturaDAO;
 import java.sql.Connection;
 import java.time.LocalDate;
 import javafx.application.Platform;
@@ -37,7 +38,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.util.StringConverter;
 
 public class VentanaPrincipalController {
 
@@ -67,6 +70,7 @@ public class VentanaPrincipalController {
     private EntidadDAO entidadDAO = new EntidadDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
     private FacturaDAO facturaDAO = new FacturaDAO();
+    private LineaFacturaDAO lineaDAO = new LineaFacturaDAO();
     
     private boolean editandoCliente = false;
     private boolean editandoProveedor = false;
@@ -270,36 +274,31 @@ public class VentanaPrincipalController {
     @FXML
     private TableColumn<Entidad, String> TC_TelCli;
 
-    // Buscador de Artículos para Factura
-    @FXML
-    private TextField txtBuscadorArticulo;
     @FXML
     private Button Boton_buscar_art;
-    @FXML
-    private TableView<Producto> TV_ResultadosArticulo;
-    @FXML
-    private TableColumn<Producto, Integer> TCR_IdArt;
-    @FXML
-    private TableColumn<Producto, String> TCR_DescArt;
-    @FXML
-    private TableColumn<Producto, Double> TCR_PvpArt;
 
+    @FXML
+    private ComboBox<Producto> cbxArticulo;
+
+    @FXML
+    private Label lblArticuloID;
+    @FXML
+    private Label lblArticuloPVP;
+    @FXML
+    private Label lblArticuloStock;
+    @FXML
+    private Label lblArticuloIVA;
+    
     @FXML
     private TableView<LineaFactura> TV_FacturaLinea;
     @FXML
-    private TableColumn<Factura, Integer> TC_ArtFacLi;
+    private TableColumn<LineaFactura, Integer> TC_ArtFacLi;
     @FXML
-    private TableColumn<Factura, Integer> TC_CantFacLi;
+    private TableColumn<LineaFactura, Integer> TC_CantFacLi;
     @FXML
-    private TableColumn<Factura, Integer> TC_DTO1FacLi;
+    private TableColumn<LineaFactura, Integer> TC_LinFacLi;
     @FXML
-    private TableColumn<Factura, Integer> TC_DTO2FacLi;
-    @FXML
-    private TableColumn<Factura, String> TC_DescFacLi;
-    @FXML
-    private TableColumn<Factura, Integer> TC_IVAFacLi;
-    @FXML
-    private TableColumn<Factura, Integer> TC_LinFacLi;
+    private TableColumn<LineaFactura, Double> TC_TotalLinea;
 
     @FXML
     private TableView<Factura> TV_Factura;
@@ -362,9 +361,19 @@ public class VentanaPrincipalController {
     
     private boolean ignorarCambioTab = false;
 
-
     @FXML
     private Button Boton_nuevo_fac;
+    
+    @FXML private Button Boton_volver_factura;
+    @FXML private Button Boton_confirmar_linea;
+    @FXML private Button Boton_modificar_linea;
+
+    // Campos de Entrada de la Línea (Cantidad y Descuento)
+    @FXML private TextField txtCantidadLinea;
+    @FXML private TextField txtDescuentoLinea;
+
+    // Columna extra que se añadió para el total de la línea (si la vas a usar)
+    @FXML private TableColumn<LineaFactura, Double> TC_TotalLi;
 
     @FXML
     public void initialize() {
@@ -377,31 +386,35 @@ public class VentanaPrincipalController {
 
         // Inicialización de escuchadores
         escucharTablaProv();
-        escucharTablaResultadosArticulo();
 
         // Inicializar la lista de facturas (si ya está cargada en cargarTabla, dejar)
         // Inicializar la carga de productos maestros
         try {
-            // En lugar de cargar facturas aquí, lo haremos al abrir la pestaña TabFactura
-            // Vamos a cargar todos los productos disponibles en el master
             productoDAO = new ProductoDAO();
-            masterDataProductos.addAll(productoDAO.listarTodos()); // Asegúrate de que ProductoDAO tiene listarTodos()
+            masterDataProductos.setAll(productoDAO.listarTodos());
 
-            // 1. Inicializar la lista filtrada con todos los datos
+            // 1. Inicializar la lista filtrada (siempre usando la lista maestra)
             filteredDataProductos = new FilteredList<>(masterDataProductos, p -> true);
 
-            // 2. Crear una lista ordenada (opcional, pero mejora la UI)
-            SortedList<Producto> sortedData = new SortedList<>(filteredDataProductos);
+            // 2. Configurar el ComboBox
+            cbxArticulo.setItems(masterDataProductos);
+            // Opcional: Mostrar la descripción en el ComboBox
+            cbxArticulo.setConverter(new StringConverter<Producto>() {
+                @Override
+                public String toString(Producto producto) {
+                    return (producto != null) ? producto.getDescripcion() : null;
+                }
+                @Override
+                public Producto fromString(String string) {
+                    return null; // No necesitamos mapear texto a objeto manualmente aquí
+                }
+            });
 
-            // 3. Vincular el comparador de SortedList a la TableView
-            sortedData.comparatorProperty().bind(TV_ResultadosArticulo.comparatorProperty());
-
-            // 4. Establecer la lista ordenada/filtrada como contenido de la tabla
-            TV_ResultadosArticulo.setItems(sortedData);
-
+            // 3. Configurar el filtro dinámico y escuchadores
             setupFiltroArticulos();
-        } catch (Exception e) {
-            mostrarError("Error BBDD");
+            escucharSeleccionArticulo(); // Nuevo método para rellenar los Labels
+        } catch (SQLException e) {
+            mostrarError("Error BBDD al cargar productos iniciales: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -1284,17 +1297,24 @@ public class VentanaPrincipalController {
         TC_StockArt.setCellValueFactory(new PropertyValueFactory<>("stock"));
         TC_IdProArt.setCellValueFactory(new PropertyValueFactory<>("idProveedor"));
 
-        TCR_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TCR_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
-
         TC_IdFac.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_TipoFac.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         TC_NumFac.setCellValueFactory(new PropertyValueFactory<>("numFactura"));
         TC_FEmisionFac.setCellValueFactory(new PropertyValueFactory<>("fechaEmision"));
         TC_IdClienteFac.setCellValueFactory(new PropertyValueFactory<>("idSecundario"));
         TC_ConFac.setCellValueFactory(new PropertyValueFactory<>("concepto"));
+        
+        TC_LinFacLi.setCellValueFactory(new PropertyValueFactory<>("idLinea"));
+        TC_ArtFacLi.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
+        TC_CantFacLi.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
 
+        // Asumimos que has añadido la columna TC_IdFacturaLi en tu FXML
+        // TC_IdFacturaLi.setCellValueFactory(new PropertyValueFactory<>("idFactura")); // Mapea a idFactura
+
+        // Mapeo de la columna Total Línea (debe ser calculado o simulado)
+        // ** Para no fallar, la mapearemos a 'cantidad', pero es incorrecto para un total **
+        TC_TotalLinea.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        
     }
 
     private void cargarFacturas() {
@@ -1347,6 +1367,19 @@ public class VentanaPrincipalController {
             mostrarAlerta("Error BBDD", "Error al actualizar: " + ex.getMessage());
         }
     }
+    
+    @FXML
+    private void onVolverACabeceraFactura(ActionEvent event) {
+        // 1. Ocultar la vista de líneas
+        paneFacturaLinea.setVisible(false);
+        paneFacturaLinea.setManaged(false);
+
+        // 2. Mostrar la vista de la cabecera
+        paneFacturaNueva.setVisible(true);
+        paneFacturaNueva.setManaged(true);
+
+        // Opcional: Actualizar totales en paneFacturaNueva si se hicieron cambios
+    }
 
     @FXML
     private void cancelarCambioInfo(ActionEvent event) {
@@ -1358,125 +1391,261 @@ public class VentanaPrincipalController {
         System.out.println("Empresa cargada: " + empresa.getNombre());
     }
 
-    private void escucharTablaResultadosArticulo() {
-        TV_ResultadosArticulo.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
-            if (newSel != null) {
-                mostrarAlerta("Artículo Seleccionado", "El artículo '" + newSel.getDescripcion() + "' ha sido seleccionado para la línea de factura.");
-                // Aquí podrías añadir la lógica para rellenar los campos de la nueva línea de factura
-            }
-        });
-    }
-
-    @FXML
-    private void onBuscarArticulo(ActionEvent event) {
-        String descripcionBusqueda = txtBuscadorArticulo.getText().trim();
-
-        if (descripcionBusqueda.isEmpty()) {
-            mostrarAlerta("Búsqueda vacía", "Introduce una descripción o parte de ella para buscar artículos.");
-            TV_ResultadosArticulo.getItems().clear();
-            return;
-        }
-
-        try {
-            // Asume que ProductoDAO tiene un método para buscar por descripción, o lo usaremos desde EntidadDAO
-            // Como tu productoDAO es un campo de la clase, lo usaremos.
-            productoDAO = new ProductoDAO();
-
-            // Suponemos que tienes un método en ProductoDAO para buscar por descripción.
-            // Si no lo tienes, deberás añadirlo en la clase Modelo.ProductoDAO
-            List<Producto> resultados = productoDAO.buscarPorDescripcion(descripcionBusqueda);
-
-            if (resultados.isEmpty()) {
-                mostrarAlerta("Sin resultados", "No se encontraron artículos con la descripción: " + descripcionBusqueda);
-            }
-
-            TV_ResultadosArticulo.setItems(FXCollections.observableArrayList(resultados));
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            mostrarAlerta("Error BBDD", "Ocurrió un error al buscar los artículos: " + ex.getMessage());
-        }
-    }
-
-    // Nuevo método en VentanaPrincipalController
     private void setupFiltroArticulos() {
-        // Añadir un listener al campo de texto de búsqueda de artículos
-        txtBuscadorArticulo.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredDataProductos.setPredicate(producto -> {
-                // Si el campo de búsqueda está vacío, muestra todos los artículos.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
+        // Escucha la escritura en el campo de texto interno del ComboBox
+        cbxArticulo.getEditor().textProperty().addListener((obs, oldText, newText) -> {
+
+            // --- Paso 1: Intentar buscar una coincidencia exacta en la lista actual ---
+            Producto selectedProduct = cbxArticulo.getSelectionModel().getSelectedItem();
+
+            // Comprobamos si el texto nuevo coincide con el nombre del producto seleccionado
+            // Si el usuario simplemente está editando la descripción, no queremos borrar la selección.
+            if (selectedProduct != null && selectedProduct.getDescripcion().equals(newText)) {
+                // El texto coincide con el ítem seleccionado. No hagas nada con la lista.
+                return;
+            }
+
+            // --- Paso 2: Ejecutar el filtro solo si el ComboBox está enfocado ---
+            if (cbxArticulo.isFocused()) {
+
+                // Si el texto está vacío, restaurar la lista completa y cerrar el desplegable
+                if (newText == null || newText.isEmpty()) {
+                    cbxArticulo.setItems(masterDataProductos);
+                    cbxArticulo.hide();
+                    cbxArticulo.getSelectionModel().clearSelection(); // Limpiamos la selección si el texto se borró
+                    return;
                 }
 
-                // Convertir el texto de búsqueda a minúsculas para una comparación sin distinción entre mayúsculas y minúsculas
-                String lowerCaseFilter = newValue.toLowerCase();
+                // Crear lista de sugerencias
+                String lowerCaseFilter = newText.toLowerCase();
 
-                // Filtrar por la descripción
-                if (producto.getDescripcion().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Coincidencia encontrada
+                ObservableList<Producto> suggestions = masterDataProductos.filtered(producto ->
+                    producto.getDescripcion().toLowerCase().contains(lowerCaseFilter) ||
+                    String.valueOf(producto.getId()).contains(lowerCaseFilter)
+                );
+
+                // Aplicar la lista filtrada
+                cbxArticulo.setItems(suggestions);
+
+                // Intentar reseleccionar si hay una coincidencia exacta
+                if (suggestions.size() == 1 && suggestions.get(0).getDescripcion().equalsIgnoreCase(newText)) {
+                     cbxArticulo.getSelectionModel().select(suggestions.get(0));
+                } else {
+                     cbxArticulo.getSelectionModel().clearSelection(); // Importante: Si no es exacto, deseleccionar
                 }
-                // Opcional: podrías filtrar por ID o PVP también, si quisieras
 
-                return false; // No hay coincidencia
-            });
+                // Mostrar el desplegable
+                if (!cbxArticulo.isShowing()) {
+                    cbxArticulo.show();
+                }
+            }
+
+            // Nota: Al perder el foco (hacer clic en cantidad), el listener focusedProperty
+            // se encargará de restaurar la selección de 'productoSeleccionado' si aplica.
         });
     }
+    
+    // Nuevo método para rellenar los labels auxiliares al seleccionar un producto
+    private void escucharSeleccionArticulo() {
+        cbxArticulo.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
 
+            if (newSel != null) {
+                productoSeleccionado = newSel; // <-- Únicamente se establece si hay SELECCIÓN
+
+                // Rellenar Labels
+                lblArticuloID.setText(String.valueOf(newSel.getId()));
+                lblArticuloPVP.setText(String.format("%.2f €", newSel.getPvp()));
+                lblArticuloStock.setText(String.valueOf(newSel.getStock()));
+                lblArticuloIVA.setText(String.format("%.2f %%", newSel.getIva()));
+
+            } else {
+                // No hacemos nada para borrar 'productoSeleccionado' aquí.
+                // Si newSel es NULL, simplemente mantenemos el estado anterior de productoSeleccionado
+                // Y solo limpiamos los labels si el texto está vacío (indicando una limpieza manual).
+                if (cbxArticulo.getEditor().getText().isEmpty()) {
+                     productoSeleccionado = null; 
+                     lblArticuloID.setText("[ID]");
+                     lblArticuloPVP.setText("[PVP]");
+                     lblArticuloStock.setText("[Stock]");
+                     lblArticuloIVA.setText("[IVA]");
+                }
+            }
+        });
+
+        // AÑADIR ESTE ESCUCHADOR: Reestablecer el ComboBox si la edición termina y no hay selección
+        cbxArticulo.focusedProperty().addListener((obs, oldFocus, newFocus) -> {
+            if (!newFocus && productoSeleccionado != null && cbxArticulo.getSelectionModel().isEmpty()) {
+                // Si perdemos el foco, hay un producto seleccionado internamente, 
+                // pero el ComboBox lo deseleccionó, lo forzamos de vuelta al texto.
+                cbxArticulo.getSelectionModel().select(productoSeleccionado);
+                cbxArticulo.getEditor().setText(productoSeleccionado.getDescripcion());
+            }
+        });
+    }
+    
     @FXML
     void onVerLineasFacturas(ActionEvent event) {
         // 1. Verificar si hay una factura seleccionada en la tabla TV_Factura
         Factura facturaSeleccionada = TV_Factura.getSelectionModel().getSelectedItem();
 
         if (facturaSeleccionada == null) {
-            mostrarAlerta("Advertencia", "Por favor, selecciona una factura de la lista para ver sus líneas.");
+            mostrarAdvertencia("Advertencia", "Por favor, selecciona una factura de la lista para ver sus líneas.");
             return; // Sale del método si no hay selección
         }
 
         // Obtener el ID de la factura para cargar sus líneas
         int idFactura = facturaSeleccionada.getId();
 
-        // 2. Cargar las líneas de la factura seleccionada (Lógica Pendiente en DAO)
+        // 2. Transición de la vista
+        // Ocultar la lista principal y mostrar el editor de líneas
+        paneFactura.setVisible(false);
+        paneFactura.setManaged(false);
+        paneFacturaLinea.setVisible(true);
+        paneFacturaLinea.setManaged(true);
+
+        // Opcional: Si quieres rellenar el campo txtFacId con el ID de la factura que se está viendo
+        // Esto es útil para el botón de "Añadir Línea"
+        if (txtFacId != null) {
+            txtFacId.setText(String.valueOf(idFactura));
+        }
+
+        // 3. Cargar las líneas de la factura seleccionada
         try {
-            // ** [PENDIENTE] ** Debes crear un método en FacturaDAO o LineaFacturaDAO
-            // para obtener las líneas asociadas a este idFactura.
-            // Ejemplo de llamada (asumiendo que FacturaDAO puede hacerlo por ahora):
-            // List<LineaFactura> lineas = facturaDAO.obtenerLineasPorFactura(idFactura);
-
-            // Suponiendo que tienes un método similar a cargarFacturas() para las líneas:
-            cargarLineasFactura(idFactura); // Llamamos al nuevo método de carga
-
-            // 3. Cambiar la vista
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(true);
-            paneFacturaLinea.setManaged(true);
+            cargarLineasFactura(idFactura);
 
         } catch (SQLException e) {
             e.printStackTrace();
             mostrarError("No se pudieron cargar las líneas de la factura: " + e.getMessage());
         }
     }
-
+    
     private void cargarLineasFactura(int idFactura) throws SQLException {
-
-        // ** [ATENCIÓN] **
-        // Es CRUCIAL que las TableColumn de TV_FacturaLinea (`TC_ArtFacLi`, `TC_CantFacLi`, etc.)
-        // estén mapeadas correctamente a las propiedades de la clase Modelo.LineaFactura.
-        // Actualmente, tus TableColumns están mapeadas a la clase Factura (Error de tipo).
-        // Configuración de columnas (solo si no se hizo en cargarTabla o si necesitas re-configurar)
-        // Ejemplo de mapeo correcto (Asumiendo que LineaFactura tiene getCantidad(), getIdProducto(), etc.):
-        /*
-        TC_LinFacLi.setCellValueFactory(new PropertyValueFactory<>("id_linea"));
-        TC_ArtFacLi.setCellValueFactory(new PropertyValueFactory<>("id_producto"));
-        TC_CantFacLi.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        // ... otros campos de línea
-         */
-        // ** PENDIENTE: Crear FacturaDAO.obtenerLineasPorFactura(idFactura) **
-        // List<LineaFactura> lineas = facturaDAO.obtenerLineasPorFactura(idFactura);
-        // TV_FacturaLinea.setItems(FXCollections.observableArrayList(lineas));
-        // Por ahora, para no tener errores de compilación, dejaremos esta parte comentada
-        // hasta que el DAO y los mapeos de columnas se definan correctamente.
-        // Ejemplo de alerta para confirmar qué factura estamos viendo:
+        List<LineaFactura> lineas = lineaDAO.listarPorFactura(idFactura);
+        TV_FacturaLinea.setItems(FXCollections.observableArrayList(lineas));
         System.out.println("Cargando líneas para Factura ID: " + idFactura);
+    }
+    
+    @FXML
+    private void onAnadirLineaFactura(ActionEvent event) {
+
+        // 1. Validar que hay un producto seleccionado para añadir
+        Producto productoActual = cbxArticulo.getSelectionModel().getSelectedItem();
+
+        // Si la selección del ComboBox se perdió al editar, usamos la variable de clase (backup)
+        if (productoActual == null && productoSeleccionado != null) {
+             productoActual = productoSeleccionado;
+        }
+
+        if (productoActual == null) {
+            mostrarAdvertencia("Selección Requerida", "Debes seleccionar un artículo del ComboBox para añadir una línea.");
+            return;
+        }
+
+        // Ahora usamos productoActual para las siguientes validaciones y acciones
+
+        // 2. Validar cantidad
+        int cantidad;
+        try {
+            cantidad = Integer.parseInt(txtCantidadLinea.getText().trim());
+            if (cantidad <= 0) {
+                mostrarAdvertencia("Cantidad Inválida", "La cantidad debe ser un número entero positivo.");
+                return;
+            }
+            // Validar Stock (Opcional, pero recomendado)
+            if (cantidad > productoActual.getStock()) {
+                 mostrarAdvertencia("Stock Insuficiente", "La cantidad solicitada (" + cantidad + ") excede el stock disponible (" + productoActual.getStock() + ").");
+                 return;
+            }
+
+        } catch (NumberFormatException e) {
+            mostrarAdvertencia("Formato Inválido", "Introduce una cantidad válida.");
+            return;
+        }
+
+        // 3. Obtener ID de la Factura (Validación de la cabecera)
+        int idFacturaActual;
+        try {
+             idFacturaActual = Integer.parseInt(txtFacId.getText().trim());
+        } catch (NumberFormatException e) {
+             mostrarError("La cabecera de la factura no tiene un ID válido. Asegúrate de guardar la cabecera primero.");
+             return;
+        }
+
+
+        try {
+            // 4. Crear la línea y guardar en BBDD
+            LineaFactura nuevaLinea = new LineaFactura(0, idFacturaActual, productoActual.getId(), cantidad);
+            lineaDAO.insertar(nuevaLinea);
+
+            // 5. Refrescar la tabla y limpiar campos
+            cargarLineasFactura(idFacturaActual); // Recarga la tabla de líneas
+
+            txtCantidadLinea.clear();
+            // Nota: NO limpiamos el ComboBox o productoSeleccionado aquí, 
+            // ya que el usuario podría querer añadir más unidades del mismo producto.
+
+            mostrarAlerta("Éxito", "Línea añadida correctamente.");
+
+        } catch (SQLException e) {
+            mostrarError("No se pudo insertar la línea de factura: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void mostrarAdvertencia(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+    
+    @FXML
+    private void onBorrarLineaFactura(ActionEvent event) {
+
+        // 1. Obtener la línea seleccionada de la tabla
+        LineaFactura lineaSeleccionada = TV_FacturaLinea.getSelectionModel().getSelectedItem();
+
+        if (lineaSeleccionada == null) {
+            mostrarAdvertencia("Selección Requerida", "Por favor, selecciona una línea de la tabla para eliminar.");
+            return;
+        }
+
+        // 2. Pedir confirmación al usuario (Recomendado antes de borrar permanentemente)
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar Eliminación");
+        alert.setHeaderText("Eliminar Línea de Factura");
+        alert.setContentText("¿Está seguro de que desea eliminar la línea " + lineaSeleccionada.getIdLinea() + 
+                             " (Producto ID: " + lineaSeleccionada.getIdProducto() + ")?");
+
+        // Configuración de botones de confirmación
+        ButtonType botonSi = new ButtonType("Sí, Eliminar", ButtonBar.ButtonData.OK_DONE);
+        ButtonType botonNo = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(botonSi, botonNo);
+
+        var result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == botonSi) {
+
+            try {
+                // 3. Eliminar de la base de datos
+                lineaDAO.eliminar(lineaSeleccionada.getIdLinea());
+
+                // 4. Eliminar de la tabla en la UI (actualizar la lista observable)
+                TV_FacturaLinea.getItems().remove(lineaSeleccionada);
+
+                // 5. Opcional: Recalcular totales de la factura
+                // Debes obtener el ID de la factura que se está editando para recalcular la cabecera
+                int idFacturaActual = lineaSeleccionada.getIdFactura();
+                // recalcularTotalesFactura(idFacturaActual); // <-- Lógica pendiente
+
+                mostrarAlerta("Éxito", "Línea eliminada correctamente.");
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                mostrarError("No se pudo eliminar la línea de factura: " + ex.getMessage());
+            }
+        }
     }
 
 }
