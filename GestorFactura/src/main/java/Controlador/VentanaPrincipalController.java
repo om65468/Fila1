@@ -31,8 +31,10 @@ import javafx.scene.layout.AnchorPane;
 import Modelo.GeneradorFactura;
 import Modelo.LineaFactura;
 import java.sql.Connection;
+import java.time.LocalDate;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.control.DatePicker;
 
 public class VentanaPrincipalController {
 
@@ -310,11 +312,46 @@ public class VentanaPrincipalController {
 
     @FXML
     private TableColumn<Factura, Integer> TC_DescFac;
+    
+    @FXML
+    private AnchorPane paneFacturaNueva; // <-- Necesitas añadir este AnchorPane
+    @FXML
+    private Button Boton_guardar_fac_nueva;
+    @FXML
+    private Button Boton_cancelar_fac_nueva;
+    @FXML
+    private TextField txtFacId;
+    @FXML
+    private TextField txtFacTipo;
+    @FXML
+    private TextField txtFacNumFactura;
+    @FXML
+    private DatePicker txtFacFechaEmision;
+    @FXML
+    private TextField txtFacIdSecundario;
+    @FXML
+    private TextArea txtFacConcepto;
+    @FXML
+    private TextField txtFacBase;
+    @FXML
+    private TextField txtFacIva;
+    @FXML
+    private TextField txtFacTotal;
+    @FXML
+    private TextField txtFacEstado;
+    @FXML
+    private TextArea txtFacObservaciones;
 
+    @FXML
+    private Button Boton_nuevo_fac;
+    
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
         paneInformacion.setVisible(true);
+
+        // Configuración de columnas (solo una vez)
+        cargarTabla();
 
         // Inicialización de escuchadores
         escucharTablaProv();
@@ -339,16 +376,14 @@ public class VentanaPrincipalController {
 
             // 4. Establecer la lista ordenada/filtrada como contenido de la tabla
             TV_ResultadosArticulo.setItems(sortedData);
-
-            // 5. Configurar el filtro dinámico
+            
             setupFiltroArticulos();
-
-        } catch (SQLException e) {
-            mostrarError("Error BBDD al cargar productos iniciales: " + e.getMessage());
+        } catch(Exception e){
+            mostrarError("Error BBDD");
             e.printStackTrace();
         }
-
-        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+    
+            tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
             if (newTab == tabArchivo) {
                 try {
                     switchToPrimary();
@@ -362,6 +397,7 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(true);
                 paneFactura.setVisible(false);
                 paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
             } else if (newTab == tab_cliente) {
                 paneInfoClientes.setVisible(true);
                 paneInfoProveedores.setVisible(false);
@@ -369,6 +405,7 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
                 paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
             } else if (newTab == tab_proveedor) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(true);
@@ -376,6 +413,7 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
                 paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
             } else if (newTab == tabArticulos) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -383,7 +421,8 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
                 paneFacturaLinea.setVisible(false);
-
+                paneFacturaNueva.setVisible(false);
+                cargarProveedoresDeEmpresa();
             } else if (newTab == TabFactura) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -391,7 +430,8 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(true);
                 paneFacturaLinea.setVisible(false);
-                cargarFacturas();
+                paneFacturaNueva.setVisible(false);
+                cargarFacturas(); 
             } else {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -399,10 +439,13 @@ public class VentanaPrincipalController {
                 paneInformacion.setVisible(false);
                 paneFactura.setVisible(false);
                 paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
             }
-            escucharTablaProv();
-            cargarProveedoresDeEmpresa();
-        });
+                escucharTablaProv();
+                cargarProveedoresDeEmpresa();
+            });
+
+        
     }
 
     //Metodos de Cliente
@@ -486,9 +529,89 @@ public class VentanaPrincipalController {
     @FXML
     private void onNuevoFactura() {
         ocultarPanes();
+        paneFacturaNueva.setVisible(true); // Muestra el formulario
+        paneFacturaNueva.setManaged(true);
+
+        // Limpiar campos para un nuevo registro
+        limpiarCamposFactura();
+    }
+    
+    private void limpiarCamposFactura() {
+        txtFacId.clear(); // El ID es automático, debería estar vacío
+        txtFacTipo.clear();
+        txtFacNumFactura.clear();
+        txtFacFechaEmision.setValue(null);
+        txtFacIdSecundario.clear();
+        txtFacConcepto.clear();
+        txtFacBase.clear();
+        txtFacIva.clear();
+        txtFacTotal.clear();
+        txtFacEstado.clear();
+        txtFacObservaciones.clear();
+    }
+    
+    @FXML
+    private void guardarFactura() {
+        // 1. Validar y parsear datos de entrada
+        try {
+            char tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
+            int numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
+            LocalDate localDate = txtFacFechaEmision.getValue();
+        if (localDate == null) {
+            mostrarError("Debes seleccionar una fecha de emisión.");
+            return;
+        }
+        String fechaEmision = localDate.toString();
+            int idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
+            String concepto = txtFacConcepto.getText().trim();
+            double base = Double.parseDouble(txtFacBase.getText().trim());
+            double iva = Double.parseDouble(txtFacIva.getText().trim());
+            double total = base * (1 + iva / 100.0); // Recalculamos para mayor seguridad
+            String estado = txtFacEstado.getText().trim();
+            String observaciones = txtFacObservaciones.getText().trim();
+
+            // 2. Validación básica (puedes añadir más)
+            if (tipo == ' ' || fechaEmision.isEmpty() || concepto.isEmpty() || idSecundario <= 0) {
+                mostrarError("Faltan campos obligatorios (Tipo, Fecha, Concepto o ID Entidad).");
+                return;
+            }
+
+            // 3. Crear el objeto Factura (asumo que tienes un constructor adecuado)
+            Factura nuevaFactura = new Factura(0, tipo, numFactura, fechaEmision, idSecundario, concepto, base, iva, total, estado, observaciones);
+
+            // 4. Insertar en la BBDD
+            facturaDAO.insertar(nuevaFactura);
+
+            // 5. Notificación y limpieza
+            mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada correctamente con ID " + nuevaFactura.getId());
+
+            // Vuelve a la vista de lista de facturas
+            cancelarNuevaFactura(); 
+
+        } catch (NumberFormatException e) {
+            mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            mostrarError("Error BBDD al guardar la factura: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    private void cancelarNuevaFactura() {
+        limpiarCamposFactura();
+
+        // Vuelve a la vista de lista de facturas
+        paneFacturaNueva.setVisible(false);
+        paneFacturaNueva.setManaged(false);
         paneFactura.setVisible(true);
         paneFactura.setManaged(true);
-        cargarTablasEmpresa();
+
+        // Recarga la tabla de facturas para ver los posibles cambios
+        cargarFacturas(); 
+
+        // Cambia la selección de pestaña al TabFactura para asegurar el foco visual
+        tabPane.getSelectionModel().select(TabFactura);
     }
 
     @FXML
@@ -786,6 +909,13 @@ public class VentanaPrincipalController {
 
         paneProducto.setVisible(false);
         paneProducto.setManaged(false);
+        
+        paneFacturaNueva.setVisible(false);
+        paneFacturaNueva.setManaged(false);
+        
+        paneFactura.setVisible(false);
+        paneFactura.setManaged(false);
+
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
@@ -859,7 +989,7 @@ public class VentanaPrincipalController {
         Connection connection = null;
         try {
             // 2. Obtener la conexión a la BBDD
-            connection = Modelo.ConexionBBDD.get();
+            connection = ConexionBBDD.get();
 
             if (connection == null) {
                 mostrarAlerta("Error", "No se pudo establecer la conexión a la base de datos.");
@@ -883,15 +1013,6 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             e.printStackTrace();
             mostrarAlerta("Error de Emisión", "Ocurrió un error al generar o guardar el PDF: " + e.getMessage());
-        } finally {
-            // 4. Cerrar la conexión
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

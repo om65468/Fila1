@@ -28,6 +28,20 @@ public class Factura {
         this.estado = estado;
         this.observaciones = observaciones;
     }
+    
+    public Factura(int id, char tipo, int numFactura, String fechaEmision, int idSecundario, String concepto, double base, double iva, double total, String estado, String observaciones) {
+        this.id = id;
+        this.tipo = tipo;
+        this.numFactura = numFactura;
+        this.fechaEmision = fechaEmision; // <-- Aquí se usa la fecha
+        this.idSecundario = idSecundario;
+        this.concepto = concepto;
+        this.base = base;
+        this.iva = iva;
+        this.total = total;
+        this.estado = estado;
+        this.observaciones = observaciones;
+    }
 
     public int getId() {
         return id;
