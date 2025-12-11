@@ -428,6 +428,9 @@ public class VentanaPrincipalController {
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneCliente.setVisible(false);
+                paneProducto.setVisible(false);
+                paneProveedor.setVisible(false);
                 paneFactura.setVisible(true);
                 paneFacturaLinea.setVisible(false);
                 paneFacturaNueva.setVisible(false);
