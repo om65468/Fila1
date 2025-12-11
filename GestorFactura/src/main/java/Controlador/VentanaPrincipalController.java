@@ -37,13 +37,13 @@ import javafx.collections.transformation.SortedList;
 import javafx.scene.control.DatePicker;
 
 public class VentanaPrincipalController {
-    
+
     private ObservableList<Producto> masterDataProductos = FXCollections.observableArrayList();
     private FilteredList<Producto> filteredDataProductos;
 
     @FXML
     private Button Boton_emitir_fac;
-    
+
     @FXML
     private Button Boton_ver_fac;
 
@@ -281,7 +281,7 @@ public class VentanaPrincipalController {
     private TableColumn<Factura, Integer> TC_IVAFacLi;
     @FXML
     private TableColumn<Factura, Integer> TC_LinFacLi;
-    
+
     @FXML
     private TableView<Factura> TV_Factura;
 
@@ -293,7 +293,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private TableColumn<Factura, Integer> TC_IdClienteFac;
-    
+
     @FXML
     private TableColumn<Factura, String> TC_ConFac;
 
@@ -345,106 +345,107 @@ public class VentanaPrincipalController {
     private Button Boton_nuevo_fac;
     
     @FXML
-public void initialize() {
-    tabPane.getSelectionModel().select(tabInformacion);
-    paneInformacion.setVisible(true);
-    
-    // Configuración de columnas (solo una vez)
-    cargarTabla();
-    
-    // Inicialización de escuchadores
-    escucharTablaProv();
-    escucharTablaResultadosArticulo();
-    
-    // Inicializar la lista de facturas (si ya está cargada en cargarTabla, dejar)
-    // Inicializar la carga de productos maestros
-    try {
-        // En lugar de cargar facturas aquí, lo haremos al abrir la pestaña TabFactura
-        // Vamos a cargar todos los productos disponibles en el master
-        productoDAO = new ProductoDAO();
-        masterDataProductos.addAll(productoDAO.listarTodos()); // Asegúrate de que ProductoDAO tiene listarTodos()
-        
-        // 1. Inicializar la lista filtrada con todos los datos
-        filteredDataProductos = new FilteredList<>(masterDataProductos, p -> true);
-        
-        // 2. Crear una lista ordenada (opcional, pero mejora la UI)
-        SortedList<Producto> sortedData = new SortedList<>(filteredDataProductos);
-        
-        // 3. Vincular el comparador de SortedList a la TableView
-        sortedData.comparatorProperty().bind(TV_ResultadosArticulo.comparatorProperty());
-        
-        // 4. Establecer la lista ordenada/filtrada como contenido de la tabla
-        TV_ResultadosArticulo.setItems(sortedData);
+    public void initialize() {
+        tabPane.getSelectionModel().select(tabInformacion);
+        paneInformacion.setVisible(true);
 
-        // 5. Configurar el filtro dinámico
-        setupFiltroArticulos();
-        
-    } catch (SQLException e) {
-        mostrarError("Error BBDD al cargar productos iniciales: " + e.getMessage());
-        e.printStackTrace();
-    }
+        // Configuración de columnas (solo una vez)
+        cargarTabla();
 
+        // Inicialización de escuchadores
+        escucharTablaProv();
+        escucharTablaResultadosArticulo();
 
-    tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-        if (newTab == tabArchivo) {
-            try {
-                switchToPrimary();
-            } catch (IOException ex) {
-                System.out.println("Problema en la linea 143");
-            }
-        } else if (newTab == tabInformacion) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(true);
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
-        } else if (newTab == tab_cliente) {
-            paneInfoClientes.setVisible(true);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
-        } else if (newTab == tab_proveedor) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(true);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
-        } else if (newTab == tabArticulos) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(true);
-            paneInformacion.setVisible(false);
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
-            cargarProveedoresDeEmpresa();
-        } else if (newTab == TabFactura) {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-            paneFactura.setVisible(true);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
-            cargarFacturas(); 
-        } else {
-            paneInfoClientes.setVisible(false);
-            paneInfoProveedores.setVisible(false);
-            paneInfoArticulos.setVisible(false);
-            paneInformacion.setVisible(false);
-            paneFactura.setVisible(false);
-            paneFacturaLinea.setVisible(false);
-            paneFacturaNueva.setVisible(false);
+        // Inicializar la lista de facturas (si ya está cargada en cargarTabla, dejar)
+        // Inicializar la carga de productos maestros
+        try {
+            // En lugar de cargar facturas aquí, lo haremos al abrir la pestaña TabFactura
+            // Vamos a cargar todos los productos disponibles en el master
+            productoDAO = new ProductoDAO();
+            masterDataProductos.addAll(productoDAO.listarTodos()); // Asegúrate de que ProductoDAO tiene listarTodos()
+
+            // 1. Inicializar la lista filtrada con todos los datos
+            filteredDataProductos = new FilteredList<>(masterDataProductos, p -> true);
+
+            // 2. Crear una lista ordenada (opcional, pero mejora la UI)
+            SortedList<Producto> sortedData = new SortedList<>(filteredDataProductos);
+
+            // 3. Vincular el comparador de SortedList a la TableView
+            sortedData.comparatorProperty().bind(TV_ResultadosArticulo.comparatorProperty());
+
+            // 4. Establecer la lista ordenada/filtrada como contenido de la tabla
+            TV_ResultadosArticulo.setItems(sortedData);
+            
+            setupFiltroArticulos();
+        } catch(Exception e){
+            mostrarError("Error BBDD");
+            e.printStackTrace();
         }
-    });
-}
+    
+            tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+            if (newTab == tabArchivo) {
+                try {
+                    switchToPrimary();
+                } catch (IOException ex) {
+                    System.out.println("Problema en la linea 143");
+                }
+            } else if (newTab == tabInformacion) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(true);
+                paneFactura.setVisible(false);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+            } else if (newTab == tab_cliente) {
+                paneInfoClientes.setVisible(true);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+            } else if (newTab == tab_proveedor) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(true);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+            } else if (newTab == tabArticulos) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(true);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+                cargarProveedoresDeEmpresa();
+            } else if (newTab == TabFactura) {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(true);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+                cargarFacturas(); 
+            } else {
+                paneInfoClientes.setVisible(false);
+                paneInfoProveedores.setVisible(false);
+                paneInfoArticulos.setVisible(false);
+                paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
+                paneFacturaLinea.setVisible(false);
+                paneFacturaNueva.setVisible(false);
+            }
+                escucharTablaProv();
+                cargarProveedoresDeEmpresa();
+            });
+
+        
+    }
 
     //Metodos de Cliente
     @FXML
@@ -474,6 +475,8 @@ public void initialize() {
         paneInfoArticulos.setManaged(false);
         paneProducto.setVisible(true);
         paneProducto.setManaged(true);
+        escucharTablaProv();
+        cargarProveedoresDeEmpresa();
     }
 
     //Metodos de Factura
@@ -588,6 +591,7 @@ public void initialize() {
 
     public void setEmpresa(Entidad empresa) {
         this.empresa = empresa;
+        cargarTabla();
         cargarDatos();
     }
 
@@ -613,7 +617,6 @@ public void initialize() {
             TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
 
-            // 1. Datos del formulario
             String nombre = NomCli.getText().trim();
             String nif = NIFCli.getText().trim();
             String calle = DirCli.getText().trim();
@@ -655,6 +658,16 @@ public void initialize() {
         NomCli.clear();
         TlfCli.clear();
         DirCli.clear();
+
+    }
+
+    @FXML
+    private void modificarCliente() {
+        Entidad ClienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
+        if (ClienteSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
+            return;
+        }
 
     }
 
@@ -711,12 +724,12 @@ public void initialize() {
             ex.printStackTrace();
             mostrarAlerta("Error", "Ocurrió un error al guardar el proveedor.");
         }
-            CodProv.clear();
-            EmailProv.clear();
-            NIFProv.clear();
-            NomProv.clear();
-            DirProv.clear();
-            TlfProv.clear();
+        CodProv.clear();
+        EmailProv.clear();
+        NIFProv.clear();
+        NomProv.clear();
+        DirProv.clear();
+        TlfProv.clear();
     }
 
     @FXML
@@ -836,25 +849,24 @@ public void initialize() {
     }
 
     private void escucharTablaProv() {
-        /*RefProd.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
+        RefProd.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, newSel) -> {
             proveedorSeleccionado = newSel;
-            if (newSel != null) {
-                ProvProd.setText(newSel.getNombre()); // referencia = nombre
-                // si quieres mostrar el id en otro campo, por ejemplo IDProdProveedor:
-                // IDProdProveedor.setText(String.valueOf(newSel.getId()));
-            } else {
-                ProvProd.clear();
-            }
-        });*/
+        });
     }
 
     public void cargarProveedoresDeEmpresa() {
         if (empresa == null) {
             return;
         }
-        entidadDAO = new EntidadDAO();
         List<Entidad> proveedores = entidadDAO.listarProveedoresDeEmpresa(empresa.getId());
         listaProveedores.setAll(proveedores);
+        
+        if (ColIDProv.getCellValueFactory() == null) {
+            ColIDProv.setCellValueFactory(new PropertyValueFactory<>("id"));
+        }
+        if (ColNomProv.getCellValueFactory() == null) {
+            ColNomProv.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        }
         RefProd.setItems(listaProveedores);
     }
 
@@ -875,10 +887,7 @@ public void initialize() {
         }
     }
 
-    // Mostrar mensaje de error (puedes adaptarlo a Alert de JavaFX)
     private void mostrarError(String mensaje) {
-        //System.out.println("Error: " + mensaje);
-        // Alternativamente, usar Alert:
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validación");
         alert.setHeaderText(null);
@@ -911,12 +920,12 @@ public void initialize() {
 
             // 3. Generar el PDF usando el ID de la factura seleccionada
             GeneradorFactura generador = new GeneradorFactura();
-            
+
             // NOTA: Tu GeneradorFactura.generarFacturaPDF usa NUMERO_FACTURA_A_EMITIR
             // Si el método realmente necesita el ID interno de la tabla (id), usa idFacturaAEmitir
             // Si el método realmente necesita el número de factura visible (numFactura), usa numFacturaAEmitir
             // Asumo que tu generador usa el número de factura para el PDF:
-            String rutaPDF = generador.generarFacturaPDF(connection, numFacturaAEmitir); 
+            String rutaPDF = generador.generarFacturaPDF(connection, numFacturaAEmitir);
 
             if (rutaPDF != null) {
                 mostrarAlerta("Éxito", "Factura N° " + numFacturaAEmitir + " generada.");
@@ -967,7 +976,7 @@ public void initialize() {
         TCR_IdArt.setCellValueFactory(new PropertyValueFactory<>("id"));
         TCR_DescArt.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         TCR_PvpArt.setCellValueFactory(new PropertyValueFactory<>("pvp"));
-        
+
         TC_IdFac.setCellValueFactory(new PropertyValueFactory<>("id"));
         TC_TipoFac.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         TC_NumFac.setCellValueFactory(new PropertyValueFactory<>("numFactura"));
@@ -976,16 +985,16 @@ public void initialize() {
         TC_ConFac.setCellValueFactory(new PropertyValueFactory<>("concepto"));
 
         cargarFacturas();
-        
+
     }
-    
-    private void cargarFacturas(){
+
+    private void cargarFacturas() {
         // Mapeo de Double, ajustado desde tu definición inicial
         TC_IVAFac.setCellValueFactory(new PropertyValueFactory<>("iva"));
         TC_TotalFac.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         try {
-            List<Factura> facturas = facturaDAO.obtenerTodasLasFacturas(); 
+            List<Factura> facturas = facturaDAO.obtenerTodasLasFacturas();
             TV_Factura.setItems(FXCollections.observableArrayList(facturas));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1020,9 +1029,9 @@ public void initialize() {
             mostrarAlerta("Error BBDD", "Error al actualizar: " + ex.getMessage());
         }
     }
-    
+
     @FXML
-    private void cancelarCambioInfo(ActionEvent event){
+    private void cancelarCambioInfo(ActionEvent event) {
         InfoNombre.setText(empresa.getNombre());
         InfoNIF.setText(empresa.getNif());
         txtInfoCalle.setText(empresa.getDireccionCompleta());
@@ -1070,9 +1079,8 @@ public void initialize() {
             mostrarAlerta("Error BBDD", "Ocurrió un error al buscar los artículos: " + ex.getMessage());
         }
     }
-    
-    // Nuevo método en VentanaPrincipalController
 
+    // Nuevo método en VentanaPrincipalController
     private void setupFiltroArticulos() {
         // Añadir un listener al campo de texto de búsqueda de artículos
         txtBuscadorArticulo.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -1088,14 +1096,14 @@ public void initialize() {
                 // Filtrar por la descripción
                 if (producto.getDescripcion().toLowerCase().contains(lowerCaseFilter)) {
                     return true; // Coincidencia encontrada
-                } 
+                }
                 // Opcional: podrías filtrar por ID o PVP también, si quisieras
 
                 return false; // No hay coincidencia
             });
         });
     }
-    
+
     @FXML
     void onVerLineasFacturas(ActionEvent event) {
         // 1. Verificar si hay una factura seleccionada en la tabla TV_Factura
@@ -1108,35 +1116,34 @@ public void initialize() {
 
         // Obtener el ID de la factura para cargar sus líneas
         int idFactura = facturaSeleccionada.getId();
-        
+
         // 2. Cargar las líneas de la factura seleccionada (Lógica Pendiente en DAO)
         try {
             // ** [PENDIENTE] ** Debes crear un método en FacturaDAO o LineaFacturaDAO
             // para obtener las líneas asociadas a este idFactura.
             // Ejemplo de llamada (asumiendo que FacturaDAO puede hacerlo por ahora):
             // List<LineaFactura> lineas = facturaDAO.obtenerLineasPorFactura(idFactura);
-            
+
             // Suponiendo que tienes un método similar a cargarFacturas() para las líneas:
             cargarLineasFactura(idFactura); // Llamamos al nuevo método de carga
-            
+
             // 3. Cambiar la vista
             paneFactura.setVisible(false);
             paneFacturaLinea.setVisible(true);
             paneFacturaLinea.setManaged(true);
-            
+
         } catch (SQLException e) {
-             e.printStackTrace();
-             mostrarError("No se pudieron cargar las líneas de la factura: " + e.getMessage());
+            e.printStackTrace();
+            mostrarError("No se pudieron cargar las líneas de la factura: " + e.getMessage());
         }
     }
-    
+
     private void cargarLineasFactura(int idFactura) throws SQLException {
 
         // ** [ATENCIÓN] **
         // Es CRUCIAL que las TableColumn de TV_FacturaLinea (`TC_ArtFacLi`, `TC_CantFacLi`, etc.)
         // estén mapeadas correctamente a las propiedades de la clase Modelo.LineaFactura.
         // Actualmente, tus TableColumns están mapeadas a la clase Factura (Error de tipo).
-
         // Configuración de columnas (solo si no se hizo en cargarTabla o si necesitas re-configurar)
         // Ejemplo de mapeo correcto (Asumiendo que LineaFactura tiene getCantidad(), getIdProducto(), etc.):
         /*
@@ -1144,19 +1151,14 @@ public void initialize() {
         TC_ArtFacLi.setCellValueFactory(new PropertyValueFactory<>("id_producto"));
         TC_CantFacLi.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         // ... otros campos de línea
-        */
-
+         */
         // ** PENDIENTE: Crear FacturaDAO.obtenerLineasPorFactura(idFactura) **
-
         // List<LineaFactura> lineas = facturaDAO.obtenerLineasPorFactura(idFactura);
         // TV_FacturaLinea.setItems(FXCollections.observableArrayList(lineas));
-
         // Por ahora, para no tener errores de compilación, dejaremos esta parte comentada
         // hasta que el DAO y los mapeos de columnas se definan correctamente.
-
         // Ejemplo de alerta para confirmar qué factura estamos viendo:
         System.out.println("Cargando líneas para Factura ID: " + idFactura);
     }
-    
-    
+
 }
