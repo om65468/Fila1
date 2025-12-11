@@ -226,7 +226,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarCliente" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#cancelarNuevo" styleClass="form-button-secondary" text="Cancelar">
                         <graphic>
                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -305,7 +305,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProveedor" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#cancelarNuevo" styleClass="form-button-secondary" text="Cancelar">
                         <graphic>
                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
@@ -388,7 +388,7 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    <Button fx:id="Boton_eliminar_art_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#borrarProducto" styleClass="form-button-secondary" text="Eliminar">
+                    <Button fx:id="Boton_eliminar_art_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#cancelarNuevo" styleClass="form-button-secondary" text="Cancelar">
                         <graphic>
                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                 <image>

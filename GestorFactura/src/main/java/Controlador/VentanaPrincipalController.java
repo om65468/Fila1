@@ -32,8 +32,11 @@ import Modelo.GeneradorFactura;
 import Modelo.LineaFactura;
 import java.sql.Connection;
 import java.time.LocalDate;
+import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 
 public class VentanaPrincipalController {
@@ -64,6 +67,12 @@ public class VentanaPrincipalController {
     private EntidadDAO entidadDAO = new EntidadDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
     private FacturaDAO facturaDAO = new FacturaDAO();
+    
+    private boolean editandoCliente = false;
+    private boolean editandoProveedor = false;
+    private boolean editandoArticulo = false;
+    private boolean editandoFactura = false;
+
 
     @FXML
     private TabPane tabPane;
@@ -350,6 +359,9 @@ public class VentanaPrincipalController {
     private TextField txtFacEstado;
     @FXML
     private TextArea txtFacObservaciones;
+    
+    private boolean ignorarCambioTab = false;
+
 
     @FXML
     private Button Boton_nuevo_fac;
@@ -394,12 +406,53 @@ public class VentanaPrincipalController {
         }
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-            if (newTab == tabArchivo) {
-                try {
-                    switchToPrimary();
-                } catch (IOException ex) {
-                    System.out.println("Problema en la linea 143");
+
+            // 0. Evitar re-ejecución cuando cambiamos la pestaña manualmente
+            if (ignorarCambioTab) {
+                ignorarCambioTab = false; // reseteamos
+                return;
+            }
+
+            // 1. Si estamos editando, mostrar mensaje
+            boolean bloqueado =
+                    editandoCliente ||
+                    editandoProveedor ||
+                    editandoArticulo ||
+                    editandoFactura;
+
+            if (bloqueado) {
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmar salida");
+                alert.setHeaderText("Tienes cambios sin guardar");
+                alert.setContentText("¿Deseas salir sin guardar los cambios?");
+
+                ButtonType salir = new ButtonType("Salir");
+                ButtonType cancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+                alert.getButtonTypes().setAll(salir, cancelar);
+
+                var result = alert.showAndWait();
+
+                if (result.isPresent() && result.get() == cancelar) {
+
+                    // Evitar nueva ejecución del listener
+                    ignorarCambioTab = true;
+
+                    // Regresar a la pestaña anterior
+                    Platform.runLater(() -> tabPane.getSelectionModel().select(oldTab));
+                    return; 
                 }
+
+                // Si acepta salir, reseteamos banderas
+                editandoCliente = false;
+                editandoProveedor = false;
+                editandoArticulo = false;
+                editandoFactura = false;
+            }
+
+            // 2. Control de visibilidad de panes según tab
+            if (newTab == tabArchivo) {
+                try { switchToPrimary(); } catch (IOException e) {}
             } else if (newTab == tabInformacion) {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -438,24 +491,13 @@ public class VentanaPrincipalController {
                 paneInfoProveedores.setVisible(false);
                 paneInfoArticulos.setVisible(false);
                 paneInformacion.setVisible(false);
+                paneFactura.setVisible(false);
                 paneCliente.setVisible(false);
-                paneProducto.setVisible(false);
-                paneProveedor.setVisible(false);
                 paneFactura.setVisible(true);
                 paneFacturaLinea.setVisible(false);
                 paneFacturaNueva.setVisible(false);
                 cargarFacturas();
-            } else {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(false);
-                paneFactura.setVisible(false);
-                paneFacturaLinea.setVisible(false);
-                paneFacturaNueva.setVisible(false);
             }
-            escucharTablaProv();
-            cargarProveedoresDeEmpresa();
         });
 
     }
@@ -463,6 +505,7 @@ public class VentanaPrincipalController {
     //Metodos de Cliente
     @FXML
     private void onNuevoCliente() {
+        editandoCliente = true;
         ocultarPanes();
         paneInfoClientes.setVisible(false);
         paneInfoClientes.setManaged(false);
@@ -478,6 +521,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private void onModificarCliente() {
+        editandoCliente = true;
         clienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
         if (clienteSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
@@ -505,6 +549,7 @@ public class VentanaPrincipalController {
     //Metodos de Proveedor
     @FXML
     private void onNuevoProveedor() {
+        editandoProveedor = true;
         ocultarPanes();
         paneInfoProveedores.setVisible(false);
         paneInfoProveedores.setManaged(false);
@@ -520,6 +565,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private void onModificarProveedor() {
+        editandoProveedor = true;
         proveedorSeleccionado = TV_Proveedores.getSelectionModel().getSelectedItem();
         if (proveedorSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún proveedor seleccionado.");
@@ -543,10 +589,20 @@ public class VentanaPrincipalController {
         NomProv.setDisable(true);
         NIFProv.setDisable(true);
     }
+    
+    @FXML
+    private void cancelarNuevo(){
+        editandoCliente = false;
+        editandoProveedor = false;
+        editandoArticulo = false;
+        editandoFactura = false;
+
+    }
 
     //Metodos de Articulo
     @FXML
     private void onNuevoArticulo() {
+        editandoArticulo = true;
         ocultarPanes();
         paneInfoArticulos.setVisible(false);
         paneInfoArticulos.setManaged(false);
@@ -563,6 +619,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private void onModificarArticulo() {
+        editandoArticulo = true;
         productoSeleccionado = TV_Articulos.getSelectionModel().getSelectedItem();
         if (productoSeleccionado == null) {
             mostrarAlerta("Error", "No hay ningún artículo seleccionado.");
