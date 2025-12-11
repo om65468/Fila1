@@ -471,6 +471,9 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
         Boton_modificar_cli_form.setDisable(true);
         Boton_guardar_cli.setDisable(false);
+        CodCli.setDisable(false);
+        NomCli.setDisable(false);
+        NIFCli.setDisable(false);
     }
 
     @FXML
@@ -494,6 +497,9 @@ public class VentanaPrincipalController {
         DirCli.setText(clienteSeleccionado.getDireccionCompleta());
         Boton_modificar_cli_form.setDisable(false);
         Boton_guardar_cli.setDisable(true);
+        CodCli.setDisable(true);
+        NomCli.setDisable(true);
+        NIFCli.setDisable(true);
     }
 
     //Metodos de Proveedor
@@ -507,6 +513,9 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
         Boton_guardar_prov.setDisable(false);
         Boton_modificar_prov_form.setDisable(true);
+        CodProv.setDisable(false);
+        NomProv.setDisable(false);
+        NIFProv.setDisable(false);
     }
 
     @FXML
@@ -530,6 +539,9 @@ public class VentanaPrincipalController {
         DirProv.setText(proveedorSeleccionado.getDireccionCompleta());
         Boton_guardar_prov.setDisable(true);
         Boton_modificar_prov_form.setDisable(false);
+        CodProv.setDisable(true);
+        NomProv.setDisable(true);
+        NIFProv.setDisable(true);
     }
 
     //Metodos de Articulo
@@ -545,6 +557,8 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
         Boton_modificar_articulo.setDisable(true);
         Boton_guardar_art.setDisable(false);
+        IDProd.setDisable(false);
+        
     }
 
     @FXML
@@ -562,7 +576,8 @@ public class VentanaPrincipalController {
         escucharTablaProv();
         cargarProveedoresDeEmpresa();
         cargarTablasEmpresa();
-
+        
+        IDProd.setText(productoSeleccionado.getId()+"");
         DescProd.setText(productoSeleccionado.getDescripcion());
         //ProvProd.setText(productoSeleccionado.getRefProveedor());
         CosProd.setText(productoSeleccionado.getCoste() + "");
@@ -571,6 +586,7 @@ public class VentanaPrincipalController {
         StokProd.setText(productoSeleccionado.getStock() + "");
         Boton_modificar_articulo.setDisable(false);
         Boton_guardar_art.setDisable(true);
+        IDProd.setDisable(true);
     }
 
     //Metodos de Factura
