@@ -283,63 +283,7 @@ public class VentanaPrincipalController {
     @FXML
     private TableView<Factura> TV_Factura;
 
-    @FXML
-    public void initialize() {
-        tabPane.getSelectionModel().select(tabInformacion);
-        paneInformacion.setVisible(true);
-        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
-            if (newTab == tabArchivo) {
-                try {
-                    // Se seleccionó la pestaña 2, llamar a tu método
-                    switchToPrimary();
-                } catch (IOException ex) {
-                    System.out.println("Problema en la linea 143");
-                }
-            } else if (newTab == tabInformacion) {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(true);
-                paneFactura.setVisible(false);
-            } else if (newTab == tab_cliente) {
-                paneInfoClientes.setVisible(true);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(false);
-                paneFactura.setVisible(false);
-            } else if (newTab == tab_proveedor) {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(true);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(false);
-                paneFactura.setVisible(false);
-            } else if (newTab == tabArticulos) {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(true);
-                paneInformacion.setVisible(false);
-                paneFactura.setVisible(false);
-                cargarProveedoresDeEmpresa();
-            } else if (newTab == TabFactura) {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(false);
-                paneCliente.setVisible(false);
-                paneProducto.setVisible(false);
-                paneProveedor.setVisible(false);
-                paneFactura.setVisible(true);
-            } else {
-                paneInfoClientes.setVisible(false);
-                paneInfoProveedores.setVisible(false);
-                paneInfoArticulos.setVisible(false);
-                paneInformacion.setVisible(false);
-                paneFactura.setVisible(false);
-            }
-        
-                
-        }
-                
+    @FXML               
     private TableColumn<Factura, String> TC_FEmisionFac;
 
     @FXML
