@@ -48,7 +48,7 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="Boton_modificar_cli" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
+                                    <Button fx:id="Boton_modificar_cli" contentDisplay="TOP" mnemonicParsing="false" onAction="#onModificarCliente" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
                                         <graphic>
                                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -145,7 +145,7 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="Boton_modificar_prov" contentDisplay="TOP" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
+                                    <Button fx:id="Boton_modificar_prov" contentDisplay="TOP" mnemonicParsing="false" onAction="#onModificarProveedor" prefHeight="65.0" prefWidth="65.0" styleClass="btn_cliente" text="Modificar">
                                         <graphic>
                                             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -212,7 +212,7 @@
         </tabs>
     </TabPane>
 
-    <AnchorPane fx:id="paneCliente" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneCliente" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
@@ -234,6 +234,15 @@
                             </ImageView>
                         </graphic>
                     </Button>
+               <Button fx:id="Boton_modificar_cli_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarModificacionCliente" styleClass="form-button-secondary" text="Modificar">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/iconEliminarCliente.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
                 </children>
             </HBox>
             
@@ -304,6 +313,15 @@
                             </ImageView>
                         </graphic>
                     </Button>
+               <Button fx:id="Boton_modificar_prov_form" contentDisplay="LEFT" mnemonicParsing="false" onAction="#guardarModificacionProveedor" styleClass="form-button-secondary" text="Modificar">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@images/iconEliminarCliente.png" />
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </Button>
                 </children>
             </HBox>
 
@@ -462,7 +480,7 @@
         </children>
     </AnchorPane>
 
-    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+    <AnchorPane fx:id="paneInformacion" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.39999999999997726" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>

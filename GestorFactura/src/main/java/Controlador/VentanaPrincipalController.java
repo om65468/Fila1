@@ -56,6 +56,7 @@ public class VentanaPrincipalController {
 
     private Entidad empresa;
     private Entidad proveedorSeleccionado;
+    private Entidad clienteSeleccionado;
     private ObservableList<Entidad> listaProveedores = FXCollections.observableArrayList();
     private EntidadDAO entidadDAO = new EntidadDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
@@ -412,6 +413,28 @@ public class VentanaPrincipalController {
         paneInfoClientes.setManaged(false);
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
+        cargarTablasEmpresa();
+    }
+
+    @FXML
+    private void onModificarCliente() {
+        clienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
+        if (clienteSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
+            return;
+        }
+        ocultarPanes();
+        paneInfoClientes.setVisible(false);
+        paneInfoClientes.setManaged(false);
+        paneCliente.setVisible(true);
+        paneCliente.setManaged(true);
+        cargarTablasEmpresa();
+        CodCli.setText(String.valueOf(clienteSeleccionado.getId()));
+        EmailCli.setText(clienteSeleccionado.getEmail());
+        NIFCli.setText(clienteSeleccionado.getNif());
+        NomCli.setText(clienteSeleccionado.getNombre());
+        TlfCli.setText(clienteSeleccionado.getTelefono());
+        DirCli.setText(clienteSeleccionado.getDireccionCompleta());
     }
 
     //Metodos de Proveedor
@@ -422,6 +445,28 @@ public class VentanaPrincipalController {
         paneInfoProveedores.setManaged(false);
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
+        cargarTablasEmpresa();
+    }
+
+    @FXML
+    private void onModificarProveedor() {
+        proveedorSeleccionado = TV_Proveedores.getSelectionModel().getSelectedItem();
+        if (proveedorSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún proveedor seleccionado.");
+            return;
+        }
+        ocultarPanes();
+        paneInfoProveedores.setVisible(false);
+        paneInfoProveedores.setManaged(false);
+        paneProveedor.setVisible(true);
+        paneProveedor.setManaged(true);
+        cargarTablasEmpresa();
+        CodProv.setText(String.valueOf(proveedorSeleccionado.getId()));
+        EmailProv.setText(proveedorSeleccionado.getEmail());
+        NIFProv.setText(proveedorSeleccionado.getNif());
+        NomProv.setText(proveedorSeleccionado.getNombre());
+        TlfProv.setText(proveedorSeleccionado.getTelefono());
+        DirProv.setText(proveedorSeleccionado.getDireccionCompleta());
     }
 
     //Metodos de Articulo
@@ -434,6 +479,7 @@ public class VentanaPrincipalController {
         paneProducto.setManaged(true);
         escucharTablaProv();
         cargarProveedoresDeEmpresa();
+        cargarTablasEmpresa();
     }
 
     //Metodos de Factura
@@ -442,6 +488,7 @@ public class VentanaPrincipalController {
         ocultarPanes();
         paneFactura.setVisible(true);
         paneFactura.setManaged(true);
+        cargarTablasEmpresa();
     }
 
     @FXML
@@ -538,13 +585,24 @@ public class VentanaPrincipalController {
     }
 
     @FXML
-    private void modificarCliente() {
-        Entidad ClienteSeleccionado = TV_Clientes.getSelectionModel().getSelectedItem();
-        if (ClienteSeleccionado == null) {
-            mostrarAlerta("Error", "No hay ningún cliente seleccionado.");
-            return;
-        }
+    private void guardarModificacionCliente() {
+       
+        // ID, NIF y Nombre NO se cambian → NO tocar esos campos
+        String nuevoEmail = EmailCli.getText();
+        String nuevoTelefono = TlfCli.getText();
+        String nuevaDireccion = DirCli.getText();
 
+        // Actualizar solo datos modificables
+        clienteSeleccionado.setEmail(nuevoEmail);
+        clienteSeleccionado.setTelefono(nuevoTelefono);
+        clienteSeleccionado.setCalle(nuevaDireccion);
+
+        try {
+            entidadDAO.actualizar(clienteSeleccionado);
+            mostrarAlerta("Éxito", "Cliente modificado correctamente.");
+        } catch (Exception e) {
+            mostrarAlerta("Error", "No se pudo modificar el cliente: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -606,6 +664,27 @@ public class VentanaPrincipalController {
         NomProv.clear();
         DirProv.clear();
         TlfProv.clear();
+    }
+
+    @FXML
+    private void guardarModificacionProveedor() {
+
+        // ID, NIF y Nombre NO se cambian → NO tocar esos campos
+        String nuevoEmail = EmailProv.getText();
+        String nuevoTelefono = TlfProv.getText();
+        String nuevaDireccion = DirProv.getText();
+
+        // Actualizar solo datos modificables
+        proveedorSeleccionado.setEmail(nuevoEmail);
+        proveedorSeleccionado.setTelefono(nuevoTelefono);
+        proveedorSeleccionado.setCalle(nuevaDireccion);
+
+        try {
+            entidadDAO.actualizar(proveedorSeleccionado);
+            mostrarAlerta("Éxito", "Proveedor modificado correctamente.");
+        } catch (Exception e) {
+            mostrarAlerta("Error", "No se pudo modificar el proveedor: " + e.getMessage());
+        }
     }
 
     @FXML
@@ -729,7 +808,7 @@ public class VentanaPrincipalController {
         }
         List<Entidad> proveedores = entidadDAO.listarProveedoresDeEmpresa(empresa.getId());
         listaProveedores.setAll(proveedores);
-        
+
         if (ColIDProv.getCellValueFactory() == null) {
             ColIDProv.setCellValueFactory(new PropertyValueFactory<>("id"));
         }

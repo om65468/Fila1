@@ -42,7 +42,7 @@ public class EntidadDAO {
 
             stmt.setString(1, e.getNombre());
             stmt.setString(2, e.getNif());
-            stmt.setString(3, e.getDireccionCompleta());
+            stmt.setString(3, e.getCalle());
             stmt.setString(4, e.getTelefono());
             stmt.setString(5, e.getEmail());
             stmt.setInt(6, e.getId());
