@@ -19,18 +19,20 @@ public class FacturaDAO {
 
     // Insertar una factura
     public void insertar(Factura f) throws SQLException {
-        String sql = "INSERT INTO facturas (tipo, numFactura, fechaEmision, idSecundario, concepto, base, iva, total, estado, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        // La sentencia SQL ahora incluye id_empresa
+        String sql = "INSERT INTO facturas (tipo, numFactura, fechaEmision, idSecundario, id_empresa, concepto, base, iva, total, estado, observaciones) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, String.valueOf(f.getTipo()));
             ps.setInt(2, f.getNumFactura());
             ps.setDate(3, Date.valueOf(f.getFechaEmision()));
             ps.setInt(4, f.getIdSecundario());
-            ps.setString(5, f.getConcepto());
-            ps.setDouble(6, f.getBase());
-            ps.setDouble(7, f.getIva());
-            ps.setDouble(8, f.getTotal());
-            ps.setString(9, f.getEstado());
-            ps.setString(10, f.getObservaciones());
+            ps.setInt(5, f.getIdEmpresa()); // <--- ¡NUEVO CAMPO!
+            ps.setString(6, f.getConcepto());
+            ps.setDouble(7, f.getBase());
+            ps.setDouble(8, f.getIva());
+            ps.setDouble(9, f.getTotal());
+            ps.setString(10, f.getEstado());
+            ps.setString(11, f.getObservaciones());
 
             ps.executeUpdate();
 
@@ -71,19 +73,21 @@ public class FacturaDAO {
 
     // Actualizar factura
     public void actualizar(Factura f) throws SQLException {
-        String sql = "UPDATE facturas SET tipo=?, numFactura=?, fechaEmision=?, idSecundario=?, concepto=?, base=?, iva=?, total=?, estado=?, observaciones=? WHERE id=?";
+        // La sentencia SQL de UPDATE ahora incluye id_empresa
+        String sql = "UPDATE facturas SET tipo=?, numFactura=?, fechaEmision=?, idSecundario=?, id_empresa=?, concepto=?, base=?, iva=?, total=?, estado=?, observaciones=? WHERE id=?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, String.valueOf(f.getTipo()));
             ps.setInt(2, f.getNumFactura());
             ps.setDate(3, Date.valueOf(f.getFechaEmision()));
             ps.setInt(4, f.getIdSecundario());
-            ps.setString(5, f.getConcepto());
-            ps.setDouble(6, f.getBase());
-            ps.setDouble(7, f.getIva());
-            ps.setDouble(8, f.getTotal());
-            ps.setString(9, f.getEstado());
-            ps.setString(10, f.getObservaciones());
-            ps.setInt(11, f.getId());
+            ps.setInt(5, f.getIdEmpresa()); // <--- ¡NUEVO CAMPO!
+            ps.setString(6, f.getConcepto());
+            ps.setDouble(7, f.getBase());
+            ps.setDouble(8, f.getIva());
+            ps.setDouble(9, f.getTotal());
+            ps.setString(10, f.getEstado());
+            ps.setString(11, f.getObservaciones());
+            ps.setInt(12, f.getId()); // ID al final
 
             ps.executeUpdate();
         }
@@ -106,6 +110,7 @@ public class FacturaDAO {
         f.setNumFactura(rs.getInt("numFactura"));
         f.setFechaEmision(rs.getDate("fechaEmision").toString());
         f.setIdSecundario(rs.getInt("idSecundario"));
+        f.setIdEmpresa(rs.getInt("id_empresa")); // <--- ¡NUEVO CAMPO LEÍDO!
         f.setConcepto(rs.getString("concepto"));
         f.setBase(rs.getDouble("base"));
         f.setIva(rs.getDouble("iva"));

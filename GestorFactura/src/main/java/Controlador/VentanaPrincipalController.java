@@ -600,6 +600,7 @@ public class VentanaPrincipalController {
 
     @FXML
 private void guardarFactura() {
+        System.out.println(empresa.getId());
     if (empresa == null) {
         mostrarError("Debe haber una empresa cargada para guardar una factura.");
         return;
