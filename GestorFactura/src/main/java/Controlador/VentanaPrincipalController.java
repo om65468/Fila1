@@ -59,6 +59,7 @@ public class VentanaPrincipalController {
     private Entidad empresa;
     private Entidad proveedorSeleccionado;
     private Entidad clienteSeleccionado;
+    private Producto productoSeleccionado;
     private ObservableList<Entidad> listaProveedores = FXCollections.observableArrayList();
     private EntidadDAO entidadDAO = new EntidadDAO();
     private ProductoDAO productoDAO = new ProductoDAO();
@@ -312,7 +313,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private TableColumn<Factura, Integer> TC_DescFac;
-    
+
     @FXML
     private AnchorPane paneFacturaNueva; // <-- Necesitas añadir este AnchorPane
     @FXML
@@ -344,7 +345,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private Button Boton_nuevo_fac;
-    
+
     @FXML
     public void initialize() {
         tabPane.getSelectionModel().select(tabInformacion);
@@ -376,14 +377,14 @@ public class VentanaPrincipalController {
 
             // 4. Establecer la lista ordenada/filtrada como contenido de la tabla
             TV_ResultadosArticulo.setItems(sortedData);
-            
+
             setupFiltroArticulos();
-        } catch(Exception e){
+        } catch (Exception e) {
             mostrarError("Error BBDD");
             e.printStackTrace();
         }
-    
-            tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
+
+        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, oldTab, newTab) -> {
             if (newTab == tabArchivo) {
                 try {
                     switchToPrimary();
@@ -431,7 +432,7 @@ public class VentanaPrincipalController {
                 paneFactura.setVisible(true);
                 paneFacturaLinea.setVisible(false);
                 paneFacturaNueva.setVisible(false);
-                cargarFacturas(); 
+                cargarFacturas();
             } else {
                 paneInfoClientes.setVisible(false);
                 paneInfoProveedores.setVisible(false);
@@ -441,11 +442,10 @@ public class VentanaPrincipalController {
                 paneFacturaLinea.setVisible(false);
                 paneFacturaNueva.setVisible(false);
             }
-                escucharTablaProv();
-                cargarProveedoresDeEmpresa();
-            });
+            escucharTablaProv();
+            cargarProveedoresDeEmpresa();
+        });
 
-        
     }
 
     //Metodos de Cliente
@@ -525,6 +525,30 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
     }
 
+    @FXML
+    private void onModificarArticulo() {
+        productoSeleccionado = TV_Articulos.getSelectionModel().getSelectedItem();
+        if (productoSeleccionado == null) {
+            mostrarAlerta("Error", "No hay ningún artículo seleccionado.");
+            return;
+        }
+        ocultarPanes();
+        paneInfoArticulos.setVisible(false);
+        paneInfoArticulos.setManaged(false);
+        paneProducto.setVisible(true);
+        paneProducto.setManaged(true);
+        escucharTablaProv();
+        cargarProveedoresDeEmpresa();
+        cargarTablasEmpresa();
+
+        DescProd.setText(productoSeleccionado.getDescripcion());
+        //ProvProd.setText(productoSeleccionado.getRefProveedor());
+        CosProd.setText(productoSeleccionado.getCoste() + "");
+        PVPProd.setText(productoSeleccionado.getPvp() + "");
+        IVAProd.setText(productoSeleccionado.getIva() + "");
+        StokProd.setText(productoSeleccionado.getStock() + "");
+    }
+
     //Metodos de Factura
     @FXML
     private void onNuevoFactura() {
@@ -535,7 +559,7 @@ public class VentanaPrincipalController {
         // Limpiar campos para un nuevo registro
         limpiarCamposFactura();
     }
-    
+
     private void limpiarCamposFactura() {
         txtFacId.clear(); // El ID es automático, debería estar vacío
         txtFacTipo.clear();
@@ -549,7 +573,7 @@ public class VentanaPrincipalController {
         txtFacEstado.clear();
         txtFacObservaciones.clear();
     }
-    
+
     @FXML
     private void guardarFactura() {
         // 1. Validar y parsear datos de entrada
@@ -557,11 +581,11 @@ public class VentanaPrincipalController {
             char tipo = txtFacTipo.getText().trim().isEmpty() ? ' ' : txtFacTipo.getText().trim().toUpperCase().charAt(0);
             int numFactura = Integer.parseInt(txtFacNumFactura.getText().trim());
             LocalDate localDate = txtFacFechaEmision.getValue();
-        if (localDate == null) {
-            mostrarError("Debes seleccionar una fecha de emisión.");
-            return;
-        }
-        String fechaEmision = localDate.toString();
+            if (localDate == null) {
+                mostrarError("Debes seleccionar una fecha de emisión.");
+                return;
+            }
+            String fechaEmision = localDate.toString();
             int idSecundario = Integer.parseInt(txtFacIdSecundario.getText().trim());
             String concepto = txtFacConcepto.getText().trim();
             double base = Double.parseDouble(txtFacBase.getText().trim());
@@ -586,7 +610,7 @@ public class VentanaPrincipalController {
             mostrarAlerta("Éxito", "Factura N° " + nuevaFactura.getNumFactura() + " guardada correctamente con ID " + nuevaFactura.getId());
 
             // Vuelve a la vista de lista de facturas
-            cancelarNuevaFactura(); 
+            cancelarNuevaFactura();
 
         } catch (NumberFormatException e) {
             mostrarError("Error en formato numérico: Asegúrate de que Número de Factura, ID Entidad, Base e IVA son números válidos.");
@@ -596,7 +620,7 @@ public class VentanaPrincipalController {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
     private void cancelarNuevaFactura() {
         limpiarCamposFactura();
@@ -608,7 +632,7 @@ public class VentanaPrincipalController {
         paneFactura.setManaged(true);
 
         // Recarga la tabla de facturas para ver los posibles cambios
-        cargarFacturas(); 
+        cargarFacturas();
 
         // Cambia la selección de pestaña al TabFactura para asegurar el foco visual
         tabPane.getSelectionModel().select(TabFactura);
@@ -708,8 +732,66 @@ public class VentanaPrincipalController {
     }
 
     @FXML
+    private void guardarModificacionArticulo() {
+        try {
+            // Recoger datos modificables
+            String descripcion = DescProd.getText().trim();
+            double coste;
+            double pvp;
+            double iva;
+            int stock;
+
+            // Validar campos numéricos
+            try {
+                coste = Double.parseDouble(CosProd.getText().trim());
+                pvp = Double.parseDouble(PVPProd.getText().trim());
+                iva = Double.parseDouble(IVAProd.getText().trim());
+                stock = Integer.parseInt(StokProd.getText().trim());
+            } catch (NumberFormatException nfe) {
+                mostrarAlerta("Datos numéricos inválidos", "Comprueba coste, pvp, iva y stock (deben ser números).");
+                return;
+            }
+
+            // Validación básica
+            if (descripcion.isEmpty()) {
+                mostrarAlerta("Descripción vacía", "Introduce una descripción para el artículo.");
+                return;
+            }
+
+            // Actualizar objeto
+            productoSeleccionado.setDescripcion(descripcion);
+            productoSeleccionado.setCoste(coste);
+            productoSeleccionado.setPvp(pvp);
+            productoSeleccionado.setIva(iva);
+            productoSeleccionado.setStock(stock);
+
+            // Guardar en base de datos
+            productoDAO.actualizar(productoSeleccionado);
+
+            // Refrescar tabla
+            cargarTablasEmpresa();
+
+            mostrarAlerta("Éxito", "Artículo modificado correctamente.");
+
+            // Limpiar selección y campos
+            productoSeleccionado = null;
+            DescProd.clear();
+            CosProd.clear();
+            PVPProd.clear();
+            IVAProd.clear();
+            StokProd.clear();
+            IDProd.clear();
+            ProvProd.clear();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            mostrarAlerta("Error BBDD", "No se pudo modificar el artículo: " + ex.getMessage());
+        }
+    }
+
+    @FXML
     private void guardarModificacionCliente() {
-       
+
         // ID, NIF y Nombre NO se cambian → NO tocar esos campos
         String nuevoEmail = EmailCli.getText();
         String nuevoTelefono = TlfCli.getText();
@@ -909,10 +991,10 @@ public class VentanaPrincipalController {
 
         paneProducto.setVisible(false);
         paneProducto.setManaged(false);
-        
+
         paneFacturaNueva.setVisible(false);
         paneFacturaNueva.setManaged(false);
-        
+
         paneFactura.setVisible(false);
         paneFactura.setManaged(false);
 
