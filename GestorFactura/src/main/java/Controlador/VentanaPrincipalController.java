@@ -103,9 +103,11 @@ public class VentanaPrincipalController {
 
     //Proveedor
     @FXML
-    private Button Boton_Guardar_prov;
+    private Button Boton_guardar_prov;
     @FXML
     private Button Boton_duplicar_prov;
+    @FXML
+    private Button Boton_modificar_prov_form;
     @FXML
     private Button Boton_eliminar_prov;
     @FXML
@@ -138,6 +140,8 @@ public class VentanaPrincipalController {
     private Button Boton_guardar_cli;
     @FXML
     private Button Boton_modificar_cli;
+    @FXML
+    private Button Boton_modificar_cli_form;
     @FXML
     private Button Boton_nuevo_cli;
     @FXML
@@ -180,6 +184,10 @@ public class VentanaPrincipalController {
     private Button GuardarProd;
     @FXML
     private Button EliminarProd;
+    @FXML
+    private Button Boton_modificar_articulo;
+    @FXML
+    private Button Boton_guardar_art;
     @FXML
     private TextField PVPProd;
     @FXML
@@ -460,6 +468,8 @@ public class VentanaPrincipalController {
         paneCliente.setVisible(true);
         paneCliente.setManaged(true);
         cargarTablasEmpresa();
+        Boton_modificar_cli_form.setDisable(true);
+        Boton_guardar_cli.setDisable(false);
     }
 
     @FXML
@@ -481,6 +491,8 @@ public class VentanaPrincipalController {
         NomCli.setText(clienteSeleccionado.getNombre());
         TlfCli.setText(clienteSeleccionado.getTelefono());
         DirCli.setText(clienteSeleccionado.getDireccionCompleta());
+        Boton_modificar_cli_form.setDisable(false);
+        Boton_guardar_cli.setDisable(true);
     }
 
     //Metodos de Proveedor
@@ -492,6 +504,8 @@ public class VentanaPrincipalController {
         paneProveedor.setVisible(true);
         paneProveedor.setManaged(true);
         cargarTablasEmpresa();
+        Boton_guardar_prov.setDisable(false);
+        Boton_modificar_prov_form.setDisable(true);
     }
 
     @FXML
@@ -513,6 +527,8 @@ public class VentanaPrincipalController {
         NomProv.setText(proveedorSeleccionado.getNombre());
         TlfProv.setText(proveedorSeleccionado.getTelefono());
         DirProv.setText(proveedorSeleccionado.getDireccionCompleta());
+        Boton_guardar_prov.setDisable(true);
+        Boton_modificar_prov_form.setDisable(false);
     }
 
     //Metodos de Articulo
@@ -526,6 +542,8 @@ public class VentanaPrincipalController {
         escucharTablaProv();
         cargarProveedoresDeEmpresa();
         cargarTablasEmpresa();
+        Boton_modificar_articulo.setDisable(true);
+        Boton_guardar_art.setDisable(false);
     }
 
     @FXML
@@ -550,6 +568,8 @@ public class VentanaPrincipalController {
         PVPProd.setText(productoSeleccionado.getPvp() + "");
         IVAProd.setText(productoSeleccionado.getIva() + "");
         StokProd.setText(productoSeleccionado.getStock() + "");
+        Boton_modificar_articulo.setDisable(false);
+        Boton_guardar_art.setDisable(true);
     }
 
     //Metodos de Factura
@@ -685,7 +705,7 @@ public class VentanaPrincipalController {
 
     @FXML
     private void guardarCliente() {
-
+        
         try {
             TipoEntidadDAO tipoEntidad = new TipoEntidadDAO();
             EmpresaEntidadRelacionDAO tipoDAO = new EmpresaEntidadRelacionDAO();
