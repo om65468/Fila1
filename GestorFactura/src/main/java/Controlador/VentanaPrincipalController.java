@@ -33,6 +33,8 @@ import Modelo.LineaFactura;
 import Modelo.LineaFacturaDAO;
 import java.sql.Connection;
 import java.time.LocalDate;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 import javafx.application.Platform;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -40,6 +42,8 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextInputControl;
 import javafx.util.StringConverter;
 
 public class VentanaPrincipalController {
@@ -377,6 +381,7 @@ public class VentanaPrincipalController {
 
     @FXML
     public void initialize() {
+        aplicarRestriccionesDeValidacion();
         tabPane.getSelectionModel().select(tabInformacion);
         paneInformacion.setVisible(true);
 
@@ -603,6 +608,7 @@ public class VentanaPrincipalController {
         NIFProv.setDisable(true);
     }
     
+    /*
     @FXML
     private void cancelarNuevo(){
         editandoCliente = false;
@@ -610,6 +616,34 @@ public class VentanaPrincipalController {
         editandoArticulo = false;
         editandoFactura = false;
 
+    }*/
+    
+    @FXML
+    private void cancelarCliente(){
+        editandoCliente = false;
+        ocultarPanes();
+        paneInfoClientes.setVisible(true);
+    }
+    
+    @FXML
+    private void cancelarProducto(){
+        editandoArticulo = false;
+        ocultarPanes();
+        paneInfoArticulos.setVisible(true);
+    }
+    
+    @FXML
+    private void cancelarProveedor(){
+        editandoProveedor = false;
+        ocultarPanes();
+        paneInfoProveedores.setVisible(true);
+    }
+    
+    @FXML
+    private void cancelarFactura(){
+        editandoFactura = false;
+        ocultarPanes();
+        paneFactura.setVisible(true);
     }
 
     //Metodos de Articulo
@@ -885,6 +919,9 @@ public class VentanaPrincipalController {
         NomCli.clear();
         TlfCli.clear();
         DirCli.clear();
+        
+        ocultarPanes();
+        paneInfoClientes.setVisible(true);
 
     }
 
@@ -1042,6 +1079,9 @@ public class VentanaPrincipalController {
         NomProv.clear();
         DirProv.clear();
         TlfProv.clear();
+        
+        ocultarPanes();
+        paneInfoProveedores.setVisible(true);
     }
 
     @FXML
@@ -1127,6 +1167,9 @@ public class VentanaPrincipalController {
             IVAProd.clear();
             StokProd.clear();
             proveedorSeleccionado = null;
+            
+            ocultarPanes();
+            paneInfoArticulos.setVisible(true);
 
             // refrescar listas, tablas, etc. si procede
         } catch (SQLException ex) {
@@ -1748,5 +1791,71 @@ public class VentanaPrincipalController {
             e.printStackTrace();
             mostrarError("Error BBDD al recalcular totales: " + e.getMessage());
         }
+    }
+    
+    private void caracteresTexto(TextInputControl inputControl) {
+        Pattern patron = Pattern.compile("[a-zA-Z0-9\\s.,-]*");
+
+        UnaryOperator<TextFormatter.Change> filtro = (cambio) -> {
+            if (patron.matcher(cambio.getControlNewText()).matches()) {
+                return cambio;
+            } else {
+                return null;
+            }
+        };
+        inputControl.setTextFormatter(new TextFormatter<>(filtro));
+    }
+
+    /**
+     * Aplica un filtro para permitir solo números enteros.
+     */
+    private void caracteresNumero(TextField textField) {
+        // Permite solo dígitos [0-9]
+        Pattern patron = Pattern.compile("\\d*");
+        UnaryOperator<TextFormatter.Change> filtro = (cambio) -> {
+            if (patron.matcher(cambio.getControlNewText()).matches()) {
+                return cambio;
+            } else {
+                return null;
+            }
+        };
+        textField.setTextFormatter(new TextFormatter<>(filtro));
+    }
+
+    /**
+     * Aplica un filtro permisivo para correos electrónicos.
+     * Permite alfanuméricos, puntos, guiones, underscores y el símbolo @.
+     */
+    private void aplicarFiltroEmail(TextField textField) {
+        // Permite alfanuméricos, @, ., -, _
+        Pattern patron = Pattern.compile("[a-zA-Z0-9@._-]*"); 
+        UnaryOperator<TextFormatter.Change> filtro = (cambio) -> {
+            if (patron.matcher(cambio.getControlNewText()).matches()) {
+                return cambio;
+            } else {
+                return null;
+            }
+        };
+        textField.setTextFormatter(new TextFormatter<>(filtro));
+    }
+    
+    private void aplicarRestriccionesDeValidacion() {
+        caracteresTexto(NomCli);
+        caracteresTexto(DirCli);
+        caracteresTexto(CodCli);
+
+        caracteresTexto(NomProv);
+        caracteresTexto(DirProv);
+        caracteresTexto(CodProv);
+
+        caracteresNumero(TlfCli);
+        caracteresNumero(TlfProv);
+        caracteresNumero(txtInfoTlf); 
+        aplicarFiltroEmail(EmailCli);
+        aplicarFiltroEmail(EmailProv);
+        aplicarFiltroEmail(txtInfoEmail);
+
+        caracteresTexto(DescProd); 
+        caracteresNumero(StokProd);
     }
 }
