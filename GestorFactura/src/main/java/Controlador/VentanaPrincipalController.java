@@ -874,6 +874,20 @@ private void guardarFactura() {
     }
 
     @FXML
+    private void borrarFactura(){
+        Factura facturaSeleccionada = TV_Factura.getSelectionModel().getSelectedItem();
+        if(facturaSeleccionada == null){
+            mostrarAlerta("Error", "No hay ninguna factura seleccionada.");
+            return;
+        }
+        FacturaDAO facturadao = new FacturaDAO();
+        try{
+            facturadao.eliminar(facturaSeleccionada.getId());
+        }catch(SQLException e){}
+        TV_Factura.getItems().remove(facturaSeleccionada);
+    }
+    
+    @FXML
     private void guardarProveedor() {
 
         try {
