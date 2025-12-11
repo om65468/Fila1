@@ -107,6 +107,7 @@
                     <Button fx:id="btn_entrar" mnemonicParsing="false" onAction="#onElegirEmpresa" styleClass="form-button-primary" text="Entrar" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="620.0" />
                <Button fx:id="btn_eliminar" layoutX="598.0" layoutY="648.0" mnemonicParsing="false" onAction="#borrarEmpresa" styleClass="form-button-primary" text="Eliminar" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="620.0" />
                <TextField fx:id="txtBuscarEmpresa" layoutX="474.0" layoutY="76.0" prefHeight="31.0" prefWidth="202.0" />
+               <Label layoutX="393.0" layoutY="83.0" text="Buscador: " />
                 </children>
             </AnchorPane>
 
