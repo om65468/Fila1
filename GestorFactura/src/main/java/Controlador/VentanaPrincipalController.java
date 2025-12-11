@@ -763,6 +763,9 @@ public class VentanaPrincipalController {
 
             txtFacId.setText(String.valueOf(nuevaFactura.getId())); // Mostrar el ID generado
 
+            paneFacturaNueva.setVisible(false);
+            paneFacturaNueva.setManaged(false);
+            onVerLineasFacturas();
             // Si el objetivo es volver al listado:
             // cancelarNuevaFactura();
 
@@ -1526,6 +1529,27 @@ public class VentanaPrincipalController {
         }
     }
     
+    void onVerLineasFacturas() {
+        // 2. Transición de la vista
+        // Ocultar la lista principal y mostrar el editor de líneas
+        paneFactura.setVisible(false);
+        paneFactura.setManaged(false);
+        paneFacturaLinea.setVisible(true);
+        paneFacturaLinea.setManaged(true);
+
+        // Opcional: Si quieres rellenar el campo txtFacId con el ID de la factura que se está viendo
+        // Esto es útil para el botón de "Añadir Línea"
+
+        // 3. Cargar las líneas de la factura seleccionada
+        try {
+            cargarLineasFactura(Integer.parseInt(txtFacId.getText()));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mostrarError("No se pudieron cargar las líneas de la factura: " + e.getMessage());
+        }
+    }
+    
     private void cargarLineasFactura(int idFactura) throws SQLException {
         List<LineaFactura> lineas = lineaDAO.listarPorFactura(idFactura);
         TV_FacturaLinea.setItems(FXCollections.observableArrayList(lineas));
@@ -1593,6 +1617,16 @@ public class VentanaPrincipalController {
             // Nota: NO limpiamos el ComboBox o productoSeleccionado aquí, 
             // ya que el usuario podría querer añadir más unidades del mismo producto.
 
+            cbxArticulo.getSelectionModel().clearSelection(); // Limpia la selección interna
+            cbxArticulo.getEditor().clear(); // Limpia el texto visible
+            productoSeleccionado = null; // Limpia la variable de respaldo
+
+            // Limpiar los labels de detalle (para evitar confusiones)
+            lblArticuloID.setText("[ID]");
+            lblArticuloPVP.setText("[PVP]");
+            lblArticuloStock.setText("[Stock]");
+            lblArticuloIVA.setText("[IVA]");
+            
             mostrarAlerta("Éxito", "Línea añadida correctamente.");
 
         } catch (SQLException e) {

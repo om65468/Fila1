@@ -599,17 +599,8 @@
 
     <AnchorPane fx:id="paneFacturaLinea" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
-            <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="20.0" spacing="20.0">
+            <HBox alignment="CENTER_LEFT" layoutX="34.0" layoutY="20.0" spacing="20.0">
                 <children>
-                    <Button fx:id="Boton_volver_factura" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onVolverACabeceraFactura" styleClass="form-button-secondary" text="Volver a Factura">
-                        <graphic>
-                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@images/back.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                    </Button>
                     
                     <Button fx:id="Boton_confirmar_linea" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onAnadirLineaFactura" styleClass="form-button-primary" text="Añadir Línea">
                         <graphic>
@@ -620,13 +611,12 @@
                             </ImageView>
                         </graphic>
                     </Button>
-                    
-                    <Button fx:id="Boton_modificar_linea" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Modificar Línea" />
                     <Button fx:id="Boton_eliminar_linea" contentDisplay="LEFT" mnemonicParsing="false" onAction="#onBorrarLineaFactura" styleClass="form-button-secondary" text="Eliminar Línea" />
+               <Button fx:id="Boton_eliminar_linea1" contentDisplay="LEFT" mnemonicParsing="false" styleClass="form-button-secondary" text="Cancelar" />
                 </children>
             </HBox>
 
-            <Label layoutX="30.0" layoutY="65.0" styleClass="section-title" text="Selección de Artículo y Cantidad" />
+            <Label layoutX="30.0" layoutY="65.0" styleClass="section-title" text="Selección de Artículo" />
 
             <GridPane layoutX="30.0" layoutY="90.0" prefHeight="130.0" prefWidth="932.0" styleClass="form-section" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
                 <columnConstraints>
@@ -701,7 +691,7 @@
          </ScrollPane>
       </children>
    </AnchorPane>
-   <AnchorPane fx:id="paneFacturaNueva" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+   <AnchorPane fx:id="paneFacturaNueva" layoutY="130.0" prefHeight="575.0" prefWidth="992.0" styleClass="form-pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
         <children>
             <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="20.0" spacing="20.0">
                 <children>
