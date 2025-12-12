@@ -98,10 +98,9 @@ public class PrimaryController implements Initializable {
     private ObservableList<Entidad> listaEmpresas;
 
     private Entidad empresaCreada;
-    
+
     @FXML
     private TextField txtBuscarEmpresa;
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -127,8 +126,12 @@ public class PrimaryController implements Initializable {
                 String filtro = newValue.toLowerCase();
 
                 // Comparación por nombre o NIF
-                if (empresa.getNombre().toLowerCase().contains(filtro)) return true;
-                if (empresa.getNif().toLowerCase().contains(filtro)) return true;
+                if (empresa.getNombre().toLowerCase().contains(filtro)) {
+                    return true;
+                }
+                if (empresa.getNif().toLowerCase().contains(filtro)) {
+                    return true;
+                }
 
                 return false;
             });
@@ -344,15 +347,36 @@ public class PrimaryController implements Initializable {
         if (!validarNIF(NIFEmp.getText())) {
             return false;
         }
+        if (!validarEmail(EmailEmp.getText().trim())){
+            return false;
+        }
         if (!validarCodigoPostal(CPEmp.getText())) {
             return false;
         }
-        //if (!validarEmail(EmailEmp.getText())) return false;
+       
         if (!validarTelefono(TelEmp.getText())) {
             return false;
         }
 
         return true; // Todo válido
+    }
+
+    private boolean validarEmail(String email) {
+        // Comprobar vacío
+        if (email.isEmpty()) {
+            mostrarError("El email no puede estar vacío");
+            return false;
+        }
+
+        // Expresión regular simple para validar email
+        String patronEmail = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
+        if (!email.matches(patronEmail)) {
+            mostrarError("No es un email válido");
+            return false;
+        }
+
+        return true;
     }
 
     // Validación de campo no vacío
@@ -400,11 +424,13 @@ public class PrimaryController implements Initializable {
         alert.showAndWait();
     }
 
-    
     private void recargarTablaEmpresas() {
         EntidadDAO dao = new EntidadDAO();
         List<Entidad> empresas = dao.obtenerEmpresas();
-        TView_Empresa.getItems().clear();
+        try {
+            TView_Empresa.getItems().clear();
+        } catch (Exception e) {
+        }
         TView_Empresa.getItems().addAll(empresas);
 
         System.out.println("Empresas recargadas: " + empresas.size());

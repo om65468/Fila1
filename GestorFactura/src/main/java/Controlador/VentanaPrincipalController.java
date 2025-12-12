@@ -1361,15 +1361,8 @@ public class VentanaPrincipalController {
         
         TC_LinFacLi.setCellValueFactory(new PropertyValueFactory<>("idLinea"));
         TC_ArtFacLi.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
-        TC_CantFacLi.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-
-        // Asumimos que has añadido la columna TC_IdFacturaLi en tu FXML
-        // TC_IdFacturaLi.setCellValueFactory(new PropertyValueFactory<>("idFactura")); // Mapea a idFactura
-
-        // Mapeo de la columna Total Línea (debe ser calculado o simulado)
-        // ** Para no fallar, la mapearemos a 'cantidad', pero es incorrecto para un total **
-        TC_TotalLinea.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-        
+        TC_CantFacLi.setCellValueFactory(new PropertyValueFactory<>("cantidad")); 
+        TC_TotalLinea.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 
     private void cargarFacturas() {
