@@ -371,6 +371,9 @@ public class VentanaPrincipalController {
     @FXML private Button Boton_volver_factura;
     @FXML private Button Boton_confirmar_linea;
     @FXML private Button Boton_modificar_linea;
+    @FXML private Button Boton_eliminar_linea;
+    @FXML private Button Boton_hecho_linea;
+    
 
     // Campos de Entrada de la Línea (Cantidad y Descuento)
     @FXML private TextField txtCantidadLinea;
@@ -1858,4 +1861,57 @@ public class VentanaPrincipalController {
         caracteresTexto(DescProd); 
         caracteresNumero(StokProd);
     }
+    
+    @FXML
+    private void salirPaneFacturaLinea(ActionEvent event) {
+
+        // --- 1. Limpiar campos de la vista de Líneas ---
+
+        // Limpiar campos de entrada de la línea
+        if (txtCantidadLinea != null) {
+            txtCantidadLinea.clear();
+        }
+        if (txtDescuentoLinea != null) {
+            txtDescuentoLinea.clear();
+        }
+
+        // Limpiar el ComboBox y los detalles del producto seleccionado
+        if (cbxArticulo != null) {
+            cbxArticulo.getSelectionModel().clearSelection(); // Limpia la selección interna
+            cbxArticulo.getEditor().clear(); // Limpia el texto visible
+            productoSeleccionado = null; // Limpia la variable de respaldo
+
+            // Limpiar los labels de detalle (para evitar confusiones)
+            lblArticuloID.setText("[ID]");
+            lblArticuloPVP.setText("[PVP]");
+            lblArticuloStock.setText("[Stock]");
+            lblArticuloIVA.setText("[IVA]");
+        }
+
+        // Limpiar la tabla de líneas
+        if (TV_FacturaLinea != null) {
+            TV_FacturaLinea.getItems().clear();
+        }
+
+        // --- 2. Transición de la Vista ---
+
+        // Ocultar la vista de líneas
+        paneFacturaLinea.setVisible(false);
+        paneFacturaLinea.setManaged(false);
+
+        // Mostrar el listado principal de facturas
+        paneFactura.setVisible(true);
+        paneFactura.setManaged(true);
+
+        // Asegurar que la pestaña principal de Facturas está seleccionada
+        tabPane.getSelectionModel().select(TabFactura);
+
+        // 3. Recargar la tabla de facturas principal (TV_Factura)
+        // Esto es vital para asegurar que los totales recalculados (Base y Total) se reflejen
+        // en el listado, ya que fueron guardados en la BBDD en recalcularTotalesFactura().
+        cargarFacturas();
+
+        mostrarAlerta("Información", "Edición de líneas finalizada.");
+    }
+    
 }
