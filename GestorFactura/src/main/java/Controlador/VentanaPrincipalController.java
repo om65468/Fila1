@@ -1911,7 +1911,6 @@ public class VentanaPrincipalController {
         // en el listado, ya que fueron guardados en la BBDD en recalcularTotalesFactura().
         cargarFacturas();
 
-        mostrarAlerta("Información", "Edición de líneas finalizada.");
     }
     
 }
