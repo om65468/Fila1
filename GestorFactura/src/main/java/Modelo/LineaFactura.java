@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.sql.SQLException;
+
 public class LineaFactura {
    
     private int idLinea;
@@ -46,5 +48,13 @@ public class LineaFactura {
         this.cantidad = cantidad;
     }
     
-    
+    public double getTotal(){
+        ProductoDAO pDAO = new ProductoDAO();
+        try{
+        Producto p = pDAO.obtenerPorId(idProducto);
+            return cantidad * p.getPvp();
+        }catch(SQLException e){
+            return cantidad;
+        }
+    }
 }
