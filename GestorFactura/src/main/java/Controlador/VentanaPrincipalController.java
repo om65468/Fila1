@@ -532,7 +532,7 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
         Boton_modificar_cli_form.setDisable(true);
         Boton_guardar_cli.setDisable(false);
-        CodCli.setDisable(false);
+        CodCli.setDisable(true);
         NomCli.setDisable(false);
         NIFCli.setDisable(false);
     }
@@ -576,7 +576,7 @@ public class VentanaPrincipalController {
         cargarTablasEmpresa();
         Boton_guardar_prov.setDisable(false);
         Boton_modificar_prov_form.setDisable(true);
-        CodProv.setDisable(false);
+        CodProv.setDisable(true);
         NomProv.setDisable(false);
         NIFProv.setDisable(false);
     }
