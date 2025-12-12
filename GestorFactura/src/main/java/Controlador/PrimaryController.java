@@ -361,7 +361,7 @@ public class PrimaryController implements Initializable {
         return true; // Todo válido
     }
 
-    private boolean validarEmail(String email) {
+    public boolean validarEmail(String email) {
         // Comprobar vacío
         if (email.isEmpty()) {
             mostrarError("El email no puede estar vacío");
@@ -407,7 +407,7 @@ public class PrimaryController implements Initializable {
     }
 
     // Validar teléfono (9 dígitos)
-    private boolean validarTelefono(String tel) {
+    public boolean validarTelefono(String tel) {
         if (!tel.matches("\\d{9}")) {
             mostrarError("Teléfono inválido");
             return false;

@@ -994,6 +994,14 @@ public class VentanaPrincipalController {
     @FXML
     private void guardarModificacionCliente() {
 
+        PrimaryController p = new PrimaryController();
+        if (!p.validarEmail(EmailCli.getText().trim())) {
+            return;
+        }
+        if(!p.validarTelefono(TlfCli.getText().trim())){
+            return;
+        }
+        
         // ID, NIF y Nombre NO se cambian → NO tocar esos campos
         String nuevoEmail = EmailCli.getText();
         String nuevoTelefono = TlfCli.getText();
@@ -1097,6 +1105,14 @@ public class VentanaPrincipalController {
     @FXML
     private void guardarModificacionProveedor() {
 
+        PrimaryController p = new PrimaryController();
+        if (!p.validarEmail(EmailProv.getText().trim())) {
+            return;
+        }
+        if(!p.validarTelefono(TlfProv.getText().trim())){
+            return;
+        }
+        
         // ID, NIF y Nombre NO se cambian → NO tocar esos campos
         String nuevoEmail = EmailProv.getText();
         String nuevoTelefono = TlfProv.getText();
@@ -1399,6 +1415,13 @@ public class VentanaPrincipalController {
     private void modificarInfo(ActionEvent event) {
         if (empresa == null) {
             mostrarAlerta("Error", "No hay ninguna empresa seleccionada para modificar.");
+            return;
+        }
+        PrimaryController p = new PrimaryController();
+        if (!p.validarEmail(txtInfoEmail.getText().trim())) {
+            return;
+        }
+        if(!p.validarTelefono(txtInfoTlf.getText().trim())){
             return;
         }
         empresa.setNombre(InfoNombre.getText());
