@@ -981,9 +981,8 @@ public class VentanaPrincipalController {
             IDProd.clear();
             
             editandoArticulo = false;
-    
-
-//            ProvProd.clear();
+            ocultarPanes();
+            paneInfoArticulos.setVisible(true);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -1018,6 +1017,9 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             mostrarAlerta("Error", "No se pudo modificar el cliente: " + e.getMessage());
         }
+        ocultarPanes();
+        paneInfoClientes.setVisible(true);
+        editandoCliente = false;
     }
 
     @FXML
@@ -1098,7 +1100,6 @@ public class VentanaPrincipalController {
         
         ocultarPanes();
         paneInfoProveedores.setVisible(true);
-        
         editandoProveedor=false;
     }
 
@@ -1129,6 +1130,9 @@ public class VentanaPrincipalController {
         } catch (Exception e) {
             mostrarAlerta("Error", "No se pudo modificar el proveedor: " + e.getMessage());
         }
+        ocultarPanes();
+        paneInfoProveedores.setVisible(true);
+        editandoProveedor=false;
     }
 
     @FXML
