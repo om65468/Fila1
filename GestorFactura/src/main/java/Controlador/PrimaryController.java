@@ -402,12 +402,8 @@ public class PrimaryController implements Initializable {
 
     
     private void recargarTablaEmpresas() {
-        EntidadDAO dao = new EntidadDAO();
-        List<Entidad> empresas = dao.obtenerEmpresas();
-        TView_Empresa.getItems().clear();
-        TView_Empresa.getItems().addAll(empresas);
-
-        System.out.println("Empresas recargadas: " + empresas.size());
+        listaEmpresas.setAll(entidadDAO.obtenerEmpresas());
+        System.out.println("Tabla recargada con " + listaEmpresas.size() + " empresas.");
     }
 
 }

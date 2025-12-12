@@ -925,7 +925,8 @@ public class VentanaPrincipalController {
         
         ocultarPanes();
         paneInfoClientes.setVisible(true);
-
+        editandoCliente = false;
+    
     }
 
     @FXML
@@ -978,6 +979,10 @@ public class VentanaPrincipalController {
             IVAProd.clear();
             StokProd.clear();
             IDProd.clear();
+            
+            editandoArticulo = false;
+    
+
 //            ProvProd.clear();
 
         } catch (SQLException ex) {
@@ -1085,6 +1090,8 @@ public class VentanaPrincipalController {
         
         ocultarPanes();
         paneInfoProveedores.setVisible(true);
+        
+        editandoProveedor=false;
     }
 
     @FXML
